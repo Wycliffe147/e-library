@@ -278,6 +278,8 @@ h2 {
     text-decoration: underline;
     cursor: pointer;
     font-size: 16px;
+    padding: 5px 8px;
+    border-radius: 4px;
 }
 
 .header nav a:hover {
