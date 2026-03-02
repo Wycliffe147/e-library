@@ -45,6 +45,7 @@ function loadAbout() {
         <div class="about-section">
             <h2>About This Project</h2>
             <p>This e-library allows students to browse, search, and read educational resources online.</p>
+<p>I think having this website is better than relying on WhatsApp groups alone because documents have to be sent every time someone new wants them. 
             <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
             <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
         </div>
