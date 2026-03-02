@@ -5,6 +5,7 @@ body {
     background-repeat: no-repeat;                                             
 }
 
+/*
 .header {
     display: flex;
     gap: 20px;
@@ -20,6 +21,62 @@ body {
 .logo {
     height: 70px;
     width: auto;
+}
+*/
+
+.header {
+    display: flex;
+    flex-direction: column;   /* stack content */
+    align-items: flex-start;
+    gap: 15px;                /* controlled spacing */
+    
+    background: linear-gradient(135deg, #1565c0, #1e88e5);
+    padding: 25px;
+    border-radius: 15px;
+    color: white;
+}
+
+/* Top row: logo + title */
+.header-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Logo styling */
+.logo {
+    width: 70px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Title */
+.header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+/* Nav container */
+.header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Nav pills */
+.header nav a {
+    padding: 8px 16px;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.25);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.header nav a:hover {
+    background-color: white;
+    color: #1565c0;
 }
 
 #card1 a {
