@@ -40,7 +40,6 @@ function loadHome() {
 }
 
 // --- About ---
-
 function loadAbout() {
     app.innerHTML = `
         <section class="about-section">
@@ -61,7 +60,6 @@ function loadAbout() {
             <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
             <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
 
-            <!-- Floating Developer Card -->
             <div class="developer-card reveal">
                 <h3>About the Developer</h3>
                 <p>
@@ -78,7 +76,7 @@ function loadAbout() {
     activateScrollReveal();
 }
 
-// --- Request a Book/Paper ---
+// --- Request ---
 function loadRequest() {
     app.innerHTML = `
         <div class="contact-section">
@@ -106,7 +104,6 @@ async function loadFolder(category, subFolder = "") {
     );
     const data = await res.json();
 
-    // Breadcrumbs
     const breadcrumbParts = ["Home", category, ...subFolder.split("/").filter(Boolean)];
     let breadcrumbHTML = "";
     let pathSoFar = "";
@@ -130,7 +127,6 @@ async function loadFolder(category, subFolder = "") {
         <div class="grid"></div>
     `;
 
-    // Breadcrumb click handling
     document.querySelectorAll(".breadcrumb").forEach(span => {
         span.addEventListener("click", e => {
             if (e.target.dataset.home) {
@@ -144,7 +140,6 @@ async function loadFolder(category, subFolder = "") {
 
     const grid = document.querySelector(".grid");
 
-    // Folders
     data.folders.forEach(folder => {
         const card = document.createElement("div");
         card.className = "folder-card";
@@ -156,7 +151,6 @@ async function loadFolder(category, subFolder = "") {
         grid.appendChild(card);
     });
 
-    // Files
     data.files.forEach(file => {
         const ext = file.split(".").pop().toLowerCase();
         let icon = "📄";
@@ -179,7 +173,6 @@ async function loadFolder(category, subFolder = "") {
         grid.appendChild(card);
     });
 
-    // Search
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", async () => {
         const query = searchInput.value.trim();
@@ -214,6 +207,25 @@ async function loadFolder(category, subFolder = "") {
             `;
             grid.appendChild(card);
         });
+    });
+}
+
+// --- Scroll Reveal Animation ---
+function activateScrollReveal() {
+    const reveals = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    reveals.forEach(reveal => {
+        observer.observe(reveal);
     });
 }
 
