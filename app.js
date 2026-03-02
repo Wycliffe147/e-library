@@ -40,6 +40,7 @@ function loadHome() {
 }
 
 // --- About ---
+
 function loadAbout() {
     app.innerHTML = `
         <section class="about-section">
@@ -49,7 +50,7 @@ function loadAbout() {
                 This e-library allows students to browse, search, and read educational resources online.
             </p>
 
-            <div class="about-flex">
+            <div class="about-flex reveal">
                 <img src="/Media/images/about.png" alt="About image" class="about-image" />
                 <p>
                     I think having this website is better than relying on WhatsApp groups alone 
@@ -59,8 +60,22 @@ function loadAbout() {
 
             <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
             <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
+
+            <!-- Floating Developer Card -->
+            <div class="developer-card reveal">
+                <h3>About the Developer</h3>
+                <p>
+                    Hi, I'm Wycliffe 👋 — a student developer passionate about building 
+                    practical tech solutions for schools.
+                </p>
+                <a href="https://wyport.vercel.app" target="_blank" class="dev-link">
+                    Visit My Portfolio
+                </a>
+            </div>
         </section>
     `;
+
+    activateScrollReveal();
 }
 
 // --- Request a Book/Paper ---
