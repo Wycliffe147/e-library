@@ -157,3 +157,29 @@ async function loadFolder(category, subFolder = "") {
         });
     });
 }
+
+// --- About Section ---
+function loadAbout() {
+    app.innerHTML = `
+        <div class="about-section">
+            <h2>About This Project</h2>
+            <p>This e-library allows students to browse, search, and read educational resources online.</p>
+            <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
+            <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
+        </div>
+    `;
+}
+
+// --- Request a Book / Contact Section ---
+function loadRequest() {
+    app.innerHTML = `
+        <div class="contact-section">
+            <h2>Request a Book / Paper</h2>
+            <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
+            <ul>
+                <li>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
+                <li>Telegram/WhatsApp: <a href="https://t.me/yourusername" target="_blank">@yourusername</a></li>
+            </ul>
+        </div>
+    `;
+}
