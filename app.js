@@ -60,7 +60,7 @@ function loadRequest() {
             <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
             <ul>
                 <li>Email: <a href="mailto: wycliffemwanganda@gmail.com">Email me</a></li>
-                <li>WhatsApp: <a href="https://t.me/yourusername" target="_blank">Let's talk/a></li>
+                <li>WhatsApp: <a href="https://wa.me/265984153455" target="_blank">Let's talk/a></li>
             </ul>
         </div>
     `;
