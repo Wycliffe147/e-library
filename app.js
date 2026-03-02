@@ -44,8 +44,13 @@ function loadAbout() {
     app.innerHTML = `
         <div class="about-section">
             <h2>About This Project</h2>
-            <p>This e-library allows students to browse, search, and read educational resources online.</p>
-<p>I think having this website is better than relying on WhatsApp groups alone because documents have to be sent every time someone new wants them. 
+            <p>
+                This e-library allows students to browse, search, and read educational resources online.
+            </p>
+            <p>
+                I think having this website is better than relying on WhatsApp groups alone because 
+                documents have to be sent every time someone new wants them.
+            </p>
             <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
             <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
         </div>
@@ -59,8 +64,12 @@ function loadRequest() {
             <h2>Request a Book / Paper</h2>
             <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
             <ul>
-                <li>Email: <a href="mailto: wycliffemwanganda@gmail.com">Email me</a></li>
-                <li>WhatsApp: <a href="https://wa.me/265984153455" target="_blank">Let's talk/a></li>
+                <li>Email: 
+                    <a href="mailto:wycliffemwanganda@gmail.com">Email me</a>
+                </li>
+                <li>WhatsApp: 
+                    <a href="https://wa.me/265984153455" target="_blank">Let's talk</a>
+                </li>
             </ul>
         </div>
     `;
@@ -82,9 +91,11 @@ async function loadFolder(category, subFolder = "") {
     let pathSoFar = "";
 
     breadcrumbParts.forEach((part, index) => {
-        if (index === 0) breadcrumbHTML += `<span class="breadcrumb">${part}</span>`;
-        else if (index === 1) breadcrumbHTML += ` / <span class="breadcrumb" data-path="">${part}</span>`;
-        else {
+        if (index === 0) {
+            breadcrumbHTML += `<span class="breadcrumb" data-home="true">${part}</span>`;
+        } else if (index === 1) {
+            breadcrumbHTML += ` / <span class="breadcrumb" data-path="">${part}</span>`;
+        } else {
             pathSoFar += "/" + part;
             breadcrumbHTML += ` / <span class="breadcrumb" data-path="${pathSoFar.slice(1)}">${part}</span>`;
         }
@@ -98,11 +109,15 @@ async function loadFolder(category, subFolder = "") {
         <div class="grid"></div>
     `;
 
+    // Breadcrumb click handling
     document.querySelectorAll(".breadcrumb").forEach(span => {
         span.addEventListener("click", e => {
-            const path = e.target.dataset.path;
-            if (!path) loadHome();
-            else loadFolder(category, path);
+            if (e.target.dataset.home) {
+                loadHome();
+            } else {
+                const path = e.target.dataset.path || "";
+                loadFolder(category, path);
+            }
         });
     });
 
@@ -134,7 +149,9 @@ async function loadFolder(category, subFolder = "") {
         const card = document.createElement("div");
         card.className = "file-card";
         card.innerHTML = `
-            <a href="Media/${category}/${currentPath ? currentPath + '/' : ''}${file}" target="_blank" title="${file}">
+            <a href="/Media/${category}/${currentPath ? currentPath + '/' : ''}${file}" 
+               target="_blank" 
+               title="${file}">
                 ${icon} ${cleanName}
             </a>
         `;
@@ -145,13 +162,17 @@ async function loadFolder(category, subFolder = "") {
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", async () => {
         const query = searchInput.value.trim();
-        grid.innerHTML = "";
-        if (!query) return loadFolder(currentCategory, currentPath);
+        if (!query) {
+            loadFolder(currentCategory, currentPath);
+            return;
+        }
 
         const res = await fetch(
             `/api/search?category=${encodeURIComponent(currentCategory)}&query=${encodeURIComponent(query)}`
         );
         const results = await res.json();
+
+        grid.innerHTML = "";
 
         results.forEach(item => {
             const ext = item.name.split(".").pop().toLowerCase();
@@ -164,7 +185,9 @@ async function loadFolder(category, subFolder = "") {
             const card = document.createElement("div");
             card.className = "file-card";
             card.innerHTML = `
-                <a href="Media/${currentCategory}/${item.path}" target="_blank" title="${item.name}">
+                <a href="/Media/${currentCategory}/${item.path}" 
+                   target="_blank" 
+                   title="${item.name}">
                     ${icon} ${item.name.replace(/\.[^/.]+$/, "")}
                 </a>
             `;
