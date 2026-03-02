@@ -9,7 +9,13 @@ export default function handler(req, res) {
     }
 
     const baseDir = path.join(process.cwd(), "Media", category);
-    const targetDir = path.join(baseDir, subpath);
+
+    if (!fs.existsSync(baseDir)) {
+        return res.status(404).json({ error: "Category not found" });
+    }
+
+    const safePath = path.normalize(subpath).replace(/^(\.\.(\/|\\|$))+/, "");
+    const targetDir = path.join(baseDir, safePath);
 
     if (!fs.existsSync(targetDir)) {
         return res.status(404).json({ error: "Folder not found" });

@@ -3,45 +3,42 @@ const app = document.getElementById("app");
 let currentCategory = null;
 let currentPath = "";
 
-// --- Load Home Page ---
+// --- Load Home ---
 function loadHome() {
     currentCategory = null;
     currentPath = "";
 
     app.innerHTML = `
-        <div class="cards" id="homeCardsInApp">
+        <div class="cards">
             <div id="card1">
-                <a href="#" class="card" data-category="Books">
-                    <img class="cover" src="media/images/Excel_Phy.png" alt="book-cover_photo"/>
+                <a href="#" class="card" data-category="books">
+                    <img class="cover" src="/Media/images/Excel_Phy.png"/>
                     <p>Read books, pamphlets & notes</p>
                 </a>
             </div>
             <div id="card2">
-                <a href="#" class="card" data-category="Exams">
-                    <img class="cover" src="media/images/MANEB_Maths.png" alt="book-cover_photo"/>
+                <a href="#" class="card" data-category="exams">
+                    <img class="cover" src="/Media/images/MANEB_Maths.png"/>
                     <p>See exam/test papers</p>
                 </a>
             </div>
             <div id="card3">
-                <a href="#" class="card" data-category="Q&A">
-                    <img class="cover" src="media/images/Q&A.png" alt="model questions photo.jpg"/>
+                <a href="#" class="card" data-category="qna">
+                    <img class="cover" src="/Media/images/Q&A.png"/>
                     <p>Study questions & model answers</p>
                 </a>
             </div>
         </div>
     `;
 
-    // Add click listeners to cards
     document.querySelectorAll('.cards a').forEach(a => {
         a.addEventListener('click', e => {
             e.preventDefault();
-            const category = a.dataset.category;
-            loadFolder(category);
+            loadFolder(a.dataset.category);
         });
     });
 }
 
-// --- Initial Load ---
 window.addEventListener("DOMContentLoaded", loadHome);
 
 // --- Load Folder ---
@@ -52,37 +49,40 @@ async function loadFolder(category, subFolder = "") {
     const res = await fetch(
         `/api/files?category=${encodeURIComponent(category)}&subpath=${encodeURIComponent(subFolder)}`
     );
+
+    if (!res.ok) {
+        app.innerHTML = `<p>Error loading folder</p>`;
+        return;
+    }
+
     const data = await res.json();
 
-    // --- Breadcrumbs ---
-    const breadcrumbParts = ["Home", category, ...subFolder.split("/").filter(Boolean)];
+    // Breadcrumbs
+    const parts = ["Home", category, ...subFolder.split("/").filter(Boolean)];
     let breadcrumbHTML = "";
     let pathSoFar = "";
 
-    breadcrumbParts.forEach((part, index) => {
+    parts.forEach((part, index) => {
         if (index === 0) {
-            breadcrumbHTML += `<span class="breadcrumb">${part}</span>`;
-        } else if (index === 1) {
-            breadcrumbHTML += ` / <span class="breadcrumb" data-path="">${part}</span>`;
+            breadcrumbHTML += `<span class="breadcrumb">Home</span>`;
         } else {
-            pathSoFar += "/" + part;
-            breadcrumbHTML += ` / <span class="breadcrumb" data-path="${pathSoFar.slice(1)}">${part}</span>`;
+            pathSoFar = index === 1 ? "" : `${pathSoFar}/${part}`;
+            breadcrumbHTML += ` / <span class="breadcrumb" data-path="${pathSoFar}">${part}</span>`;
         }
     });
 
     app.innerHTML = `
         <div class="breadcrumb-container">${breadcrumbHTML}</div>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search files or folders..." />
+            <input type="text" id="searchInput" placeholder="Search files..." />
         </div>
         <div class="grid"></div>
     `;
 
-    // Breadcrumb click
     document.querySelectorAll(".breadcrumb").forEach(span => {
         span.addEventListener("click", e => {
             const path = e.target.dataset.path;
-            if (!path) {
+            if (path === undefined) {
                 loadHome();
             } else {
                 loadFolder(category, path);
@@ -92,7 +92,7 @@ async function loadFolder(category, subFolder = "") {
 
     const grid = document.querySelector(".grid");
 
-    // --- Render Folders ---
+    // Folders
     data.folders.forEach(folder => {
         const card = document.createElement("div");
         card.className = "folder-card";
@@ -104,33 +104,32 @@ async function loadFolder(category, subFolder = "") {
         grid.appendChild(card);
     });
 
-    // --- Render Files ---
+    // Files
     data.files.forEach(file => {
         const extension = file.split(".").pop().toLowerCase();
         let icon = "📄";
         if (extension === "pdf") icon = "📕";
-        else if (extension === "doc" || extension === "docx") icon = "📝";
-        else if (extension === "xls" || extension === "xlsx") icon = "📊";
-        else if (extension === "ppt" || extension === "pptx") icon = "📽️";
+        if (["doc","docx"].includes(extension)) icon = "📝";
+        if (["xls","xlsx"].includes(extension)) icon = "📊";
+        if (["ppt","pptx"].includes(extension)) icon = "📽️";
 
         const cleanName = file.replace(/\.[^/.]+$/, "");
 
         const card = document.createElement("div");
         card.className = "file-card";
         card.innerHTML = `
-            <a href="Media/${category}/${currentPath ? currentPath + '/' : ''}${file}" target="_blank" title="${file}">
+            <a href="/Media/${category}/${currentPath ? currentPath + "/" : ""}${file}" target="_blank">
                 ${icon} ${cleanName}
             </a>
         `;
         grid.appendChild(card);
     });
 
-    // --- Search ---
+    // Search
     const searchInput = document.getElementById("searchInput");
+
     searchInput.addEventListener("input", async () => {
         const query = searchInput.value.trim();
-        grid.innerHTML = "";
-
         if (!query) {
             loadFolder(currentCategory, currentPath);
             return;
@@ -139,20 +138,18 @@ async function loadFolder(category, subFolder = "") {
         const res = await fetch(
             `/api/search?category=${encodeURIComponent(currentCategory)}&query=${encodeURIComponent(query)}`
         );
+
         const results = await res.json();
+        grid.innerHTML = "";
 
         results.forEach(item => {
             const extension = item.name.split(".").pop().toLowerCase();
-            let icon = "📄";
-            if (extension === "pdf") icon = "📕";
-            else if (extension === "doc" || extension === "docx") icon = "📝";
-            else if (extension === "xls" || extension === "xlsx") icon = "📊";
-            else if (extension === "ppt" || extension === "pptx") icon = "📽️";
+            let icon = extension === "pdf" ? "📕" : "📄";
 
             const card = document.createElement("div");
             card.className = "file-card";
             card.innerHTML = `
-                <a href="Media/${currentCategory}/${item.path}" target="_blank" title="${item.name}">
+                <a href="/Media/${currentCategory}/${item.path}" target="_blank">
                     ${icon} ${item.name.replace(/\.[^/.]+$/, "")}
                 </a>
             `;
