@@ -265,28 +265,23 @@ h2 {
     border-radius: 10px;
 }
 
-/* Header nav links */
-.header nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-/* Header nav links style */
+/* Header nav links as pills */
 .header nav a {
-    color: white;
-    text-decoration: underline;
-    cursor: pointer;
+    padding: 6px 12px;          /* space inside the pill */
+    border-radius: 20px;         /* rounded corners */
+    background-color: rgba(255, 255, 255, 0.2); /* semi-transparent background */
+    color: white;               /* text color */
+    text-decoration: none;
     font-size: 16px;
-    padding: 5px 8px;
-    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .header nav a:hover {
-    color: #ffd700;
+    background-color: rgba(255, 255, 255, 0.5); /* lighter on hover */
+    color: #000;                                /* text turns black on hover */
 }
 
-/* Mobile adjustments */
+/* Mobile adjustments (stacking / spacing) */
 @media (max-width: 720px) {
     .header {
         flex-direction: column;
@@ -294,11 +289,15 @@ h2 {
     }
 
     .header nav {
-        flex-direction: row;
+        display: flex;
         flex-wrap: wrap;
         gap: 10px;
         width: 100%;
         margin-top: 5px;
+    }
+
+    .header nav a {
+        margin-bottom: 5px; /* extra spacing for mobile */
     }
 }
 
