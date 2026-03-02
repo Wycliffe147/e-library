@@ -3,28 +3,28 @@ const app = document.getElementById("app");
 let currentCategory = null;
 let currentPath = "";
 
-// --- Load Home ---
+// --- Home ---
 function loadHome() {
     currentCategory = null;
     currentPath = "";
 
     app.innerHTML = `
-        <div class="cards">
+        <div class="cards" id="homeCardsInApp">
             <div id="card1">
-                <a href="#" class="card" data-category="books">
-                    <img class="cover" src="/Media/images/Excel_Phy.png"/>
+                <a href="#" class="card" data-category="Books">
+                    <img class="cover" src="/Media/images/Excel_Phy.png" alt="book-cover_photo"/>
                     <p>Read books, pamphlets & notes</p>
                 </a>
             </div>
             <div id="card2">
-                <a href="#" class="card" data-category="exams">
-                    <img class="cover" src="/Media/images/MANEB_Maths.png"/>
+                <a href="#" class="card" data-category="Exams">
+                    <img class="cover" src="/Media/images/MANEB_Maths.png" alt="book-cover_photo"/>
                     <p>See exam/test papers</p>
                 </a>
             </div>
             <div id="card3">
-                <a href="#" class="card" data-category="qna">
-                    <img class="cover" src="/Media/images/Q&A.png"/>
+                <a href="#" class="card" data-category="Q&A">
+                    <img class="cover" src="/Media/images/Q&A.png" alt="model questions photo"/>
                     <p>Study questions & model answers</p>
                 </a>
             </div>
@@ -39,7 +39,31 @@ function loadHome() {
     });
 }
 
-window.addEventListener("DOMContentLoaded", loadHome);
+// --- About ---
+function loadAbout() {
+    app.innerHTML = `
+        <div class="about-section">
+            <h2>About This Project</h2>
+            <p>This e-library allows students to browse, search, and read educational resources online.</p>
+            <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
+            <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
+        </div>
+    `;
+}
+
+// --- Request a Book/Paper ---
+function loadRequest() {
+    app.innerHTML = `
+        <div class="contact-section">
+            <h2>Request a Book / Paper</h2>
+            <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
+            <ul>
+                <li>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
+                <li>Telegram/WhatsApp: <a href="https://t.me/yourusername" target="_blank">@yourusername</a></li>
+            </ul>
+        </div>
+    `;
+}
 
 // --- Load Folder ---
 async function loadFolder(category, subFolder = "") {
@@ -49,32 +73,26 @@ async function loadFolder(category, subFolder = "") {
     const res = await fetch(
         `/api/files?category=${encodeURIComponent(category)}&subpath=${encodeURIComponent(subFolder)}`
     );
-
-    if (!res.ok) {
-        app.innerHTML = `<p>Error loading folder</p>`;
-        return;
-    }
-
     const data = await res.json();
 
     // Breadcrumbs
-    const parts = ["Home", category, ...subFolder.split("/").filter(Boolean)];
+    const breadcrumbParts = ["Home", category, ...subFolder.split("/").filter(Boolean)];
     let breadcrumbHTML = "";
     let pathSoFar = "";
 
-    parts.forEach((part, index) => {
-        if (index === 0) {
-            breadcrumbHTML += `<span class="breadcrumb">Home</span>`;
-        } else {
-            pathSoFar = index === 1 ? "" : `${pathSoFar}/${part}`;
-            breadcrumbHTML += ` / <span class="breadcrumb" data-path="${pathSoFar}">${part}</span>`;
+    breadcrumbParts.forEach((part, index) => {
+        if (index === 0) breadcrumbHTML += `<span class="breadcrumb">${part}</span>`;
+        else if (index === 1) breadcrumbHTML += ` / <span class="breadcrumb" data-path="">${part}</span>`;
+        else {
+            pathSoFar += "/" + part;
+            breadcrumbHTML += ` / <span class="breadcrumb" data-path="${pathSoFar.slice(1)}">${part}</span>`;
         }
     });
 
     app.innerHTML = `
         <div class="breadcrumb-container">${breadcrumbHTML}</div>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search files..." />
+            <input type="text" id="searchInput" placeholder="Search files or folders..." />
         </div>
         <div class="grid"></div>
     `;
@@ -82,11 +100,8 @@ async function loadFolder(category, subFolder = "") {
     document.querySelectorAll(".breadcrumb").forEach(span => {
         span.addEventListener("click", e => {
             const path = e.target.dataset.path;
-            if (path === undefined) {
-                loadHome();
-            } else {
-                loadFolder(category, path);
-            }
+            if (!path) loadHome();
+            else loadFolder(category, path);
         });
     });
 
@@ -106,19 +121,19 @@ async function loadFolder(category, subFolder = "") {
 
     // Files
     data.files.forEach(file => {
-        const extension = file.split(".").pop().toLowerCase();
+        const ext = file.split(".").pop().toLowerCase();
         let icon = "📄";
-        if (extension === "pdf") icon = "📕";
-        if (["doc","docx"].includes(extension)) icon = "📝";
-        if (["xls","xlsx"].includes(extension)) icon = "📊";
-        if (["ppt","pptx"].includes(extension)) icon = "📽️";
+        if (ext === "pdf") icon = "📕";
+        else if (ext === "doc" || ext === "docx") icon = "📝";
+        else if (ext === "xls" || ext === "xlsx") icon = "📊";
+        else if (ext === "ppt" || ext === "pptx") icon = "📽️";
 
         const cleanName = file.replace(/\.[^/.]+$/, "");
 
         const card = document.createElement("div");
         card.className = "file-card";
         card.innerHTML = `
-            <a href="/Media/${category}/${currentPath ? currentPath + "/" : ""}${file}" target="_blank">
+            <a href="Media/${category}/${currentPath ? currentPath + '/' : ''}${file}" target="_blank" title="${file}">
                 ${icon} ${cleanName}
             </a>
         `;
@@ -127,29 +142,28 @@ async function loadFolder(category, subFolder = "") {
 
     // Search
     const searchInput = document.getElementById("searchInput");
-
     searchInput.addEventListener("input", async () => {
         const query = searchInput.value.trim();
-        if (!query) {
-            loadFolder(currentCategory, currentPath);
-            return;
-        }
+        grid.innerHTML = "";
+        if (!query) return loadFolder(currentCategory, currentPath);
 
         const res = await fetch(
             `/api/search?category=${encodeURIComponent(currentCategory)}&query=${encodeURIComponent(query)}`
         );
-
         const results = await res.json();
-        grid.innerHTML = "";
 
         results.forEach(item => {
-            const extension = item.name.split(".").pop().toLowerCase();
-            let icon = extension === "pdf" ? "📕" : "📄";
+            const ext = item.name.split(".").pop().toLowerCase();
+            let icon = "📄";
+            if (ext === "pdf") icon = "📕";
+            else if (ext === "doc" || ext === "docx") icon = "📝";
+            else if (ext === "xls" || ext === "xlsx") icon = "📊";
+            else if (ext === "ppt" || ext === "pptx") icon = "📽️";
 
             const card = document.createElement("div");
             card.className = "file-card";
             card.innerHTML = `
-                <a href="/Media/${currentCategory}/${item.path}" target="_blank">
+                <a href="Media/${currentCategory}/${item.path}" target="_blank" title="${item.name}">
                     ${icon} ${item.name.replace(/\.[^/.]+$/, "")}
                 </a>
             `;
@@ -158,28 +172,5 @@ async function loadFolder(category, subFolder = "") {
     });
 }
 
-// --- About Section ---
-function loadAbout() {
-    app.innerHTML = `
-        <div class="about-section">
-            <h2>About This Project</h2>
-            <p>This e-library allows students to browse, search, and read educational resources online.</p>
-            <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
-            <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
-        </div>
-    `;
-}
-
-// --- Request a Book / Contact Section ---
-function loadRequest() {
-    app.innerHTML = `
-        <div class="contact-section">
-            <h2>Request a Book / Paper</h2>
-            <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
-            <ul>
-                <li>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
-                <li>Telegram/WhatsApp: <a href="https://t.me/yourusername" target="_blank">@yourusername</a></li>
-            </ul>
-        </div>
-    `;
-}
+// --- Initial load ---
+window.addEventListener("DOMContentLoaded", loadHome);
