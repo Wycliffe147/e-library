@@ -400,3 +400,50 @@ h2 {
         width: 200px;
     }
 }
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.developer-card {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 250px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.developer-card h3 {
+    margin-top: 0;
+}
+
+.dev-link {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #0077ff;
+}
+
+.dev-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .developer-card {
+        position: static;
+        margin-top: 30px;
+        width: 100%;
+    }
+}
