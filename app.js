@@ -63,7 +63,7 @@ function loadAbout() {
             <div class="developer-card reveal">
                 <h3>About the Developer</h3>
                 <p>
-                    Hi, I'm Wycliffe 👋, a student developer passionate about building 
+                    Hi, I'm Wycliffe Mwanganda 👋, a student developer passionate about building 
                     practical tech solutions for schools and any interested institutions.
                </p>
                 <a href="https://wyport.vercel.app" target="_blank" class="dev-link">
