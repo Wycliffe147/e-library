@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="header">
+        <img class="logo" src="media/images/logo.png" alt="Logo"/>
+        <h1>Star Private Secondary School e-library</h1>
+    </div>
+
+    <div class="cards" id="homeCards">
+        <div id="card1">
+            <a href="#" class="card" data-category="Books">
+                <img class="cover" src="media/images/Excel_Phy.png" alt="book-cover_photo"/>
+                <p>Read books, pamphlets & notes</p>
+            </a>
+        </div>
+        <div id="card2">
+            <a href="#" class="card" data-category="Exams">
+                <img class="cover" src="media/images/MANEB_Maths.png" alt="book-cover_photo"/>
+                <p>See exam/test papers</p>
+            </a>            
+        </div>
+        <div id="card3">
+            <a href="#" class="card" data-category="Q&A">
+                <img class="cover" src="media/images/Q&A.png" alt="model questions photo.jpg"/>
+                <p>Study questions & model answers</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- SPA container -->
+    <div id="app" style="display:none;"></div>
+
+    <script src="app.js"></script>
+    <script>
+        // When clicking a home card, hide home cards and load SPA
+        document.querySelectorAll('#homeCards a').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const category = a.dataset.category;
+
+                document.getElementById('homeCards').style.display = 'none';
+                document.getElementById('app').style.display = 'block';
+
+                loadFolder(category);
+            });
+        });
+    </script>
+</body>
+</html>

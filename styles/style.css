@@ -1,0 +1,244 @@
+body {
+
+    background-image: url("../media/images/bg.jpg");    
+    background-size: cover;
+    background-repeat: no-repeat;                                             
+}
+
+.header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: rgb(0, 104, 202);
+    padding-left: 20px;
+    color: whitesmoke;   
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+
+.logo {
+    height: 70px;
+    width: auto;
+}
+
+#card1 a {
+    display: flex;
+    align-items: center;
+    background-color: dodgerblue;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 60%;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s, color 1s;
+    color: white;
+    font-size:20px;
+    text-decoration: none;
+}
+
+#card1 img {
+    margin: 5px;
+    
+}
+
+#card1 a:hover {
+    transform: translateY(-5px);
+    background-color: #e0e0ff;
+    color: black;
+}
+
+#card2 a {
+    display: flex;
+    align-items: center;
+    background-color: rgb(3, 54, 104);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 60%;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s, color 1s;
+    color: white;
+    font-size:20px;
+    text-decoration: none;
+}
+
+#card2 img {
+    margin: 5px;
+    
+}
+
+#card2 a:hover {
+    transform: translateY(-5px);
+    background-color: #e0e0ff;
+    color: black;
+}
+
+
+#card3 a {
+    display: flex;
+    align-items: center;
+    background-color: rgb(0, 81, 95);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 60%;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s, color 1s;
+    color: white;
+    font-size:20px;
+    text-decoration: none;   
+}
+
+#card3 img {
+    margin: 5px;
+    
+}
+
+#card3 a:hover {
+    transform: translateY(-5px);
+    background-color: #e0e0ff;
+    color: black;
+}
+
+.cover {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    height: 150px;
+    width: auto;
+    
+}
+
+nav {
+    background-color: aqua;
+}
+
+.subject a{
+    margin: 20px;
+    margin-right: 800px;
+    background-color: aquamarine;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s, color 1s;
+    text-decoration: none;
+}
+
+h2 {
+    background-color: rgb(255, 255, 255);
+}
+
+.sciences {
+    background-color: rgb(226, 29, 95);
+}
+
+.cardsub a {
+    background-color: rgb(0, 81, 95);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 800px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s, color 1s;
+    color: white;
+    font-size:20px;
+    text-decoration: none;   
+    
+}
+
+.agr a {
+    background-color: rgb(0, 81, 95);
+    margin-top: 220px;
+    margin-bottom: 20px;
+    margin-right: 800px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s, color 1s;
+    color: white;
+    font-size:20px;
+    text-decoration: none;
+    padding: 20px; 
+}
+
+.agr a:hover {
+    transform: translateY(-5px);
+    background-color: #e0e0ff;
+    color: black;
+
+}
+
+@media (max-width: 720px) {    
+    #card1 a {
+        margin-right: 0;
+    } 
+    #card2 a {
+        margin-right: 0;
+    }
+    #card3 a {
+        margin-right: 0;
+    }  
+}
+
+/* Node stuff. Still don't get it though */
+
+/* Breadcrumbs */
+.breadcrumb-container {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.breadcrumb {
+    color: #0073e6;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.breadcrumb:hover {
+    color: #005bb5;
+}
+
+/* Search bar */
+.search-container {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#searchInput {
+    width: 80%;
+    max-width: 400px;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.2s;
+}
+
+#searchInput:focus {
+    border-color: #0073e6;
+    box-shadow: 0 0 3px rgba(0,115,230,0.5);
+}
+
+/* Folder Cards */
+.folder-card {
+    background: #e8f0fe;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s ease;
+    margin: 5px;
+}
+
+.folder-card:hover {
+    background: #cce0ff;
+}
+
+/* File Cards */
+.file-card {
+    background: #f5f5f5;
+    padding: 8px;
+    border-radius: 5px;
+    margin: 5px;
+}
