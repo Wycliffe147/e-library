@@ -42,18 +42,24 @@ function loadHome() {
 // --- About ---
 function loadAbout() {
     app.innerHTML = `
-        <div class="about-section">
+        <section class="about-section">
             <h2>About This Project</h2>
+
             <p>
                 This e-library allows students to browse, search, and read educational resources online.
             </p>
-            <p>
-                I think having this website is better than relying on WhatsApp groups alone because 
-                documents have to be sent every time someone new wants them.
-            </p>
+
+            <div class="about-flex">
+                <img src="/Media/images/about.png" alt="About image" class="about-image" />
+                <p>
+                    I think having this website is better than relying on WhatsApp groups alone 
+                    because documents have to be sent every time someone new wants them.
+                </p>
+            </div>
+
             <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
             <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
-        </div>
+        </section>
     `;
 }
 
