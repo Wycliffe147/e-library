@@ -186,12 +186,17 @@ h2 {
 .breadcrumb-container {
     margin-bottom: 10px;
     font-size: 14px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
 }
 
 .breadcrumb {
     color: #0073e6;
     cursor: pointer;
     text-decoration: underline;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 .breadcrumb:hover {
