@@ -59,7 +59,7 @@ function loadRequest() {
             <h2>Request a Book / Paper</h2>
             <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
             <ul>
-                <li>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
+                <li>Email: <a href="mailto: wycliffemwanganda@gmail.com">Email me</a></li>
                 <li>Telegram/WhatsApp: <a href="https://t.me/yourusername" target="_blank">@yourusername</a></li>
             </ul>
         </div>
