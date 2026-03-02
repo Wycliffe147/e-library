@@ -252,33 +252,53 @@ h2 {
     color: #005bb5;
 }
 
-/* Header layout */
+//* Header */
 .header {
     display: flex;
-    flex-wrap: wrap; /* allow items to wrap on small screens */
-    gap: 10px;
+    flex-wrap: wrap; /* allow wrapping */
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(0, 104, 202);
+    background-color: rgb(0,104,202); /* blue background */
     padding: 10px 20px;
-    color: whitesmoke;
     border-radius: 10px;
+    color: white;
 }
 
-/* Header nav links as pills */
+/* Nav container */
+.header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0; /* remove extra spacing that might create cyan block */
+}
+
+/* Nav links as pills */
 .header nav a {
-    padding: 6px 12px;          /* space inside the pill */
-    border-radius: 20px;         /* rounded corners */
-    background-color: rgba(255, 0, 255, 0.2); /* semi-transparent background */
-    color: white;               /* text color */
+    padding: 6px 12px;
+    border-radius: 20px;
+    background-color: rgba(255,255,255,0.3); /* distinct pill */
+    color: white;
     text-decoration: none;
     font-size: 16px;
     transition: background-color 0.2s, color 0.2s;
 }
 
 .header nav a:hover {
-    background-color: rgba(255, 255, 255, 0.5); /* lighter on hover */
-    color: #000;                                /* text turns black on hover */
+    background-color: rgba(255,255,255,0.6);
+    color: black;
+}
+
+/* Mobile adjustments */
+@media (max-width: 720px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header nav {
+        width: 100%;
+        gap: 8px;
+    }
 }
 
 /* Mobile adjustments (stacking / spacing) */
