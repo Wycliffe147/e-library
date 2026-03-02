@@ -247,3 +247,15 @@ h2 {
     border-radius: 5px;
     margin: 5px;
 }
+
+.header nav a {
+    margin-left: 20px;
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.header nav a:hover {
+    color: #ffd700; /* gold highlight */
+}
