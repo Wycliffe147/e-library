@@ -268,37 +268,24 @@ h2 {
     margin: 0; /* remove extra spacing that might create cyan block */
 }
 
-/* Nav links as pills */
+/* Header nav links as pills */
 .header nav a {
-    padding: 6px 12px;
-    border-radius: 20px;
-    background-color: rgba(255,255,255,0.3); /* distinct pill */
-    color: white;
+    padding: 6px 12px;          /* space inside the pill */
+    border-radius: 20px;         /* rounded corners */
+    background-color: rgba(255, 255, 255, 0.2); /* semi-transparent background */
+    color: white;               /* text color */
     text-decoration: none;
     font-size: 16px;
     transition: background-color 0.2s, color 0.2s;
 }
 
 .header nav a:hover {
-    background-color: rgba(255,255,255,0.6);
-    color: black;
-}
-
-/* Mobile adjustments */
-@media (max-width: 720px) {
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .header nav {
-        width: 100%;
-        gap: 8px;
-    }
+    background-color: rgba(255, 255, 255, 0.5); /* lighter on hover */
+    color: #000;                                /* text turns black on hover */
 }
 
 /* Mobile adjustments (stacking / spacing) */
-@media (max-width: 720px) {
+/* @media (max-width: 720px) {
     .header {
         flex-direction: column;
         align-items: flex-start;
@@ -314,6 +301,20 @@ h2 {
 
     .header nav a {
         margin-bottom: 5px; /* extra spacing for mobile */
+    }
+}
+  */
+
+/* Mobile adjustments */
+@media (max-width: 720px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header nav {
+        width: 100%;
+        gap: 8px;
     }
 }
 
