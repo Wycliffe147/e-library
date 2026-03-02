@@ -270,7 +270,7 @@ h2 {
 
 /* Header nav links as pills */
 .header nav a {
-
+    padding: 6px 12px;          /* space inside the pill */
     border-radius: 20px;         /* rounded corners */
     background-color: rgba(255, 255, 255, 0.2); /* semi-transparent background */
     color: white;               /* text color */
@@ -296,7 +296,7 @@ h2 {
         flex-wrap: wrap;
         gap: 10px;
         width: 100%;
-        margin-top: 5px;
+
     }
 
     .header nav a {
