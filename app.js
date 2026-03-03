@@ -39,61 +39,6 @@ function loadHome() {
     });
 }
 
-// --- About ---
-function loadAbout() {
-    app.innerHTML = `
-        <section class="about-section">
-            <h2>About This Project</h2>
-
-            <p>
-                This e-library allows students to browse, search, and read educational resources online.
-            </p>
-
-            <div class="about-flex reveal">
-                <img src="/Media/images/about.png" alt="About image" class="about-image" />
-                <p>
-                    I think having this website is better than relying on WhatsApp groups alone 
-                    because documents have to be sent every time someone new wants them.
-                </p>
-            </div>
-
-            <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
-            <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
-
-            <div class="developer-card reveal">
-                <h3>About the Developer</h3>
-                <p>
-                    Hi, I'm Wycliffe Mwanganda 👋, a student developer passionate about building 
-                    practical tech solutions for schools and any interested institutions.
-               </p>
-                <a href="https://wyport.vercel.app" target="_blank" class="dev-link">
-                    Visit My Portfolio
-                </a>
-            </div>
-        </section>
-    `;
-
-    activateScrollReveal();
-}
-
-// --- Request ---
-function loadRequest() {
-    app.innerHTML = `
-        <div class="contact-section">
-            <h2>Request a Book / Paper</h2>
-            <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
-            <ul>
-                <li>Email: 
-                    <a href="mailto:wycliffemwanganda@gmail.com">Email me</a>
-                </li>
-                <li>WhatsApp: 
-                    <a href="https://wa.me/265984153455" target="_blank">Let's talk</a>
-                </li>
-            </ul>
-        </div>
-    `;
-}
-
 // --- Load Folder ---
 async function loadFolder(category, subFolder = "") {
     currentCategory = category;
@@ -109,11 +54,9 @@ async function loadFolder(category, subFolder = "") {
     let pathSoFar = "";
 
     breadcrumbParts.forEach((part, index) => {
-        if (index === 0) {
-            breadcrumbHTML += `<span class="breadcrumb" data-home="true">${part}</span>`;
-        } else if (index === 1) {
-            breadcrumbHTML += ` / <span class="breadcrumb" data-path="">${part}</span>`;
-        } else {
+        if (index === 0) breadcrumbHTML += `<span class="breadcrumb" data-home="true">${part}</span>`;
+        else if (index === 1) breadcrumbHTML += ` / <span class="breadcrumb" data-path="">${part}</span>`;
+        else {
             pathSoFar += "/" + part;
             breadcrumbHTML += ` / <span class="breadcrumb" data-path="${pathSoFar.slice(1)}">${part}</span>`;
         }
@@ -124,17 +67,14 @@ async function loadFolder(category, subFolder = "") {
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search files or folders..." />
         </div>
+        <button id="downloadSelected">Download Selected</button>
         <div class="grid"></div>
     `;
 
     document.querySelectorAll(".breadcrumb").forEach(span => {
         span.addEventListener("click", e => {
-            if (e.target.dataset.home) {
-                loadHome();
-            } else {
-                const path = e.target.dataset.path || "";
-                loadFolder(category, path);
-            }
+            if (e.target.dataset.home) loadHome();
+            else loadFolder(category, e.target.dataset.path || "");
         });
     });
 
@@ -160,32 +100,47 @@ async function loadFolder(category, subFolder = "") {
         else if (ext === "ppt" || ext === "pptx") icon = "📽️";
 
         const cleanName = file.replace(/\.[^/.]+$/, "");
+        const filePath = `${category}/${currentPath ? currentPath + '/' : ''}${file}`;
 
         const card = document.createElement("div");
         card.className = "file-card";
         card.innerHTML = `
-            <a href="/Media/${category}/${currentPath ? currentPath + '/' : ''}${file}" 
-               target="_blank" 
-               title="${file}">
-                ${icon} ${cleanName}
-            </a>
+            <div class="file-top">
+                <input type="checkbox" class="file-checkbox" value="${filePath}">
+                <span>${icon} ${cleanName}</span>
+            </div>
+            <div class="file-actions">
+                <a href="/api/download?file=${encodeURIComponent(filePath)}" target="_blank">Open</a>
+                <a href="/api/download?file=${encodeURIComponent(filePath)}" download>Download</a>
+            </div>
         `;
         grid.appendChild(card);
     });
 
+    document.getElementById("downloadSelected").addEventListener("click", () => {
+        const selected = document.querySelectorAll(".file-checkbox:checked");
+        if (!selected.length) return alert("No files selected");
+
+        selected.forEach(cb => {
+            const link = document.createElement("a");
+            link.href = `/api/download?file=${encodeURIComponent(cb.value)}`;
+            link.download = "";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    });
+
+    // --- Search ---
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", async () => {
         const query = searchInput.value.trim();
-        if (!query) {
-            loadFolder(currentCategory, currentPath);
-            return;
-        }
+        if (!query) return loadFolder(currentCategory, currentPath);
 
         const res = await fetch(
             `/api/search?category=${encodeURIComponent(currentCategory)}&query=${encodeURIComponent(query)}`
         );
         const results = await res.json();
-
         grid.innerHTML = "";
 
         results.forEach(item => {
@@ -199,33 +154,17 @@ async function loadFolder(category, subFolder = "") {
             const card = document.createElement("div");
             card.className = "file-card";
             card.innerHTML = `
-                <a href="/Media/${currentCategory}/${item.path}" 
-                   target="_blank" 
-                   title="${item.name}">
-                    ${icon} ${item.name.replace(/\.[^/.]+$/, "")}
-                </a>
+                <div class="file-top">
+                    <input type="checkbox" class="file-checkbox" value="${item.path}">
+                    <span>${icon} ${item.name}</span>
+                </div>
+                <div class="file-actions">
+                    <a href="/api/download?file=${encodeURIComponent(item.path)}" target="_blank">Open</a>
+                    <a href="/api/download?file=${encodeURIComponent(item.path)}" download>Download</a>
+                </div>
             `;
             grid.appendChild(card);
         });
-    });
-}
-
-// --- Scroll Reveal Animation ---
-function activateScrollReveal() {
-    const reveals = document.querySelectorAll(".reveal");
-
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("active");
-            }
-        });
-    }, {
-        threshold: 0.2
-    });
-
-    reveals.forEach(reveal => {
-        observer.observe(reveal);
     });
 }
 
