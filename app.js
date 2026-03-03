@@ -50,7 +50,7 @@ function loadAbout() {
                 This e-library allows students to browse, search, and read educational resources online.
             </p>
 
-            <div class="about-flex reveal">
+            <div class="about-flex">
                 <img src="/Media/images/about.png" alt="About image" class="about-image" />
                 <p>
                     I think having this website is better than relying on WhatsApp groups alone 
