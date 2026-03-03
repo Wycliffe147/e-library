@@ -39,6 +39,62 @@ function loadHome() {
     });
 }
 
+
+// --- About ---
+function loadAbout() {
+    app.innerHTML = `
+        <section class="about-section">
+            <h2>About This Project</h2>
+
+            <p>
+                This e-library allows students to browse, search, and read educational resources online.
+            </p>
+
+            <div class="about-flex reveal">
+                <img src="/Media/images/about.png" alt="About image" class="about-image" />
+                <p>
+                    I think having this website is better than relying on WhatsApp groups alone 
+                    because documents have to be sent every time someone new wants them.
+                </p>
+            </div>
+
+            <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
+            <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
+
+            <div class="developer-card reveal">
+                <h3>About the Developer</h3>
+                <p>
+                    Hi, I'm Wycliffe Mwanganda 👋, a student developer passionate about building 
+                    practical tech solutions for schools and any interested institutions.
+               </p>
+                <a href="https://wyport.vercel.app" target="_blank" class="dev-link">
+                    Visit My Portfolio
+                </a>
+            </div>
+        </section>
+    `;
+
+    activateScrollReveal();
+}
+
+// --- Request ---
+function loadRequest() {
+    app.innerHTML = `
+        <div class="contact-section">
+            <h2>Request a Book / Paper</h2>
+            <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
+            <ul>
+                <li>Email: 
+                    <a href="mailto:wycliffemwanganda@gmail.com">Email me</a>
+                </li>
+                <li>WhatsApp: 
+                    <a href="https://wa.me/265984153455" target="_blank">Let's talk</a>
+                </li>
+            </ul>
+        </div>
+    `;
+}
+
 // --- Load Folder ---
 async function loadFolder(category, subFolder = "") {
     currentCategory = category;
