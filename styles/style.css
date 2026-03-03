@@ -449,12 +449,44 @@ h2 {
     }
 }
 
-.file-actions a {
-    margin-right: 50px; /* space to the right of each link */
-    text-decoration: none; /* optional: remove underline */
-    color: #007bff; /* optional: link color */
+.file-actions {
+    margin-top: 8px;
 }
 
+.file-actions a {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    margin-right: 8px;
+}
+
+/* Open button */
+.file-actions a:first-child {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.file-actions a:first-child:hover {
+    background-color: #3e8e41;
+    transform: translateY(-2px);
+}
+
+/* Download button */
 .file-actions a:last-child {
-    margin-right: 0; /* no extra margin after the last link */
+    background-color: #007BFF;
+    color: white;
+}
+
+.file-actions a:last-child:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Remove margin from last button */
+.file-actions a:last-child {
+    margin-right: 0;
 }
