@@ -39,6 +39,8 @@ function loadHome() {
     });
 }
 
+
+// --- About ---
 function loadAbout() {
     app.innerHTML = `
         <section class="about-section">
@@ -48,10 +50,8 @@ function loadAbout() {
                 This e-library allows students to browse, search, and read educational resources online.
             </p>
 
-            <div class="about-flex">
-                <img src="/api/download?file=images/about.png&mode=open" 
-                     alt="About image" 
-                     class="about-image" />
+            <div class="about-flex reveal">
+                <img src="/Media/images/about.png" alt="About image" class="about-image" />
                 <p>
                     I think having this website is better than relying on WhatsApp groups alone 
                     because documents have to be sent every time someone new wants them.
@@ -61,11 +61,11 @@ function loadAbout() {
             <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
             <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
 
-            <div class="developer-card">
+            <div class="developer-card reveal">
                 <h3>About the Developer</h3>
                 <p>
                     Hi, I'm Wycliffe Mwanganda 👋, a student developer passionate about building 
-                    practical tech solutions for schools.
+                    practical tech solutions for schools and any interested institutions.
                </p>
                 <a href="https://wyport.vercel.app" target="_blank" class="dev-link">
                     Visit My Portfolio
@@ -73,8 +73,11 @@ function loadAbout() {
             </div>
         </section>
     `;
+
+    activateScrollReveal();
 }
 
+// --- Request ---
 function loadRequest() {
     app.innerHTML = `
         <div class="contact-section">
@@ -91,6 +94,7 @@ function loadRequest() {
         </div>
     `;
 }
+
 
 // --- Load Folder ---
 async function loadFolder(category, subFolder = "") {
