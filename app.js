@@ -75,7 +75,22 @@ function loadAbout() {
     `;
 }
 
-
+function loadRequest() {
+    app.innerHTML = `
+        <div class="contact-section">
+            <h2>Request a Book / Paper</h2>
+            <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
+            <ul>
+                <li>Email: 
+                    <a href="mailto:wycliffemwanganda@gmail.com">Email me</a>
+                </li>
+                <li>WhatsApp: 
+                    <a href="https://wa.me/265984153455" target="_blank">Let's talk</a>
+                </li>
+            </ul>
+        </div>
+    `;
+}
 
 // --- Load Folder ---
 async function loadFolder(category, subFolder = "") {
