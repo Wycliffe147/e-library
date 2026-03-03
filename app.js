@@ -45,54 +45,42 @@ function loadHome() {
     });
 }
 
-/* ---------------- ABOUT ---------------- */
-
 function loadAbout() {
     app.innerHTML = `
         <section class="about-section">
             <h2>About This Project</h2>
 
             <p>
-                This e-library allows students to browse, search,
-                and read educational resources online.
+                This e-library allows students to browse, search, and read educational resources online.
             </p>
 
-            <div class="about-flex reveal">
-                <img src="/api/download?file=images/about.png&mode=open"
-                     class="about-image" />
-
+            <div class="about-flex">
+                <img 
+                    src="/api/download?file=images/about.png&mode=open" 
+                    alt="About image" 
+                    class="about-image" 
+                />
                 <p>
-                    I think having this website is better than relying
-                    on WhatsApp groups alone because documents have to
-                    be sent every time someone new wants them.
+                    I think having this website is better than relying on WhatsApp groups alone 
+                    because documents have to be sent every time someone new wants them.
                 </p>
             </div>
 
-            <p><strong>Technologies:</strong>
-            HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
+            <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
+            <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
 
-            <p><strong>Features:</strong>
-            SPA navigation, search functionality, responsive layout,
-            dynamic breadcrumbs.</p>
-
-            <div class="developer-card reveal">
+            <div class="developer-card">
                 <h3>About the Developer</h3>
                 <p>
-                    Hi, I'm Wycliffe Mwanganda 👋,
-                    a student developer passionate about building
-                    practical tech solutions for schools.
+                    Hi, I'm Wycliffe Mwanganda 👋, a student developer passionate about building 
+                    practical tech solutions for schools and interested institutions.
                 </p>
-
-                <a href="https://wyport.vercel.app"
-                   target="_blank"
-                   class="dev-link">
-                   Visit My Portfolio
+                <a href="https://wyport.vercel.app" target="_blank" class="dev-link">
+                    Visit My Portfolio
                 </a>
             </div>
         </section>
     `;
-
-    activateScrollReveal();
 }
 
 /* ---------------- REQUEST ---------------- */
