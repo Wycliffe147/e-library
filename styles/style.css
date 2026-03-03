@@ -450,7 +450,7 @@ h2 {
 }
 
 .file-actions a {
-    margin-right: 10px; /* space to the right of each link */
+    margin-right: 50px; /* space to the right of each link */
     text-decoration: none; /* optional: remove underline */
     color: #007bff; /* optional: link color */
 }
