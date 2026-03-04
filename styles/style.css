@@ -491,19 +491,3 @@ h2 {
     margin-right: 0;
 }
 
-.file-preview {
-    width: 100%;
-    height: 180px;
-    overflow: hidden;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    background: #f1f1f1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pdf-canvas {
-    width: 100%;
-    height: auto;
-}
