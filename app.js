@@ -3,6 +3,33 @@ const app = document.getElementById("app");
 let currentCategory = null;
 let currentPath = "";
 
+// Configure PDF.js worker
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+// ================= PDF THUMBNAIL RENDERER =================
+async function renderPDFThumbnail(url, canvas) {
+    try {
+        const loadingTask = pdfjsLib.getDocument(url);
+        const pdf = await loadingTask.promise;
+        const page = await pdf.getPage(1);
+
+        const viewport = page.getViewport({ scale: 0.5 });
+
+        const context = canvas.getContext("2d");
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        await page.render({
+            canvasContext: context,
+            viewport: viewport
+        }).promise;
+
+    } catch (error) {
+        console.error("PDF thumbnail error:", error);
+    }
+}
+
 // ================= HOME =================
 function loadHome() {
     currentCategory = null;
@@ -12,19 +39,19 @@ function loadHome() {
         <div class="cards" id="homeCardsInApp">
             <div id="card1">
                 <a href="#" class="card" data-category="Books">
-                    <img class="cover" src="/Media/images/Excel_Phy.png" alt="book-cover_photo"/>
+                    <img class="cover" src="/Media/images/Excel_Phy.png"/>
                     <p>Read books, pamphlets & notes</p>
                 </a>
             </div>
             <div id="card2">
                 <a href="#" class="card" data-category="Exams">
-                    <img class="cover" src="/Media/images/MANEB_Maths.png" alt="book-cover_photo"/>
+                    <img class="cover" src="/Media/images/MANEB_Maths.png"/>
                     <p>See exam/test papers</p>
                 </a>
             </div>
             <div id="card3">
                 <a href="#" class="card" data-category="Q&A">
-                    <img class="cover" src="/Media/images/Q&A.png" alt="model questions photo"/>
+                    <img class="cover" src="/Media/images/Q&A.png"/>
                     <p>Study questions & model answers</p>
                 </a>
             </div>
@@ -44,29 +71,26 @@ function loadAbout() {
     app.innerHTML = `
         <section class="about-section">
             <h2>About This Project</h2>
-
-            <p>
-                This e-library allows students to browse, search, and read educational resources online.
-            </p>
+            <p>This e-library allows students to browse, search, and read educational resources online.</p>
 
             <div class="about-flex reveal">
-                <img src="/Media/images/about.png" alt="About image" class="about-image" />
+                <img src="/Media/images/about.png" class="about-image"/>
                 <p>
-                    I think having this website is better than relying on WhatsApp groups alone 
-                    because documents have to be sent every time someone new wants them.
+                    Having this website is better than relying on WhatsApp groups 
+                    because documents don't need to be re-sent repeatedly.
                 </p>
             </div>
 
-            <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
-            <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
+            <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel</p>
+            <p><strong>Features:</strong> SPA navigation, search, breadcrumbs, PDF thumbnails.</p>
 
             <div class="developer-card reveal">
                 <h3>About the Developer</h3>
                 <p>
-                    Hi, I'm Wycliffe Mwanganda 👋, a student developer passionate about building 
-                    practical tech solutions for schools and institutions.
-               </p>
-                <a href="https://wyport.vercel.app" target="_blank" class="dev-link">
+                    Hi, I'm Wycliffe Mwanganda 👋, a student developer building 
+                    practical tech solutions for schools.
+                </p>
+                <a href="https://wyport.vercel.app" target="_blank">
                     Visit My Portfolio
                 </a>
             </div>
@@ -81,14 +105,10 @@ function loadRequest() {
     app.innerHTML = `
         <div class="contact-section">
             <h2>Request a Book / Paper</h2>
-            <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
+            <p>If you want a specific resource added, contact me:</p>
             <ul>
-                <li>Email: 
-                    <a href="mailto:wycliffemwanganda@gmail.com">Email me</a>
-                </li>
-                <li>WhatsApp: 
-                    <a href="https://wa.me/265984153455" target="_blank">Let's talk</a>
-                </li>
+                <li><a href="mailto:wycliffemwanganda@gmail.com">Email</a></li>
+                <li><a href="https://wa.me/265984153455" target="_blank">WhatsApp</a></li>
             </ul>
         </div>
     `;
@@ -137,7 +157,7 @@ async function loadFolder(category, subFolder = "") {
 
     const grid = document.querySelector(".grid");
 
-    // -------- FOLDERS --------
+    // FOLDERS
     data.folders.forEach(folder => {
         const card = document.createElement("div");
         card.className = "folder-card";
@@ -149,7 +169,7 @@ async function loadFolder(category, subFolder = "") {
         grid.appendChild(card);
     });
 
-    // -------- FILES --------
+    // FILES
     data.files.forEach(file => {
         const ext = file.split(".").pop().toLowerCase();
         const cleanName = file.replace(/\.[^/.]+$/, "");
@@ -159,10 +179,14 @@ async function loadFolder(category, subFolder = "") {
         const card = document.createElement("div");
         card.className = "file-card";
 
+        // ===== PDF CANVAS THUMBNAIL =====
         if (ext === "pdf") {
+
+            const canvasId = "pdf-" + Math.random().toString(36).substring(2, 9);
+
             card.innerHTML = `
                 <div class="file-preview">
-                    <iframe src="${previewURL}#page=1" class="pdf-thumb"></iframe>
+                    <canvas id="${canvasId}" class="pdf-canvas"></canvas>
                 </div>
 
                 <div class="file-top">
@@ -175,29 +199,36 @@ async function loadFolder(category, subFolder = "") {
                     <a href="${previewURL}&mode=download">Download</a>
                 </div>
             `;
-        } else {
-            let icon = "📄";
-            if (ext === "doc" || ext === "docx") icon = "📝";
-            else if (ext === "xls" || ext === "xlsx") icon = "📊";
-            else if (ext === "ppt" || ext === "pptx") icon = "📽️";
 
-            card.innerHTML = `
-                <div class="file-top">
-                    <input type="checkbox" class="file-checkbox" value="${filePath}">
-                    <span>${icon} ${cleanName}</span>
-                </div>
+            grid.appendChild(card);
 
-                <div class="file-actions">
-                    <a href="${previewURL}" target="_blank">Open</a>
-                    <a href="${previewURL}&mode=download">Download</a>
-                </div>
-            `;
+            const canvas = document.getElementById(canvasId);
+            renderPDFThumbnail(previewURL, canvas);
+
+            return;
         }
+
+        // ===== OTHER FILE TYPES =====
+        let icon = "📄";
+        if (ext === "doc" || ext === "docx") icon = "📝";
+        else if (ext === "xls" || ext === "xlsx") icon = "📊";
+        else if (ext === "ppt" || ext === "pptx") icon = "📽️";
+
+        card.innerHTML = `
+            <div class="file-top">
+                <input type="checkbox" class="file-checkbox" value="${filePath}">
+                <span>${icon} ${cleanName}</span>
+            </div>
+            <div class="file-actions">
+                <a href="${previewURL}" target="_blank">Open</a>
+                <a href="${previewURL}&mode=download">Download</a>
+            </div>
+        `;
 
         grid.appendChild(card);
     });
 
-    // -------- DOWNLOAD SELECTED --------
+    // DOWNLOAD SELECTED
     document.getElementById("downloadSelected").addEventListener("click", () => {
         const selected = document.querySelectorAll(".file-checkbox:checked");
         if (!selected.length) return alert("No files selected");
@@ -212,7 +243,7 @@ async function loadFolder(category, subFolder = "") {
         });
     });
 
-    // -------- SEARCH --------
+    // SEARCH
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", async () => {
         const query = searchInput.value.trim();
@@ -225,21 +256,14 @@ async function loadFolder(category, subFolder = "") {
         grid.innerHTML = "";
 
         results.forEach(item => {
-            const ext = item.name.split(".").pop().toLowerCase();
             const previewURL = `/api/download?file=${encodeURIComponent(item.path)}&mode=open`;
-
-            let icon = "📄";
-            if (ext === "pdf") icon = "📕";
-            else if (ext === "doc" || ext === "docx") icon = "📝";
-            else if (ext === "xls" || ext === "xlsx") icon = "📊";
-            else if (ext === "ppt" || ext === "pptx") icon = "📽️";
 
             const card = document.createElement("div");
             card.className = "file-card";
             card.innerHTML = `
                 <div class="file-top">
                     <input type="checkbox" class="file-checkbox" value="${item.path}">
-                    <span>${icon} ${item.name}</span>
+                    <span>📄 ${item.name}</span>
                 </div>
                 <div class="file-actions">
                     <a href="${previewURL}" target="_blank">Open</a>
