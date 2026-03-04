@@ -3,7 +3,7 @@ const app = document.getElementById("app");
 let currentCategory = null;
 let currentPath = "";
 
-// --- Home ---
+// ================= HOME =================
 function loadHome() {
     currentCategory = null;
     currentPath = "";
@@ -39,8 +39,7 @@ function loadHome() {
     });
 }
 
-
-// --- About ---
+// ================= ABOUT =================
 function loadAbout() {
     app.innerHTML = `
         <section class="about-section">
@@ -50,7 +49,7 @@ function loadAbout() {
                 This e-library allows students to browse, search, and read educational resources online.
             </p>
 
-            <div class="about-flex reveal ">
+            <div class="about-flex reveal">
                 <img src="/Media/images/about.png" alt="About image" class="about-image" />
                 <p>
                     I think having this website is better than relying on WhatsApp groups alone 
@@ -65,7 +64,7 @@ function loadAbout() {
                 <h3>About the Developer</h3>
                 <p>
                     Hi, I'm Wycliffe Mwanganda 👋, a student developer passionate about building 
-                    practical tech solutions for schools and any interested institutions.
+                    practical tech solutions for schools and institutions.
                </p>
                 <a href="https://wyport.vercel.app" target="_blank" class="dev-link">
                     Visit My Portfolio
@@ -77,7 +76,7 @@ function loadAbout() {
     activateScrollReveal();
 }
 
-// --- Request ---
+// ================= REQUEST =================
 function loadRequest() {
     app.innerHTML = `
         <div class="contact-section">
@@ -95,7 +94,7 @@ function loadRequest() {
     `;
 }
 
-// --- Load Folder ---
+// ================= LOAD FOLDER =================
 async function loadFolder(category, subFolder = "") {
     currentCategory = category;
     currentPath = subFolder;
@@ -110,8 +109,10 @@ async function loadFolder(category, subFolder = "") {
     let pathSoFar = "";
 
     breadcrumbParts.forEach((part, index) => {
-        if (index === 0) breadcrumbHTML += `<span class="breadcrumb" data-home="true">${part}</span>`;
-        else if (index === 1) breadcrumbHTML += ` / <span class="breadcrumb" data-path="">${part}</span>`;
+        if (index === 0)
+            breadcrumbHTML += `<span class="breadcrumb" data-home="true">${part}</span>`;
+        else if (index === 1)
+            breadcrumbHTML += ` / <span class="breadcrumb" data-path="">${part}</span>`;
         else {
             pathSoFar += "/" + part;
             breadcrumbHTML += ` / <span class="breadcrumb" data-path="${pathSoFar.slice(1)}">${part}</span>`;
@@ -136,6 +137,7 @@ async function loadFolder(category, subFolder = "") {
 
     const grid = document.querySelector(".grid");
 
+    // -------- FOLDERS --------
     data.folders.forEach(folder => {
         const card = document.createElement("div");
         card.className = "folder-card";
@@ -147,39 +149,62 @@ async function loadFolder(category, subFolder = "") {
         grid.appendChild(card);
     });
 
+    // -------- FILES --------
     data.files.forEach(file => {
         const ext = file.split(".").pop().toLowerCase();
-        let icon = "📄";
-        if (ext === "pdf") icon = "📕";
-        else if (ext === "doc" || ext === "docx") icon = "📝";
-        else if (ext === "xls" || ext === "xlsx") icon = "📊";
-        else if (ext === "ppt" || ext === "pptx") icon = "📽️";
-
         const cleanName = file.replace(/\.[^/.]+$/, "");
         const filePath = `${category}/${currentPath ? currentPath + '/' : ''}${file}`;
+        const previewURL = `/api/download?file=${encodeURIComponent(filePath)}&mode=open`;
 
         const card = document.createElement("div");
         card.className = "file-card";
-        card.innerHTML = `
-            <div class="file-top">
-                <input type="checkbox" class="file-checkbox" value="${filePath}">
-                <span>${icon} ${cleanName}</span>
-            </div>
-            <div class="file-actions">
-                <a href="/api/download?file=${encodeURIComponent(filePath)}" target="_blank">Open</a>
-                <a href="/api/download?file=${encodeURIComponent(filePath)}" download>Download</a>
-            </div>
-        `;
+
+        if (ext === "pdf") {
+            card.innerHTML = `
+                <div class="file-preview">
+                    <iframe src="${previewURL}#page=1" class="pdf-thumb"></iframe>
+                </div>
+
+                <div class="file-top">
+                    <input type="checkbox" class="file-checkbox" value="${filePath}">
+                    <span>${cleanName}</span>
+                </div>
+
+                <div class="file-actions">
+                    <a href="${previewURL}" target="_blank">Open</a>
+                    <a href="${previewURL}&mode=download">Download</a>
+                </div>
+            `;
+        } else {
+            let icon = "📄";
+            if (ext === "doc" || ext === "docx") icon = "📝";
+            else if (ext === "xls" || ext === "xlsx") icon = "📊";
+            else if (ext === "ppt" || ext === "pptx") icon = "📽️";
+
+            card.innerHTML = `
+                <div class="file-top">
+                    <input type="checkbox" class="file-checkbox" value="${filePath}">
+                    <span>${icon} ${cleanName}</span>
+                </div>
+
+                <div class="file-actions">
+                    <a href="${previewURL}" target="_blank">Open</a>
+                    <a href="${previewURL}&mode=download">Download</a>
+                </div>
+            `;
+        }
+
         grid.appendChild(card);
     });
 
+    // -------- DOWNLOAD SELECTED --------
     document.getElementById("downloadSelected").addEventListener("click", () => {
         const selected = document.querySelectorAll(".file-checkbox:checked");
         if (!selected.length) return alert("No files selected");
 
         selected.forEach(cb => {
             const link = document.createElement("a");
-            link.href = `/api/download?file=${encodeURIComponent(cb.value)}`;
+            link.href = `/api/download?file=${encodeURIComponent(cb.value)}&mode=download`;
             link.download = "";
             document.body.appendChild(link);
             link.click();
@@ -187,7 +212,7 @@ async function loadFolder(category, subFolder = "") {
         });
     });
 
-    // --- Search ---
+    // -------- SEARCH --------
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", async () => {
         const query = searchInput.value.trim();
@@ -201,6 +226,8 @@ async function loadFolder(category, subFolder = "") {
 
         results.forEach(item => {
             const ext = item.name.split(".").pop().toLowerCase();
+            const previewURL = `/api/download?file=${encodeURIComponent(item.path)}&mode=open`;
+
             let icon = "📄";
             if (ext === "pdf") icon = "📕";
             else if (ext === "doc" || ext === "docx") icon = "📝";
@@ -215,8 +242,8 @@ async function loadFolder(category, subFolder = "") {
                     <span>${icon} ${item.name}</span>
                 </div>
                 <div class="file-actions">
-                    <a href="/api/download?file=${encodeURIComponent(item.path)}" target="_blank">Open</a>
-                    <a href="/api/download?file=${encodeURIComponent(item.path)}" download>Download</a>
+                    <a href="${previewURL}" target="_blank">Open</a>
+                    <a href="${previewURL}&mode=download">Download</a>
                 </div>
             `;
             grid.appendChild(card);
@@ -224,6 +251,7 @@ async function loadFolder(category, subFolder = "") {
     });
 }
 
+// ================= SCROLL REVEAL =================
 function activateScrollReveal() {
     const reveals = document.querySelectorAll(".reveal");
 
@@ -232,7 +260,6 @@ function activateScrollReveal() {
 
         reveals.forEach(el => {
             const boxTop = el.getBoundingClientRect().top;
-
             if (boxTop < triggerBottom) {
                 el.classList.add("active");
             }
@@ -240,8 +267,8 @@ function activateScrollReveal() {
     }
 
     window.addEventListener("scroll", revealOnScroll);
-    revealOnScroll(); // trigger immediately
+    revealOnScroll();
 }
 
-// --- Initial load ---
+// ================= INITIAL LOAD =================
 window.addEventListener("DOMContentLoaded", loadHome);
