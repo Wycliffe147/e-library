@@ -490,3 +490,18 @@ h2 {
 .file-actions a:last-child {
     margin-right: 0;
 }
+
+.file-preview {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.pdf-thumb {
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: none; /* disables scrolling inside thumbnail */
+}
