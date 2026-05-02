@@ -22,6 +22,12 @@ function loadHome() {
                     <p>See exam/test papers</p>  
                 </a>  
             </div>  
+            <div id="card4">  
+                <a href="#" class="card" data-category="Downloads">  
+                    <img class="cover" src="/Media/images/downloads.png" alt="downloads-photo"/>  
+                    <p>Download zip packages</p>  
+                </a>  
+            </div>  
             <div id="card3">  
                 <a href="#" class="card" data-category="Q&A">  
                     <img class="cover" src="/Media/images/Q&A.png" alt="model questions photo"/>  
@@ -117,12 +123,14 @@ async function loadFolder(category, subFolder = "") {
         }  
     });  
 
+    const isDownloads = category === "Downloads";  
+
     app.innerHTML = `  
         <div class="breadcrumb-container">${breadcrumbHTML}</div>  
         <div class="search-container">  
             <input type="text" id="searchInput" placeholder="Search files or folders..." />  
         </div>  
-        <button id="downloadSelected">Download Selected</button>  
+        ${!isDownloads ? '<button id="downloadSelected">Download Selected</button>' : ''}  
         <div class="grid"></div>  
     `;  
 
@@ -153,39 +161,55 @@ async function loadFolder(category, subFolder = "") {
         else if (ext === "doc" || ext === "docx") icon = "📝";  
         else if (ext === "xls" || ext === "xlsx") icon = "📊";  
         else if (ext === "ppt" || ext === "pptx") icon = "📽️";  
+        else if (ext === "zip" || ext === "rar") icon = "🗜️";  
 
         const cleanName = file.replace(/\.[^/.]+$/, "");  
         const filePath = `${category}/${currentPath ? currentPath + '/' : ''}${file}`;  
 
         const card = document.createElement("div");  
         card.className = "file-card";  
-        card.innerHTML = `  
-            <div class="file-top">  
-                <input type="checkbox" class="file-checkbox" value="${filePath}">  
-                <span>${icon} ${cleanName}</span>  
-            </div>  
-            <div class="file-actions">  
-                <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=open" target="_blank">Open</a>  
-                <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>  
-            </div>  
-        `;  
+
+        if (isDownloads) {  
+            card.innerHTML = `  
+                <div class="file-top">  
+                    <span>${icon} ${cleanName}</span>  
+                </div>  
+                <div class="file-actions">  
+                    <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>  
+                </div>  
+            `;  
+        } else {  
+            card.innerHTML = `  
+                <div class="file-top">  
+                    <input type="checkbox" class="file-checkbox" value="${filePath}">  
+                    <span>${icon} ${cleanName}</span>  
+                </div>  
+                <div class="file-actions">  
+                    <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=open" target="_blank">Open</a>  
+                    <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>  
+                </div>  
+            `;  
+        }  
+
         grid.appendChild(card);  
     });  
 
-    document.getElementById("downloadSelected").addEventListener("click", () => {  
-        const selected = document.querySelectorAll(".file-checkbox:checked");  
-        if (!selected.length) return alert("No files selected");  
+    if (!isDownloads) {  
+        document.getElementById("downloadSelected").addEventListener("click", () => {  
+            const selected = document.querySelectorAll(".file-checkbox:checked");  
+            if (!selected.length) return alert("No files selected");  
 
-        selected.forEach(cb => {  
-            const filename = cb.value.split("/").pop();  
-            const link = document.createElement("a");  
-            link.href = `/api/download?file=${encodeURIComponent(cb.value)}&mode=download`;  
-            link.download = filename;  
-            document.body.appendChild(link);  
-            link.click();  
-            document.body.removeChild(link);  
+            selected.forEach(cb => {  
+                const filename = cb.value.split("/").pop();  
+                const link = document.createElement("a");  
+                link.href = `/api/download?file=${encodeURIComponent(cb.value)}&mode=download`;  
+                link.download = filename;  
+                document.body.appendChild(link);  
+                link.click();  
+                document.body.removeChild(link);  
+            });  
         });  
-    });  
+    }  
 
     // --- Search ---
     const searchInput = document.getElementById("searchInput");  
@@ -206,19 +230,33 @@ async function loadFolder(category, subFolder = "") {
             else if (ext === "doc" || ext === "docx") icon = "📝";  
             else if (ext === "xls" || ext === "xlsx") icon = "📊";  
             else if (ext === "ppt" || ext === "pptx") icon = "📽️";  
+            else if (ext === "zip" || ext === "rar") icon = "🗜️";  
 
             const card = document.createElement("div");  
             card.className = "file-card";  
-            card.innerHTML = `  
-                <div class="file-top">  
-                    <input type="checkbox" class="file-checkbox" value="${item.path}">  
-                    <span>${icon} ${item.name}</span>  
-                </div>  
-                <div class="file-actions">  
-                    <a href="/api/download?file=${encodeURIComponent(item.path)}&mode=open" target="_blank">Open</a>  
-                    <a href="/api/download?file=${encodeURIComponent(item.path)}&mode=download" download="${item.name}">Download</a>  
-                </div>  
-            `;  
+
+            if (isDownloads) {  
+                card.innerHTML = `  
+                    <div class="file-top">  
+                        <span>${icon} ${item.name}</span>  
+                    </div>  
+                    <div class="file-actions">  
+                        <a href="/api/download?file=${encodeURIComponent(item.path)}&mode=download" download="${item.name}">Download</a>  
+                    </div>  
+                `;  
+            } else {  
+                card.innerHTML = `  
+                    <div class="file-top">  
+                        <input type="checkbox" class="file-checkbox" value="${item.path}">  
+                        <span>${icon} ${item.name}</span>  
+                    </div>  
+                    <div class="file-actions">  
+                        <a href="/api/download?file=${encodeURIComponent(item.path)}&mode=open" target="_blank">Open</a>  
+                        <a href="/api/download?file=${encodeURIComponent(item.path)}&mode=download" download="${item.name}">Download</a>  
+                    </div>  
+                `;  
+            }  
+
             grid.appendChild(card);  
         });  
     });  
