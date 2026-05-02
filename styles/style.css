@@ -131,6 +131,30 @@ body {
     color: black;
 }
 
+#card4 a {
+    display: flex;
+    align-items: center;
+    background-color: rgb(100, 60, 180);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 60%;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s, color 1s;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+#card4 img {
+    margin: 5px;
+}
+
+#card4 a:hover {
+    transform: translateY(-5px);
+    background-color: #e0e0ff;
+    color: black;
+}
 
 #card3 a {
     display: flex;
@@ -231,7 +255,10 @@ h2 {
     }
     #card3 a {
         margin-right: 0;
-    }  
+    }
+    #card4 a {
+        margin-right: 0;
+    }
 }
 
 /* Node stuff. Still don't get it though */
