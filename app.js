@@ -23,8 +23,8 @@ function loadHome() {
                 </a>  
             </div>  
             <div id="card4">  
-                <a href="#" class="card" data-category="Downloads">  
-                    <img class="cover" src="/Media/images/downloads.png" alt="downloads-photo"/>  
+                <a href="#" class="card" data-category="Zips">  
+                    <img class="cover" src="/Media/images/zips.png" alt="zip-photo"/>  
                     <p>Download zip packages</p>  
                 </a>  
             </div>  
@@ -123,7 +123,7 @@ async function loadFolder(category, subFolder = "") {
         }  
     });  
 
-    const isDownloads = category === "Downloads";  
+    const isDownloads = category === "Zips";  
 
     app.innerHTML = `  
         <div class="breadcrumb-container">${breadcrumbHTML}</div>  
