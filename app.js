@@ -165,7 +165,7 @@ async function loadFolder(category, subFolder = "") {
                 <span>${icon} ${cleanName}</span>  
             </div>  
             <div class="file-actions">  
-                <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" target="_blank">Open</a>  
+                <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=open" target="_blank">Open</a>  
                 <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>  
             </div>  
         `;  
@@ -215,7 +215,7 @@ async function loadFolder(category, subFolder = "") {
                     <span>${icon} ${item.name}</span>  
                 </div>  
                 <div class="file-actions">  
-                    <a href="/api/download?file=${encodeURIComponent(item.path)}&mode=download" target="_blank">Open</a>  
+                    <a href="/api/download?file=${encodeURIComponent(item.path)}&mode=open" target="_blank">Open</a>  
                     <a href="/api/download?file=${encodeURIComponent(item.path)}&mode=download" download="${item.name}">Download</a>  
                 </div>  
             `;  
@@ -240,7 +240,7 @@ function activateScrollReveal() {
     }  
 
     window.addEventListener("scroll", revealOnScroll);  
-    revealOnScroll(); // trigger immediately  
+    revealOnScroll();  
 }  
 
 // --- Initial load ---
