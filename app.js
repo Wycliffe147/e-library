@@ -3,10 +3,67 @@ const app = document.getElementById("app");
 let currentCategory = null;
 let currentPath = "";
 
-// --- Home ---
-async function loadHome() {
+// ─── History / Routing ──────────────────────────────────────────────────────
+
+window.addEventListener("popstate", e => {
+    const state = e.state;
+    if (!state || state.view === "home")         loadHome(false);
+    else if (state.view === "about")             loadAbout(false);
+    else if (state.view === "request")           loadRequest(false);
+    else if (state.view === "folder")            loadFolder(state.category, state.subFolder, false);
+});
+
+// ─── Skeletons ──────────────────────────────────────────────────────────────
+
+function showHomeSkeleton() {
+    app.innerHTML = `
+        <div class="cards" id="homeCardsInApp">
+            ${Array(4).fill(`
+                <div>
+                    <div class="card skeleton-home-card">
+                        <div class="skeleton-cover skeleton-pulse"></div>
+                        <div class="card-text">
+                            <div class="skeleton-line skeleton-pulse" style="width:80%;height:14px"></div>
+                            <div class="skeleton-line skeleton-pulse" style="width:50%;height:12px;margin-top:8px"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join("")}
+        </div>
+    `;
+}
+
+function showFolderSkeleton() {
+    app.innerHTML = `
+        <div class="breadcrumb-container">
+            <div class="skeleton-line skeleton-pulse" style="width:200px;height:16px"></div>
+        </div>
+        <div class="folder-meta">
+            <div class="skeleton-line skeleton-pulse" style="width:100px;height:13px"></div>
+        </div>
+        <div class="search-container">
+            <div class="skeleton-line skeleton-pulse" style="width:100%;height:38px;border-radius:6px"></div>
+        </div>
+        <div class="grid">
+            ${Array(6).fill(`
+                <div class="skeleton-file-card skeleton-pulse">
+                    <div class="skeleton-line" style="width:70%;height:14px"></div>
+                    <div class="skeleton-line" style="width:40%;height:12px;margin-top:10px"></div>
+                </div>
+            `).join("")}
+        </div>
+    `;
+}
+
+// ─── Home ───────────────────────────────────────────────────────────────────
+
+async function loadHome(push = true) {
     currentCategory = null;
     currentPath = "";
+
+    if (push) history.pushState({ view: "home" }, "");
+
+    showHomeSkeleton();
 
     const categories = [
         { id: "card1", category: "Books",  img: "/Media/images/Excel_Phy.png",   label: "Read books, pamphlets & notes" },
@@ -23,7 +80,9 @@ async function loadHome() {
                         <img class="cover" src="${c.img}" alt="cover"/>
                         <div class="card-text">
                             <p>${c.label}</p>
-                            <span class="file-count" id="count-${c.category}">counting...</span>
+                            <span class="file-count" id="count-${c.category}">
+                                <span class="skeleton-count skeleton-pulse"></span>
+                            </span>
                         </div>
                     </a>
                 </div>
@@ -52,8 +111,11 @@ async function loadHome() {
     });
 }
 
-// --- About ---
-function loadAbout() {
+// ─── About ──────────────────────────────────────────────────────────────────
+
+function loadAbout(push = true) {
+    if (push) history.pushState({ view: "about" }, "");
+
     app.innerHTML = `
         <section class="about-section">
             <h2>About This Project</h2>
@@ -84,8 +146,11 @@ function loadAbout() {
     activateScrollReveal();
 }
 
-// --- Request ---
-function loadRequest() {
+// ─── Request ─────────────────────────────────────────────────────────────────
+
+function loadRequest(push = true) {
+    if (push) history.pushState({ view: "request" }, "");
+
     app.innerHTML = `
         <div class="contact-section">
             <h2>Request a Book / Paper</h2>
@@ -98,7 +163,8 @@ function loadRequest() {
     `;
 }
 
-// --- Debounce helper ---
+// ─── Debounce helper ─────────────────────────────────────────────────────────
+
 function debounce(fn, delay) {
     let timer;
     return (...args) => {
@@ -107,7 +173,8 @@ function debounce(fn, delay) {
     };
 }
 
-// --- Render file card helper ---
+// ─── Render file card helper ─────────────────────────────────────────────────
+
 function renderFileCard(file, filePath, isDownloads) {
     const ext = file.split(".").pop().toLowerCase();
     let icon = "📄";
@@ -146,10 +213,15 @@ function renderFileCard(file, filePath, isDownloads) {
     return card;
 }
 
-// --- Load Folder ---
-async function loadFolder(category, subFolder = "") {
+// ─── Load Folder ─────────────────────────────────────────────────────────────
+
+async function loadFolder(category, subFolder = "", push = true) {
     currentCategory = category;
     currentPath = subFolder;
+
+    if (push) history.pushState({ view: "folder", category, subFolder }, "");
+
+    showFolderSkeleton();
 
     const res = await fetch(
         `/api/files?category=${encodeURIComponent(category)}&subpath=${encodeURIComponent(subFolder)}`
@@ -239,19 +311,25 @@ async function loadFolder(category, subFolder = "") {
         });
     }
 
-    // --- Search (debounced, scoped to current folder) ---
+    // ─── Search (debounced, scoped to current folder) ───────────────────────
     const searchInput = document.getElementById("searchInput");
 
     const handleSearch = debounce(async () => {
         const query = searchInput.value.trim();
 
-        // Clear search → restore normal folder view
         if (!query) {
             renderFolderContents(data.folders, data.files);
             return;
         }
 
-        grid.innerHTML = `<p class="search-loading">Searching...</p>`;
+        grid.innerHTML = `
+            ${Array(4).fill(`
+                <div class="skeleton-file-card skeleton-pulse">
+                    <div class="skeleton-line" style="width:65%;height:14px"></div>
+                    <div class="skeleton-line" style="width:35%;height:12px;margin-top:10px"></div>
+                </div>
+            `).join("")}
+        `;
 
         try {
             const res = await fetch(
@@ -277,6 +355,8 @@ async function loadFolder(category, subFolder = "") {
     searchInput.addEventListener("input", handleSearch);
 }
 
+// ─── Scroll reveal ───────────────────────────────────────────────────────────
+
 function activateScrollReveal() {
     const reveals = document.querySelectorAll(".reveal");
 
@@ -293,5 +373,10 @@ function activateScrollReveal() {
     revealOnScroll();
 }
 
-// --- Initial load ---
-window.addEventListener("DOMContentLoaded", loadHome);
+// ─── Initial load ─────────────────────────────────────────────────────────────
+
+window.addEventListener("DOMContentLoaded", () => {
+    // replaceState so the very first entry has a state object too
+    history.replaceState({ view: "home" }, "");
+    loadHome(false);
+});
