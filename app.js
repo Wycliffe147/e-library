@@ -3,14 +3,69 @@ const app = document.getElementById("app");
 let currentCategory = null;
 let currentPath = "";
 
+// ─── Dark Mode ───────────────────────────────────────────────────────────────
+
+function initDarkMode() {
+    const saved = localStorage.getItem("darkMode");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (saved === "true" || (saved === null && prefersDark)) {
+        document.documentElement.classList.add("dark");
+    }
+
+    const btn = document.getElementById("darkModeToggle");
+    if (btn) updateToggleIcon(btn);
+}
+
+function updateToggleIcon(btn) {
+    const isDark = document.documentElement.classList.contains("dark");
+    btn.textContent = isDark ? "☀️" : "🌙";
+    btn.title = isDark ? "Switch to light mode" : "Switch to dark mode";
+}
+
+function toggleDarkMode() {
+    const isDark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("darkMode", isDark);
+    const btn = document.getElementById("darkModeToggle");
+    if (btn) updateToggleIcon(btn);
+}
+
+// ─── Page Transitions ────────────────────────────────────────────────────────
+
+function transitionOut() {
+    return new Promise(resolve => {
+        app.classList.add("page-exit");
+        setTimeout(() => {
+            app.classList.remove("page-exit");
+            resolve();
+        }, 220);
+    });
+}
+
+function transitionIn() {
+    app.classList.add("page-enter");
+    // Force reflow
+    void app.offsetWidth;
+    app.classList.add("page-enter-active");
+    setTimeout(() => {
+        app.classList.remove("page-enter", "page-enter-active");
+    }, 320);
+}
+
+async function navigateTo(renderFn) {
+    await transitionOut();
+    renderFn();
+    transitionIn();
+}
+
 // ─── History / Routing ──────────────────────────────────────────────────────
 
 window.addEventListener("popstate", e => {
     const state = e.state;
-    if (!state || state.view === "home")         loadHome(false);
-    else if (state.view === "about")             loadAbout(false);
-    else if (state.view === "request")           loadRequest(false);
-    else if (state.view === "folder")            loadFolder(state.category, state.subFolder, false);
+    if (!state || state.view === "home")         navigateTo(() => loadHome(false));
+    else if (state.view === "about")             navigateTo(() => loadAbout(false));
+    else if (state.view === "request")           navigateTo(() => loadRequest(false));
+    else if (state.view === "folder")            navigateTo(() => loadFolder(state.category, state.subFolder, false));
 });
 
 // ─── Skeletons ──────────────────────────────────────────────────────────────
@@ -61,8 +116,15 @@ async function loadHome(push = true) {
     currentCategory = null;
     currentPath = "";
 
-    if (push) history.pushState({ view: "home" }, "");
+    if (push) {
+        history.pushState({ view: "home" }, "");
+        await navigateTo(_renderHome);
+    } else {
+        _renderHome();
+    }
+}
 
+function _renderHome() {
     showHomeSkeleton();
 
     const categories = [
@@ -113,9 +175,16 @@ async function loadHome(push = true) {
 
 // ─── About ──────────────────────────────────────────────────────────────────
 
-function loadAbout(push = true) {
-    if (push) history.pushState({ view: "about" }, "");
+async function loadAbout(push = true) {
+    if (push) {
+        history.pushState({ view: "about" }, "");
+        await navigateTo(_renderAbout);
+    } else {
+        _renderAbout();
+    }
+}
 
+function _renderAbout() {
     app.innerHTML = `
         <section class="about-section">
             <h2>About This Project</h2>
@@ -148,9 +217,16 @@ function loadAbout(push = true) {
 
 // ─── Request ─────────────────────────────────────────────────────────────────
 
-function loadRequest(push = true) {
-    if (push) history.pushState({ view: "request" }, "");
+async function loadRequest(push = true) {
+    if (push) {
+        history.pushState({ view: "request" }, "");
+        await navigateTo(_renderRequest);
+    } else {
+        _renderRequest();
+    }
+}
 
+function _renderRequest() {
     app.innerHTML = `
         <div class="contact-section">
             <h2>Request a Book / Paper</h2>
@@ -219,8 +295,15 @@ async function loadFolder(category, subFolder = "", push = true) {
     currentCategory = category;
     currentPath = subFolder;
 
-    if (push) history.pushState({ view: "folder", category, subFolder }, "");
+    if (push) {
+        history.pushState({ view: "folder", category, subFolder }, "");
+        await navigateTo(() => _renderFolder(category, subFolder));
+    } else {
+        _renderFolder(category, subFolder);
+    }
+}
 
+async function _renderFolder(category, subFolder) {
     showFolderSkeleton();
 
     const res = await fetch(
@@ -376,7 +459,12 @@ function activateScrollReveal() {
 // ─── Initial load ─────────────────────────────────────────────────────────────
 
 window.addEventListener("DOMContentLoaded", () => {
-    // replaceState so the very first entry has a state object too
     history.replaceState({ view: "home" }, "");
+
+    // Wire up dark mode toggle button
+    const toggleBtn = document.getElementById("darkModeToggle");
+    if (toggleBtn) toggleBtn.addEventListener("click", toggleDarkMode);
+
+    initDarkMode();
     loadHome(false);
 });
