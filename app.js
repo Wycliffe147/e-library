@@ -15,7 +15,6 @@ async function loadHome() {
         { id: "card3", category: "Q&A",    img: "/Media/images/Q&A.png",          label: "Study questions & model answers" },
     ];
 
-    // Render cards immediately with a loading placeholder for counts
     app.innerHTML = `
         <div class="cards" id="homeCardsInApp">
             ${categories.map(c => `
@@ -99,6 +98,54 @@ function loadRequest() {
     `;
 }
 
+// --- Debounce helper ---
+function debounce(fn, delay) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(...args), delay);
+    };
+}
+
+// --- Render file card helper ---
+function renderFileCard(file, filePath, isDownloads) {
+    const ext = file.split(".").pop().toLowerCase();
+    let icon = "📄";
+    if (ext === "pdf") icon = "📕";
+    else if (ext === "doc" || ext === "docx") icon = "📝";
+    else if (ext === "xls" || ext === "xlsx") icon = "📊";
+    else if (ext === "ppt" || ext === "pptx") icon = "📽️";
+    else if (ext === "zip" || ext === "rar") icon = "🗜️";
+
+    const cleanName = file.replace(/\.[^/.]+$/, "");
+    const card = document.createElement("div");
+    card.className = "file-card";
+
+    if (isDownloads) {
+        card.innerHTML = `
+            <div class="file-top">
+                <span>${icon} ${cleanName}</span>
+            </div>
+            <div class="file-actions">
+                <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
+            </div>
+        `;
+    } else {
+        card.innerHTML = `
+            <div class="file-top">
+                <input type="checkbox" class="file-checkbox" value="${filePath}">
+                <span>${icon} ${cleanName}</span>
+            </div>
+            <div class="file-actions">
+                <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=open" target="_blank">Open</a>
+                <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
+            </div>
+        `;
+    }
+
+    return card;
+}
+
 // --- Load Folder ---
 async function loadFolder(category, subFolder = "") {
     currentCategory = category;
@@ -131,7 +178,7 @@ async function loadFolder(category, subFolder = "") {
             <span class="folder-file-count">${totalFiles} file${totalFiles !== 1 ? "s" : ""} in this folder</span>
         </div>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search files or folders..." />
+            <input type="text" id="searchInput" placeholder="Search in this folder..." />
         </div>
         ${!isDownloads ? '<button id="downloadSelected">Download Selected</button>' : ''}
         <div class="grid"></div>
@@ -146,60 +193,34 @@ async function loadFolder(category, subFolder = "") {
 
     const grid = document.querySelector(".grid");
 
-    // Folders — now objects with { name, count }
-    data.folders.forEach(folder => {
-        const card = document.createElement("div");
-        card.className = "folder-card";
-        card.innerHTML = `
-            <span class="folder-name">📁 ${folder.name}</span>
-            <span class="folder-count-badge">${folder.count} file${folder.count !== 1 ? "s" : ""}</span>
-        `;
-        card.addEventListener("click", () => {
-            const newPath = currentPath ? `${currentPath}/${folder.name}` : folder.name;
-            loadFolder(category, newPath);
+    function renderFolderContents(folders, files) {
+        grid.innerHTML = "";
+
+        folders.forEach(folder => {
+            const card = document.createElement("div");
+            card.className = "folder-card";
+            card.innerHTML = `
+                <span class="folder-name">📁 ${folder.name}</span>
+                <span class="folder-count-badge">${folder.count} file${folder.count !== 1 ? "s" : ""}</span>
+            `;
+            card.addEventListener("click", () => {
+                const newPath = currentPath ? `${currentPath}/${folder.name}` : folder.name;
+                loadFolder(category, newPath);
+            });
+            grid.appendChild(card);
         });
-        grid.appendChild(card);
-    });
 
-    data.files.forEach(file => {
-        const ext = file.split(".").pop().toLowerCase();
-        let icon = "📄";
-        if (ext === "pdf") icon = "📕";
-        else if (ext === "doc" || ext === "docx") icon = "📝";
-        else if (ext === "xls" || ext === "xlsx") icon = "📊";
-        else if (ext === "ppt" || ext === "pptx") icon = "📽️";
-        else if (ext === "zip" || ext === "rar") icon = "🗜️";
+        files.forEach(file => {
+            const filePath = `${category}/${currentPath ? currentPath + '/' : ''}${file}`;
+            grid.appendChild(renderFileCard(file, filePath, isDownloads));
+        });
 
-        const cleanName = file.replace(/\.[^/.]+$/, "");
-        const filePath = `${category}/${currentPath ? currentPath + '/' : ''}${file}`;
-
-        const card = document.createElement("div");
-        card.className = "file-card";
-
-        if (isDownloads) {
-            card.innerHTML = `
-                <div class="file-top">
-                    <span>${icon} ${cleanName}</span>
-                </div>
-                <div class="file-actions">
-                    <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
-                </div>
-            `;
-        } else {
-            card.innerHTML = `
-                <div class="file-top">
-                    <input type="checkbox" class="file-checkbox" value="${filePath}">
-                    <span>${icon} ${cleanName}</span>
-                </div>
-                <div class="file-actions">
-                    <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=open" target="_blank">Open</a>
-                    <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
-                </div>
-            `;
+        if (folders.length === 0 && files.length === 0) {
+            grid.innerHTML = `<p class="empty-state">No files here yet.</p>`;
         }
+    }
 
-        grid.appendChild(card);
-    });
+    renderFolderContents(data.folders, data.files);
 
     if (!isDownloads) {
         document.getElementById("downloadSelected").addEventListener("click", () => {
@@ -218,55 +239,42 @@ async function loadFolder(category, subFolder = "") {
         });
     }
 
-    // --- Search ---
+    // --- Search (debounced, scoped to current folder) ---
     const searchInput = document.getElementById("searchInput");
-    searchInput.addEventListener("input", async () => {
+
+    const handleSearch = debounce(async () => {
         const query = searchInput.value.trim();
-        if (!query) return loadFolder(currentCategory, currentPath);
 
-        const res = await fetch(
-            `/api/search?category=${encodeURIComponent(currentCategory)}&query=${encodeURIComponent(query)}`
-        );
-        const results = await res.json();
-        grid.innerHTML = "";
+        // Clear search → restore normal folder view
+        if (!query) {
+            renderFolderContents(data.folders, data.files);
+            return;
+        }
 
-        results.forEach(item => {
-            const ext = item.name.split(".").pop().toLowerCase();
-            let icon = "📄";
-            if (ext === "pdf") icon = "📕";
-            else if (ext === "doc" || ext === "docx") icon = "📝";
-            else if (ext === "xls" || ext === "xlsx") icon = "📊";
-            else if (ext === "ppt" || ext === "pptx") icon = "📽️";
-            else if (ext === "zip" || ext === "rar") icon = "🗜️";
+        grid.innerHTML = `<p class="search-loading">Searching...</p>`;
 
-            const card = document.createElement("div");
-            card.className = "file-card";
+        try {
+            const res = await fetch(
+                `/api/search?category=${encodeURIComponent(currentCategory)}&query=${encodeURIComponent(query)}&subpath=${encodeURIComponent(currentPath)}`
+            );
+            const results = await res.json();
 
-            if (isDownloads) {
-                card.innerHTML = `
-                    <div class="file-top">
-                        <span>${icon} ${item.name}</span>
-                    </div>
-                    <div class="file-actions">
-                        <a href="/api/download?file=${encodeURIComponent(item.path)}&mode=download" download="${item.name}">Download</a>
-                    </div>
-                `;
-            } else {
-                card.innerHTML = `
-                    <div class="file-top">
-                        <input type="checkbox" class="file-checkbox" value="${item.path}">
-                        <span>${icon} ${item.name}</span>
-                    </div>
-                    <div class="file-actions">
-                        <a href="/api/download?file=${encodeURIComponent(item.path)}&mode=open" target="_blank">Open</a>
-                        <a href="/api/download?file=${encodeURIComponent(item.path)}&mode=download" download="${item.name}">Download</a>
-                    </div>
-                `;
+            grid.innerHTML = "";
+
+            if (results.length === 0) {
+                grid.innerHTML = `<p class="empty-state">No files found for "<strong>${query}</strong>" in this folder.</p>`;
+                return;
             }
 
-            grid.appendChild(card);
-        });
-    });
+            results.forEach(item => {
+                grid.appendChild(renderFileCard(item.name, item.path, isDownloads));
+            });
+        } catch {
+            grid.innerHTML = `<p class="empty-state">Search failed. Please try again.</p>`;
+        }
+    }, 350);
+
+    searchInput.addEventListener("input", handleSearch);
 }
 
 function activateScrollReveal() {
