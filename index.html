@@ -15,9 +15,9 @@
     </div>
 
     <nav>
-        <a href="#" onclick="loadHome()">Home</a>
-        <a href="#" onclick="loadAbout()">About</a>
-        <a href="#" onclick="loadRequest()">Request a Book/Paper</a>
+        <a href="#" onclick="event.preventDefault(); loadHome()">Home</a>
+        <a href="#" onclick="event.preventDefault(); loadAbout()">About</a>
+        <a href="#" onclick="event.preventDefault(); loadRequest()">Request a Book/Paper</a>
         <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
     </nav>
 </div>
