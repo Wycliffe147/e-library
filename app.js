@@ -382,7 +382,8 @@ async function _renderFolder(category, subFolder) {
             const selected = document.querySelectorAll(".file-checkbox:checked");
             if (!selected.length) return alert("No files selected");
 
-            selected.forEach(cb => {
+            selected.forEach((cb, index) => {
+            setTimeout(() => {
                 const filename = cb.value.split("/").pop();
                 const link = document.createElement("a");
                 link.href = `/api/download?file=${encodeURIComponent(cb.value)}&mode=download`;
@@ -390,6 +391,7 @@ async function _renderFolder(category, subFolder) {
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+            }, index * 800);
             });
         });
     }
