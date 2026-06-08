@@ -280,7 +280,7 @@ function renderFileCard(file, filePath, isDownloads) {
                 <span>${icon} ${cleanName}</span>
             </div>
             <div class="file-actions">
-                <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=open" target="_blank">Open</a>
+                <a href="https://github.com/Wycliffe147/e-library/blob/main/Media/${encodeURIComponent(filePath)}" target="_blank">Open</a>
                 <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
             </div>
         `;
@@ -383,15 +383,15 @@ async function _renderFolder(category, subFolder) {
             if (!selected.length) return alert("No files selected");
 
             selected.forEach((cb, index) => {
-            setTimeout(() => {
-                const filename = cb.value.split("/").pop();
-                const link = document.createElement("a");
-                link.href = `/api/download?file=${encodeURIComponent(cb.value)}&mode=download`;
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }, index * 800);
+                setTimeout(() => {
+                    const filename = cb.value.split("/").pop();
+                    const link = document.createElement("a");
+                    link.href = `/api/download?file=${encodeURIComponent(cb.value)}&mode=download`;
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }, index * 800);
             });
         });
     }
