@@ -5,6 +5,16 @@ export default async function handler(req, res) {
         return res.status(400).send("File parameter required");
     }
 
+    const mimeTypes = {
+        "pdf": "application/pdf",
+        "zip": "application/zip",
+        "jpg": "image/jpeg",
+        "jpeg": "image/jpeg",
+        "png": "image/png",
+        "txt": "text/plain",
+        "html": "text/html"
+    };
+
     const lfsExtensions = ["pdf", "zip"];
     const ext = file.split(".").pop().toLowerCase();
 
@@ -22,9 +32,6 @@ export default async function handler(req, res) {
 
     const targetUrl = `${host}/${user}/${repo}/${branch}/Media/${cleanPath}`;
 
-    // If the user explicitly wants to download, we can still redirect.
-    // However, to force "Open" to work "normally" (inline), we must proxy the request
-    // to override GitHub's default 'Content-Disposition: attachment' header.
     if (mode === 'download') {
         return res.redirect(targetUrl);
     }
@@ -35,13 +42,12 @@ export default async function handler(req, res) {
             return res.status(response.status).send(`Failed to fetch file from GitHub: ${response.statusText}`);
         }
 
-        const contentType = response.headers.get("content-type") || "application/octet-stream";
+        // Use our mapper, fallback to the response's type, then to octet-stream
+        const contentType = mimeTypes[ext] || response.headers.get("content-type") || "application/octet-stream";
         
-        // Set headers to allow browser to open file inline
         res.setHeader("Content-Type", contentType);
         res.setHeader("Content-Disposition", "inline");
 
-        // Convert the response to an arrayBuffer and send it
         const buffer = await response.arrayBuffer();
         res.send(Buffer.from(buffer));
     } catch (error) {
