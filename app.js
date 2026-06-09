@@ -280,7 +280,7 @@ function renderFileCard(file, filePath, isDownloads) {
                 <span>${icon} ${cleanName}</span>
             </div>
             <div class="file-actions">
-                <a href="https://github.com/Wycliffe147/e-library/blob/main/Media/${encodeURIComponent(filePath)}" target="_blank">Open</a>
+                <a href="/api/download?file=${encodeURIComponent(filePath)}" target="_blank">Open</a>
                 <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
             </div>
         `;
