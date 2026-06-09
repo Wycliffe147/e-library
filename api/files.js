@@ -23,7 +23,7 @@ function getRealSize(fullPath) {
     if (size > 0 && size < 500) {
         try {
             const content = fs.readFileSync(fullPath, "utf8");
-            if (content.startsWith("version https://git-lfs.github.com/spec/v0")) {
+            if (content.includes("https://git-lfs.github.com/spec/")) {
                 const match = content.match(/size\s+(\d+)/);
                 if (match) {
                     return parseInt(match[1], 10);
