@@ -1,6 +1,24 @@
 import fs from "fs";
 import path from "path";
 
+function getRealSize(fullPath) {
+    const stats = fs.statSync(fullPath);
+    let size = stats.size;
+
+    if (size > 0 && size < 500) {
+        try {
+            const content = fs.readFileSync(fullPath, "utf8");
+            if (content.startsWith("version https://git-lfs.github.com/spec/v0")) {
+                const match = content.match(/size\s+(\d+)/);
+                if (match) {
+                    return parseInt(match[1], 10);
+                }
+            }
+        } catch (e) {}
+    }
+    return size;
+}
+
 function searchFiles(dir, query, relativePath = "") {
     let results = [];
     const items = fs.readdirSync(dir);
@@ -12,7 +30,8 @@ function searchFiles(dir, query, relativePath = "") {
         if (fs.statSync(fullPath).isDirectory()) {
             results = results.concat(searchFiles(fullPath, query, itemPath));
         } else if (item.toLowerCase().includes(query.toLowerCase())) {
-            results.push({ name: item, path: itemPath });
+            const size = getRealSize(fullPath);
+            results.push({ name: item, path: itemPath, size });
         }
     });
 
@@ -38,7 +57,8 @@ export default function handler(req, res) {
     const rawResults = searchFiles(searchDir, query);
     const results = rawResults.map(r => ({
         name: r.name,
-        path: `${prefix}/${r.path}`
+        path: `${prefix}/${r.path}`,
+        size: r.size
     }));
 
     res.status(200).json(results);

@@ -249,9 +249,18 @@ function debounce(fn, delay) {
     };
 }
 
+function formatBytes(bytes, decimals = 1) {
+    if (!bytes || bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
 // ─── Render file card helper ─────────────────────────────────────────────────
 
-function renderFileCard(file, filePath, isDownloads) {
+function renderFileCard(file, filePath, isDownloads, size) {
     const ext = file.split(".").pop().toLowerCase();
     let icon = "📄";
     if (ext === "pdf") icon = "📕";
@@ -273,10 +282,12 @@ function renderFileCard(file, filePath, isDownloads) {
         openUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
     }
 
+    const sizeHTML = size ? `<span class="file-size" style="font-size: 0.8em; opacity: 0.7; margin-left: 5px;">(${formatBytes(size)})</span>` : '';
+
     if (isDownloads) {
         card.innerHTML = `
             <div class="file-top">
-                <span>${icon} ${cleanName}</span>
+                <span>${icon} ${cleanName} ${sizeHTML}</span>
             </div>
             <div class="file-actions">
                 <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
@@ -286,7 +297,7 @@ function renderFileCard(file, filePath, isDownloads) {
         card.innerHTML = `
             <div class="file-top">
                 <input type="checkbox" class="file-checkbox" value="${filePath}">
-                <span>${icon} ${cleanName}</span>
+                <span>${icon} ${cleanName} ${sizeHTML}</span>
             </div>
             <div class="file-actions">
                 <a href="${openUrl}" target="_blank">Open</a>
@@ -375,8 +386,8 @@ async function _renderFolder(category, subFolder) {
         });
 
         files.forEach(file => {
-            const filePath = `${category}/${currentPath ? currentPath + '/' : ''}${file}`;
-            grid.appendChild(renderFileCard(file, filePath, isDownloads));
+            const filePath = `${category}/${currentPath ? currentPath + '/' : ''}${file.name}`;
+            grid.appendChild(renderFileCard(file.name, filePath, isDownloads, file.size));
         });
 
         if (folders.length === 0 && files.length === 0) {
@@ -439,7 +450,7 @@ async function _renderFolder(category, subFolder) {
             }
 
             results.forEach(item => {
-                grid.appendChild(renderFileCard(item.name, item.path, isDownloads));
+                grid.appendChild(renderFileCard(item.name, item.path, isDownloads, item.size));
             });
         } catch {
             grid.innerHTML = `<p class="empty-state">Search failed. Please try again.</p>`;

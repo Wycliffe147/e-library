@@ -15,6 +15,27 @@ function countFilesRecursive(dir) {
     return count;
 }
 
+function getRealSize(fullPath) {
+    const stats = fs.statSync(fullPath);
+    let size = stats.size;
+
+    // If it's small, it might be a Git LFS pointer
+    if (size > 0 && size < 500) {
+        try {
+            const content = fs.readFileSync(fullPath, "utf8");
+            if (content.startsWith("version https://git-lfs.github.com/spec/v0")) {
+                const match = content.match(/size\s+(\d+)/);
+                if (match) {
+                    return parseInt(match[1], 10);
+                }
+            }
+        } catch (e) {
+            // Not a text file or other error, just use the stat size
+        }
+    }
+    return size;
+}
+
 export default function handler(req, res) {
     const { category, subpath = "", count = "false" } = req.query;
 
@@ -44,7 +65,8 @@ export default function handler(req, res) {
             const fileCount = countFilesRecursive(fullPath);
             folders.push({ name: item, count: fileCount });
         } else {
-            files.push(item);
+            const size = getRealSize(fullPath);
+            files.push({ name: item, size });
         }
     });
 
