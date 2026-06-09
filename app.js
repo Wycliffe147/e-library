@@ -264,6 +264,15 @@ function renderFileCard(file, filePath, isDownloads) {
     const card = document.createElement("div");
     card.className = "file-card";
 
+    let openUrl = `/api/download?file=${encodeURIComponent(filePath)}`;
+    
+    // Use Google Docs Viewer for Office files to allow in-browser viewing
+    const officeExts = ["doc", "docx", "xls", "xlsx", "ppt", "pptx"];
+    if (officeExts.includes(ext)) {
+        const absoluteUrl = window.location.origin + openUrl;
+        openUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
+    }
+
     if (isDownloads) {
         card.innerHTML = `
             <div class="file-top">
@@ -280,7 +289,7 @@ function renderFileCard(file, filePath, isDownloads) {
                 <span>${icon} ${cleanName}</span>
             </div>
             <div class="file-actions">
-                <a href="/api/download?file=${encodeURIComponent(filePath)}" target="_blank">Open</a>
+                <a href="${openUrl}" target="_blank">Open</a>
                 <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
             </div>
         `;
