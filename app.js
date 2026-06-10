@@ -606,6 +606,59 @@ function activateScrollReveal() {
     revealOnScroll();
 }
 
+// ─── Magic Nav ───────────────────────────────────────────────────────────────
+
+function initMagicNav() {
+    const header = document.querySelector(".header");
+    const magicNav = document.getElementById("magicNav");
+    const circle = document.querySelector(".magic-nav-circle");
+
+    if (!header || !magicNav) return;
+
+    // Detect when header scrolls out of view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                // Header is out - show magic nav
+                magicNav.classList.remove("hidden");
+                magicNav.classList.add("visible");
+            } else {
+                // Header is in - hide magic nav
+                magicNav.classList.add("hidden");
+                magicNav.classList.remove("visible");
+                magicNav.classList.remove("expanded");
+            }
+        });
+    }, { 
+        threshold: 0,
+        rootMargin: "-20px 0px 0px 0px" // Trigger slightly before it's fully gone
+    });
+
+    observer.observe(header);
+
+    // Toggle expanded ribbon
+    circle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        magicNav.classList.toggle("expanded");
+    });
+
+    // Close ribbon when clicking anywhere else
+    document.addEventListener("click", (e) => {
+        if (!magicNav.contains(e.target)) {
+            magicNav.classList.remove("expanded");
+        }
+    });
+
+    // Close ribbon on significant scroll
+    let lastScroll = window.scrollY;
+    window.addEventListener("scroll", () => {
+        if (Math.abs(window.scrollY - lastScroll) > 50) {
+            magicNav.classList.remove("expanded");
+            lastScroll = window.scrollY;
+        }
+    }, { passive: true });
+}
+
 // ─── Initial load ─────────────────────────────────────────────────────────────
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -616,5 +669,6 @@ window.addEventListener("DOMContentLoaded", () => {
     if (toggleBtn) toggleBtn.addEventListener("click", toggleDarkMode);
 
     initDarkMode();
+    initMagicNav();
     loadHome(false);
 });

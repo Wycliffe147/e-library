@@ -31,6 +31,18 @@
     </nav>
 </div>
 
+<!-- Magic Nav (Floating Circle / Ribbon) -->
+<div id="magicNav" class="magic-nav hidden">
+    <div class="magic-nav-circle">
+        <img src="/Media/images/logo.png" alt="Logo"/>
+    </div>
+    <div class="magic-nav-ribbon">
+        <a href="#" onclick="event.preventDefault(); loadHome()">Home</a>
+        <a href="#" onclick="event.preventDefault(); loadAbout()">About</a>
+        <a href="#" onclick="event.preventDefault(); loadRequest()">Request</a>
+    </div>
+</div>
+
     <!-- SPA container -->
     <div id="app"></div>
 
