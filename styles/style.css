@@ -941,3 +941,117 @@ h2 {
         border-color 0.35s ease,
         box-shadow 0.35s ease;
 }
+
+/* ZIP Modal Styles */
+.zip-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.zip-modal-content {
+    background-color: var(--bg-about);
+    color: var(--text-primary);
+    width: 90%;
+    max-width: 600px;
+    max-height: 80%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+    animation: modal-appear 0.3s ease-out;
+}
+
+@keyframes modal-appear {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.zip-modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-input);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.zip-modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.close-zip-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.close-zip-modal:hover {
+    opacity: 1;
+}
+
+.zip-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.zip-entry-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.zip-entry-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+html.dark .zip-entry-list li {
+    border-bottom-color: rgba(255,255,255,0.05);
+}
+
+.entry-name {
+    word-break: break-all;
+    margin-right: 10px;
+}
+
+.entry-size {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+.open-zip-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    margin-right: 8px;
+    border: none;
+    background-color: #ff9800;
+    color: white;
+    cursor: pointer;
+}
+
+.open-zip-btn:hover {
+    background-color: #f57c00;
+    transform: translateY(-2px);
+}

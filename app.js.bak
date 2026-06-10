@@ -249,69 +249,9 @@ function debounce(fn, delay) {
     };
 }
 
-function formatBytes(bytes, decimals = 1) {
-    if (!bytes || bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-}
-
-async function showZipContents(file, filePath) {
-    const modal = document.createElement("div");
-    modal.className = "zip-modal";
-    modal.innerHTML = `
-        <div class="zip-modal-content">
-            <div class="zip-modal-header">
-                <h3>Contents of ${file}</h3>
-                <button class="close-zip-modal">&times;</button>
-            </div>
-            <div class="zip-modal-body">
-                <div class="skeleton-line skeleton-pulse" style="width:100%;height:20px;margin-bottom:10px"></div>
-                <div class="skeleton-line skeleton-pulse" style="width:90%;height:20px;margin-bottom:10px"></div>
-                <div class="skeleton-line skeleton-pulse" style="width:95%;height:20px;margin-bottom:10px"></div>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-
-    modal.querySelector(".close-zip-modal").onclick = () => {
-        document.body.removeChild(modal);
-    };
-
-    modal.onclick = (e) => {
-        if (e.target === modal) document.body.removeChild(modal);
-    };
-
-    try {
-        const res = await fetch(`/api/zip-contents?file=${encodeURIComponent(filePath)}`);
-        if (!res.ok) throw new Error("Failed to load contents");
-        const entries = await res.json();
-
-        const body = modal.querySelector(".zip-modal-body");
-        if (entries.length === 0) {
-            body.innerHTML = "<p>This ZIP file is empty.</p>";
-        } else {
-            body.innerHTML = `
-                <ul class="zip-entry-list">
-                    ${entries.map(entry => `
-                        <li>
-                            <span class="entry-name">${entry.isDirectory ? "📁" : "📄"} ${entry.name}</span>
-                            ${!entry.isDirectory ? `<span class="entry-size">${formatBytes(entry.size)}</span>` : ""}
-                        </li>
-                    `).join("")}
-                </ul>
-            `;
-        }
-    } catch (err) {
-        modal.querySelector(".zip-modal-body").innerHTML = `<p class="error-text">Error: ${err.message}</p>`;
-    }
-}
-
 // ─── Render file card helper ─────────────────────────────────────────────────
 
-function renderFileCard(file, filePath, isDownloads, size) {
+function renderFileCard(file, filePath, isDownloads) {
     const ext = file.split(".").pop().toLowerCase();
     let icon = "📄";
     if (ext === "pdf") icon = "📕";
@@ -324,26 +264,12 @@ function renderFileCard(file, filePath, isDownloads, size) {
     const card = document.createElement("div");
     card.className = "file-card";
 
-    let openUrl = `/api/download?file=${encodeURIComponent(filePath)}`;
-    
-    // Use Google Docs Viewer for Office files to allow in-browser viewing
-    const officeExts = ["doc", "docx", "xls", "xlsx", "ppt", "pptx"];
-    if (officeExts.includes(ext)) {
-        const absoluteUrl = window.location.origin + openUrl;
-        openUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
-    }
-
-    const sizeHTML = size ? `<span class="file-size" style="font-size: 0.8em; opacity: 0.7; margin-left: 5px;">(${formatBytes(size)})</span>` : '';
-
-    const isZip = ext === "zip";
-
     if (isDownloads) {
         card.innerHTML = `
             <div class="file-top">
-                <span>${icon} ${cleanName} ${sizeHTML}</span>
+                <span>${icon} ${cleanName}</span>
             </div>
             <div class="file-actions">
-                ${isZip ? `<button class="open-zip-btn" data-file="${file}" data-path="${filePath}">View Contents</button>` : ""}
                 <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
             </div>
         `;
@@ -351,21 +277,13 @@ function renderFileCard(file, filePath, isDownloads, size) {
         card.innerHTML = `
             <div class="file-top">
                 <input type="checkbox" class="file-checkbox" value="${filePath}">
-                <span>${icon} ${cleanName} ${sizeHTML}</span>
+                <span>${icon} ${cleanName}</span>
             </div>
             <div class="file-actions">
-                ${isZip ? 
-                    `<button class="open-zip-btn" data-file="${file}" data-path="${filePath}">View Contents</button>` : 
-                    `<a href="${openUrl}" target="_blank">Open</a>`
-                }
+                <a href="https://github.com/Wycliffe147/e-library/blob/main/Media/${encodeURIComponent(filePath)}" target="_blank">Open</a>
                 <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
             </div>
         `;
-    }
-
-    const zipBtn = card.querySelector(".open-zip-btn");
-    if (zipBtn) {
-        zipBtn.onclick = () => showZipContents(file, filePath);
     }
 
     return card;
@@ -448,8 +366,8 @@ async function _renderFolder(category, subFolder) {
         });
 
         files.forEach(file => {
-            const filePath = `${category}/${currentPath ? currentPath + '/' : ''}${file.name}`;
-            grid.appendChild(renderFileCard(file.name, filePath, isDownloads, file.size));
+            const filePath = `${category}/${currentPath ? currentPath + '/' : ''}${file}`;
+            grid.appendChild(renderFileCard(file, filePath, isDownloads));
         });
 
         if (folders.length === 0 && files.length === 0) {
@@ -512,7 +430,7 @@ async function _renderFolder(category, subFolder) {
             }
 
             results.forEach(item => {
-                grid.appendChild(renderFileCard(item.name, item.path, isDownloads, item.size));
+                grid.appendChild(renderFileCard(item.name, item.path, isDownloads));
             });
         } catch {
             grid.innerHTML = `<p class="empty-state">Search failed. Please try again.</p>`;
