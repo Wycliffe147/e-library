@@ -52,20 +52,35 @@ function transitionIn() {
     }, 320);
 }
 
-async function navigateTo(renderFn) {
+async function navigateTo(renderFn, pageTitle) {
     await transitionOut();
     renderFn();
     transitionIn();
+
+    // Track page view in Google Analytics
+    if (typeof gtag === 'function') {
+        gtag('event', 'page_view', {
+            page_title: pageTitle || document.title,
+            page_location: window.location.href,
+            page_path: window.location.pathname + window.location.search + window.location.hash
+        });
+    }
 }
 
 // ─── History / Routing ──────────────────────────────────────────────────────
 
 window.addEventListener("popstate", e => {
     const state = e.state;
-    if (!state || state.view === "home")         navigateTo(() => loadHome(false));
-    else if (state.view === "about")             navigateTo(() => loadAbout(false));
-    else if (state.view === "request")           navigateTo(() => loadRequest(false));
-    else if (state.view === "folder")            navigateTo(() => loadFolder(state.category, state.subFolder, false));
+    if (!state || state.view === "home") {
+        navigateTo(() => loadHome(false), "Home - e-library");
+    } else if (state.view === "about") {
+        navigateTo(() => loadAbout(false), "About - e-library");
+    } else if (state.view === "request") {
+        navigateTo(() => loadRequest(false), "Request - e-library");
+    } else if (state.view === "folder") {
+        const folderTitle = state.subFolder ? `${state.category} > ${state.subFolder}` : state.category;
+        navigateTo(() => loadFolder(state.category, state.subFolder, false), `${folderTitle} - e-library`);
+    }
 });
 
 // ─── Skeletons ──────────────────────────────────────────────────────────────
@@ -118,7 +133,7 @@ async function loadHome(push = true) {
 
     if (push) {
         history.pushState({ view: "home" }, "");
-        await navigateTo(_renderHome);
+        await navigateTo(_renderHome, "Home - e-library");
     } else {
         _renderHome();
     }
@@ -178,7 +193,7 @@ function _renderHome() {
 async function loadAbout(push = true) {
     if (push) {
         history.pushState({ view: "about" }, "");
-        await navigateTo(_renderAbout);
+        await navigateTo(_renderAbout, "About - e-library");
     } else {
         _renderAbout();
     }
@@ -220,7 +235,7 @@ function _renderAbout() {
 async function loadRequest(push = true) {
     if (push) {
         history.pushState({ view: "request" }, "");
-        await navigateTo(_renderRequest);
+        await navigateTo(_renderRequest, "Request - e-library");
     } else {
         _renderRequest();
     }
@@ -380,7 +395,8 @@ async function loadFolder(category, subFolder = "", push = true) {
 
     if (push) {
         history.pushState({ view: "folder", category, subFolder }, "");
-        await navigateTo(() => _renderFolder(category, subFolder));
+        const folderTitle = subFolder ? `${category} > ${subFolder}` : category;
+        await navigateTo(() => _renderFolder(category, subFolder), `${folderTitle} - e-library`);
     } else {
         _renderFolder(category, subFolder);
     }
