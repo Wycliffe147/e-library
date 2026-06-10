@@ -340,6 +340,7 @@ function renderFileCard(file, filePath, isDownloads, size) {
     if (isDownloads) {
         card.innerHTML = `
             <div class="file-top">
+                <input type="checkbox" class="file-checkbox" value="${filePath}">
                 <span>${icon} ${cleanName} ${sizeHTML}</span>
             </div>
             <div class="file-actions">
@@ -417,7 +418,7 @@ async function _renderFolder(category, subFolder) {
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search in this folder..." />
         </div>
-        ${!isDownloads ? '<button id="downloadSelected">Download Selected</button>' : ''}
+        <button id="downloadSelected">Download Selected</button>
         <div class="grid"></div>
     `;
 
@@ -468,9 +469,8 @@ async function _renderFolder(category, subFolder) {
 
     renderFolderContents(data.folders, data.files);
 
-    if (!isDownloads) {
-        document.getElementById("downloadSelected").addEventListener("click", async () => {
-            const selectedFiles = Array.from(document.querySelectorAll(".file-checkbox:checked")).map(cb => cb.value);
+    document.getElementById("downloadSelected").addEventListener("click", async () => {
+        const selectedFiles = Array.from(document.querySelectorAll(".file-checkbox:checked")).map(cb => cb.value);
             const selectedFolders = Array.from(document.querySelectorAll(".folder-checkbox:checked"));
 
             if (!selectedFiles.length && !selectedFolders.length) return alert("No items selected");
@@ -527,7 +527,6 @@ async function _renderFolder(category, subFolder) {
                 }, index * 800);
             });
         }
-    }
 
     // ─── Search (debounced, scoped to current folder) ───────────────────────
     const searchInput = document.getElementById("searchInput");
