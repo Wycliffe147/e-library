@@ -750,7 +750,7 @@ html.dark body::before {
     z-index: 0;
 }
 
-html.dark body > * {
+html.dark body > :not(.magic-nav):not(.zip-modal) {
     position: relative;
     z-index: 1;
 }
