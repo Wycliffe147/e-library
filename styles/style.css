@@ -95,7 +95,7 @@ body {
 }
 
 #card1 img {
-    margin: 5px;
+    
     
 }
 
@@ -121,7 +121,7 @@ body {
 }
 
 #card2 img {
-    margin: 5px;
+    
     
 }
 
@@ -147,7 +147,7 @@ body {
 }
 
 #card4 img {
-    margin: 5px;
+    
 }
 
 #card4 a:hover {
@@ -172,7 +172,7 @@ body {
 }
 
 #card3 img {
-    margin: 5px;
+    
     
 }
 
@@ -186,8 +186,8 @@ body {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     height: 150px;
-    width: auto;
-    
+    width: 150px;
+    object-fit: cover;
 }
 
 
@@ -294,7 +294,7 @@ h2 {
     cursor: pointer;
     font-weight: 500;
     transition: 0.2s ease;
-    margin: 5px;
+    
 }
 
 .folder-card:hover {
@@ -306,7 +306,7 @@ h2 {
     background: #f5f5f5;
     padding: 8px;
     border-radius: 5px;
-    margin: 5px;
+    
 }
 
 
