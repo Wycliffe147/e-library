@@ -436,13 +436,22 @@ async function _renderFolder(category, subFolder) {
         folders.forEach(folder => {
             const card = document.createElement("div");
             card.className = "folder-card";
+            const folderPath = currentPath ? `${currentPath}/${folder.name}` : folder.name;
+            
             card.innerHTML = `
-                <span class="folder-name">📁 ${folder.name}</span>
+                <div class="folder-top">
+                    <input type="checkbox" class="folder-checkbox" data-path="${folderPath}" data-name="${folder.name}">
+                    <span class="folder-name">📁 ${folder.name}</span>
+                </div>
                 <span class="folder-count-badge">${folder.count} file${folder.count !== 1 ? "s" : ""}</span>
             `;
+            
+            // Prevent checkbox click from opening the folder
+            const checkbox = card.querySelector(".folder-checkbox");
+            checkbox.addEventListener("click", e => e.stopPropagation());
+
             card.addEventListener("click", () => {
-                const newPath = currentPath ? `${currentPath}/${folder.name}` : folder.name;
-                loadFolder(category, newPath);
+                loadFolder(category, folderPath);
             });
             grid.appendChild(card);
         });
@@ -460,22 +469,64 @@ async function _renderFolder(category, subFolder) {
     renderFolderContents(data.folders, data.files);
 
     if (!isDownloads) {
-        document.getElementById("downloadSelected").addEventListener("click", () => {
-            const selected = document.querySelectorAll(".file-checkbox:checked");
-            if (!selected.length) return alert("No files selected");
+        document.getElementById("downloadSelected").addEventListener("click", async () => {
+            const selectedFiles = Array.from(document.querySelectorAll(".file-checkbox:checked")).map(cb => cb.value);
+            const selectedFolders = Array.from(document.querySelectorAll(".folder-checkbox:checked"));
 
-            selected.forEach((cb, index) => {
+            if (!selectedFiles.length && !selectedFolders.length) return alert("No items selected");
+
+            // Show a "Processing..." hint if downloading folders
+            if (selectedFolders.length > 0) {
+                const btn = document.getElementById("downloadSelected");
+                const originalText = btn.textContent;
+                btn.textContent = "Processing folders...";
+                btn.disabled = true;
+                
+                try {
+                    let allFilePaths = [...selectedFiles];
+
+                    for (const folderCb of selectedFolders) {
+                        const folderPath = folderCb.dataset.path;
+                        const res = await fetch(`/api/files?category=${encodeURIComponent(category)}&subpath=${encodeURIComponent(folderPath)}&recursive=true`);
+                        const data = await res.json();
+                        if (data.files) {
+                            allFilePaths = allFilePaths.concat(data.files);
+                        }
+                    }
+
+                    // Remove duplicates
+                    allFilePaths = [...new Set(allFilePaths)].filter(Boolean);
+
+                    if (allFilePaths.length === 0) {
+                        alert("No files found in selected folders.");
+                    } else {
+                        triggerBatchDownload(allFilePaths);
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert("Error gathering folder files.");
+                } finally {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }
+            } else {
+                triggerBatchDownload(selectedFiles);
+            }
+        });
+
+        function triggerBatchDownload(paths) {
+            paths.forEach((filePath, index) => {
                 setTimeout(() => {
-                    const filename = cb.value.split("/").pop();
+                    const filename = filePath.split("/").pop();
                     const link = document.createElement("a");
-                    link.href = `/api/download?file=${encodeURIComponent(cb.value)}&mode=download`;
+                    link.href = `/api/download?file=${encodeURIComponent(filePath)}&mode=download`;
                     link.download = filename;
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
                 }, index * 800);
             });
-        });
+        }
     }
 
     // ─── Search (debounced, scoped to current folder) ───────────────────────

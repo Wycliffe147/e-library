@@ -15,6 +15,24 @@ function countFilesRecursive(dir) {
     return count;
 }
 
+function getFilesRecursive(dir, category) {
+    let results = [];
+    const items = fs.readdirSync(dir);
+    const mediaDir = path.join(process.cwd(), "Media");
+    
+    items.forEach(item => {
+        const fullPath = path.join(dir, item);
+        if (fs.statSync(fullPath).isDirectory()) {
+            results = results.concat(getFilesRecursive(fullPath, category));
+        } else {
+            // Path relative to Media/
+            const relPath = path.relative(mediaDir, fullPath);
+            results.push(relPath);
+        }
+    });
+    return results;
+}
+
 function getRealSize(fullPath) {
     const stats = fs.statSync(fullPath);
     let size = stats.size;
@@ -37,7 +55,7 @@ function getRealSize(fullPath) {
 }
 
 export default function handler(req, res) {
-    const { category, subpath = "", count = "false" } = req.query;
+    const { category, subpath = "", count = "false", recursive = "false" } = req.query;
 
     if (!category) return res.status(400).json({ error: "Category required" });
 
@@ -54,6 +72,12 @@ export default function handler(req, res) {
     const targetDir = path.join(baseDir, safePath);
 
     if (!fs.existsSync(targetDir)) return res.status(404).json({ error: "Folder not found" });
+
+    // ?recursive=true → return all file paths inside this folder
+    if (recursive === "true") {
+        const allFiles = getFilesRecursive(targetDir, category);
+        return res.status(200).json({ files: allFiles });
+    }
 
     const items = fs.readdirSync(targetDir);
     const folders = [];

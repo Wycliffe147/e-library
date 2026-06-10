@@ -1055,3 +1055,16 @@ html.dark .zip-entry-list li {
     background-color: #f57c00;
     transform: translateY(-2px);
 }
+
+/* Folder Checkbox Styles */
+.folder-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.folder-checkbox {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+}
