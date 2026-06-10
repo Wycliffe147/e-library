@@ -1068,3 +1068,15 @@ html.dark .zip-entry-list li {
     height: 17px;
     cursor: pointer;
 }
+
+/* Fix for long filenames without spaces */
+.file-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.file-card span {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
