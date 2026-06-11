@@ -202,6 +202,17 @@ async function loadAbout(push = true) {
 function _renderAbout() {
     app.innerHTML = `
         <section class="about-section">
+            <div class="developer-card reveal">
+                <h3>About the Developer</h3>
+                <p>
+                    Hi, I'm Wycliffe Mwanganda 👋, a student developer passionate about building
+                    practical tech solutions for schools and any interested institutions.
+                </p>
+                <a href="https://wyport.vercel.app" target="_blank" class="dev-link">
+                    Visit My Portfolio
+                </a>
+            </div>
+
             <div class="about-content">
                 <h2>About This Project</h2>
                 <p>
@@ -218,17 +229,6 @@ function _renderAbout() {
                     <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
                     <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
                 </div>
-            </div>
-
-            <div class="developer-card reveal">
-                <h3>About the Developer</h3>
-                <p>
-                    Hi, I'm Wycliffe Mwanganda 👋, a student developer passionate about building
-                    practical tech solutions for schools and any interested institutions.
-                </p>
-                <a href="https://wyport.vercel.app" target="_blank" class="dev-link">
-                    Visit My Portfolio
-                </a>
             </div>
         </section>
     `;

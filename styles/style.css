@@ -401,7 +401,7 @@ h2 {
 }
 
 .about-content {
-    margin-bottom: 40px;
+    margin-top: 40px;
 }
 
 .about-flex {
@@ -464,7 +464,7 @@ h2 {
     padding: 25px;
     border-radius: 12px;
     border: 1px solid #e9ecef;
-    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .developer-card h3 {
