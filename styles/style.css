@@ -392,29 +392,42 @@ h2 {
 
 /* About / Contact / Request Section */
 .about-section, .contact-section {
-    padding: 20px;
-    max-width: 800px;
-    margin: 20px auto;
+    padding: 30px;
+    max-width: 900px;
+    margin: 40px auto;
     background-color: rgba(255,255,255,0.9);
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.about-content {
+    margin-bottom: 40px;
 }
 
 .about-flex {
     display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    margin: 20px 0;
+    align-items: center;
+    gap: 30px;
+    margin: 30px 0;
 }
 
 .about-image {
-    width: 150px;
+    width: 180px;
     height: auto;
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .about-flex p {
     margin: 0;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.tech-stack {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
 }
 
 @media (max-width: 768px) {
@@ -425,14 +438,20 @@ h2 {
     }
 
     .about-image {
-        width: 200px;
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .about-section {
+        padding: 20px;
+        margin: 20px;
     }
 }
 
 .reveal {
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .reveal.active {
@@ -441,38 +460,46 @@ h2 {
 }
 
 .developer-card {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 250px;
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    z-index: 1000;
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    margin-top: 30px;
 }
 
 .developer-card h3 {
     margin-top: 0;
+    color: #333;
+    font-size: 1.4em;
+}
+
+.developer-card p {
+    color: #666;
+    line-height: 1.5;
 }
 
 .dev-link {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 15px;
     text-decoration: none;
     font-weight: bold;
     color: #0077ff;
+    padding: 8px 16px;
+    border: 2px solid #0077ff;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
 .dev-link:hover {
-    text-decoration: underline;
+    background: #0077ff;
+    color: white;
+    text-decoration: none;
 }
 
 @media (max-width: 768px) {
     .developer-card {
-        position: static;
-        margin-top: 30px;
         width: 100%;
+        box-sizing: border-box;
     }
 }
 
@@ -824,16 +851,39 @@ html.dark .contact-section a {
     color: #6ab0ff;
 }
 
+html.dark .tech-stack {
+    border-top-color: #333;
+}
+
 html.dark h2 {
     background: transparent;
     color: var(--text-primary);
 }
 
-/* Dark: developer card (fixed position variant) */
+/* Dark: developer card (integrated variant) */
 html.dark .developer-card {
-    background: #1a2030;
+    background: #1e2536;
     color: var(--text-primary);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-color: #2d3748;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+html.dark .developer-card h3 {
+    color: var(--text-primary);
+}
+
+html.dark .developer-card p {
+    color: #a0aec0;
+}
+
+html.dark .dev-link {
+    border-color: #6ab0ff;
+    color: #6ab0ff;
+}
+
+html.dark .dev-link:hover {
+    background: #6ab0ff;
+    color: #1a2030;
 }
 
 /* Dark: skeleton shimmer */
