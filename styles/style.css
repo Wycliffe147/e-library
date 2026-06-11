@@ -29,8 +29,8 @@ body {
     flex-direction: column;   /* stack content */
     align-items: flex-start;
     gap: 15px;                /* controlled spacing */
-    
-    background: linear-gradient(135deg, #1565c0, #1e88e5);
+
+    background: var(--header-bg);
     padding: 25px;
     border-radius: 15px;
     color: white;
@@ -82,7 +82,7 @@ body {
 #card1 a {
     display: flex;
     align-items: center;
-    background-color: dodgerblue;
+    background-color: var(--card1-bg);
     margin-top: 20px;
     margin-bottom: 20px;
     margin-right: 60%;
@@ -96,7 +96,7 @@ body {
 
 #card1 img {
     margin: 5px;
-    
+
 }
 
 #card1 a:hover {
@@ -108,7 +108,7 @@ body {
 #card2 a {
     display: flex;
     align-items: center;
-    background-color: rgb(3, 54, 104);
+    background-color: var(--card2-bg);
     margin-top: 20px;
     margin-bottom: 20px;
     margin-right: 60%;
@@ -122,7 +122,7 @@ body {
 
 #card2 img {
     margin: 5px;
-    
+
 }
 
 #card2 a:hover {
@@ -134,7 +134,7 @@ body {
 #card4 a {
     display: flex;
     align-items: center;
-    background-color: #004d40;
+    background-color: var(--card4-bg);
     margin-top: 20px;
     margin-bottom: 20px;
     margin-right: 60%;
@@ -159,7 +159,7 @@ body {
 #card3 a {
     display: flex;
     align-items: center;
-    background-color: rgb(0, 81, 95);
+    background-color: var(--card3-bg);
     margin-top: 20px;
     margin-bottom: 20px;
     margin-right: 60%;
@@ -168,9 +168,8 @@ body {
     transition: transform 0.2s, box-shadow 0.2s, color 1s;
     color: white;
     font-size:20px;
-    text-decoration: none;   
+    text-decoration: none;
 }
-
 #card3 img {
     margin: 5px;
     
@@ -742,6 +741,13 @@ h2 {
     --badge-bg:       #c2d4f0;
     --badge-color:    #1a3a6e;
     --transition-speed: 0.25s;
+
+    /* Header & Home Cards */
+    --header-bg:      linear-gradient(135deg, #1565c0, #1e88e5);
+    --card1-bg:       dodgerblue;
+    --card2-bg:       rgb(3, 54, 104);
+    --card3-bg:       rgb(0, 81, 95);
+    --card4-bg:       #004d40;
 }
 
 /* ─── Dark mode overrides ────────────────────────────────────────── */
@@ -765,6 +771,13 @@ html.dark {
     --skeleton-file:  #1e2430;
     --badge-bg:       #1e3060;
     --badge-color:    #7eb3ff;
+
+    /* Dark Mode Header & Home Cards */
+    --header-bg:      linear-gradient(135deg, #1a202c, #2d3748);
+    --card1-bg:       #1e4a8e;
+    --card2-bg:       #1a365d;
+    --card3-bg:       #234e52;
+    --card4-bg:       #1c4532;
 }
 
 /* Dark mode: body overlay so background image dims */
