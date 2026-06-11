@@ -753,31 +753,31 @@ h2 {
 /* ─── Dark mode overrides ────────────────────────────────────────── */
 html.dark {
     color-scheme: dark;
-    --bg-card:        #1e2430;
-    --bg-folder:      #1a2540;
-    --bg-folder-hover:#243060;
-    --bg-breadcrumb:  rgba(30,36,48,0.9);
-    --bg-meta:        rgba(30,36,48,0.85);
-    --bg-about:       rgba(20,25,35,0.95);
-    --bg-input:       #1e2430;
-    --text-primary:   #e8eaf0;
-    --text-secondary: #9aa3b8;
-    --border-input:   #3a4560;
-    --shadow-card:    0 4px 16px rgba(0,0,0,0.5);
-    --toggle-bg:      rgba(255,255,255,0.12);
-    --skeleton-a:     #2a3040;
-    --skeleton-b:     #323848;
-    --skeleton-base:  #2a3040;
-    --skeleton-file:  #1e2430;
-    --badge-bg:       #1e3060;
-    --badge-color:    #7eb3ff;
+    --bg-card:        #000000;
+    --bg-folder:      #0a0a0a;
+    --bg-folder-hover:#151515;
+    --bg-breadcrumb:  rgba(0,0,0,0.9);
+    --bg-meta:        rgba(5,5,5,0.85);
+    --bg-about:       rgba(0,0,0,0.95);
+    --bg-input:       #050505;
+    --text-primary:   #ffffff;
+    --text-secondary: #bbbbbb;
+    --border-input:   #222222;
+    --shadow-card:    0 4px 20px rgba(0,0,0,1);
+    --toggle-bg:      rgba(255,255,255,0.15);
+    --skeleton-a:     #0a0a0a;
+    --skeleton-b:     #111111;
+    --skeleton-base:  #0a0a0a;
+    --skeleton-file:  #050505;
+    --badge-bg:       #151515;
+    --badge-color:    #eeeeee;
 
-    /* Dark Mode Header & Home Cards */
-    --header-bg:      linear-gradient(135deg, #1a202c, #2d3748);
-    --card1-bg:       #1e4a8e;
-    --card2-bg:       #1a365d;
-    --card3-bg:       #234e52;
-    --card4-bg:       #1c4532;
+    /* Dark Mode Header & Home Cards (True Black Theme) */
+    --header-bg:      #000000;
+    --card1-bg:       #0a0a0a;
+    --card2-bg:       #050505;
+    --card3-bg:       #080808;
+    --card4-bg:       #030303;
 }
 
 /* Dark mode: body overlay so background image dims */
