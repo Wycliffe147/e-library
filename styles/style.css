@@ -1260,7 +1260,9 @@ html.dark .btn-cancel {
 }
 
 html.dark .back-to-top {
-    background: linear-gradient(135deg, #0d1b3e, #1a2d5a);
+    background: linear-gradient(135deg, #1e88e5, #1565c0);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .back-to-top.hidden {
@@ -1271,12 +1273,16 @@ html.dark .back-to-top {
 
 .back-to-top:hover {
     transform: scale(1.1);
-    background: #1565c0;
+    filter: brightness(1.1);
 }
 
 .back-to-top.idle {
     opacity: 0.3;
     transform: scale(0.9) translateX(5px);
+}
+
+html.dark .back-to-top.idle {
+    opacity: 0.5; /* Higher visibility in dark mode */
 }
 
 .back-to-top.idle:hover {
