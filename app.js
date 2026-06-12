@@ -658,12 +658,41 @@ function initMagicNav() {
 
     // Close ribbon on significant scroll
     let lastScroll = window.scrollY;
+    let idleTimer;
+
+    function resetIdleTimer() {
+        magicNav.classList.remove("idle");
+        clearTimeout(idleTimer);
+        
+        // Only start idle timer if NOT expanded
+        if (!magicNav.classList.contains("expanded")) {
+            idleTimer = setTimeout(() => {
+                magicNav.classList.add("idle");
+            }, 3000); // 3 seconds of stillness
+        }
+    }
+
     window.addEventListener("scroll", () => {
+        resetIdleTimer();
         if (Math.abs(window.scrollY - lastScroll) > 50) {
             magicNav.classList.remove("expanded");
             lastScroll = window.scrollY;
         }
     }, { passive: true });
+
+    // Also wake up on touch/move
+    window.addEventListener("touchstart", resetIdleTimer, { passive: true });
+    window.addEventListener("mousemove", resetIdleTimer, { passive: true });
+
+    // If user expands, stop the idle timer
+    circle.addEventListener("click", () => {
+        if (magicNav.classList.contains("expanded")) {
+            clearTimeout(idleTimer);
+            magicNav.classList.remove("idle");
+        } else {
+            resetIdleTimer();
+        }
+    });
 }
 
 // ─── Initial load ─────────────────────────────────────────────────────────────

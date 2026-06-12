@@ -1167,6 +1167,18 @@ html.dark .zip-entry-list li {
     transform: scale(1) translateY(0);
 }
 
+.magic-nav.idle {
+    opacity: 0.3;
+    transform: scale(0.9) translateX(-5px);
+    pointer-events: none;
+}
+
+.magic-nav.idle:hover {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    pointer-events: auto;
+}
+
 .magic-nav-circle {
     width: 50px;
     height: 50px;
