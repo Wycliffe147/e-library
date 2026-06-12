@@ -606,8 +606,8 @@ function activateScrollReveal() {
             }
         });
     }, { 
-        threshold: 0.1, // Trigger when 10% is visible
-        rootMargin: "0px 0px -50px 0px" // Trigger slightly before it hits the bottom
+        threshold: 0, // Trigger as soon as the first pixel enters
+        rootMargin: "0px" // No delay
     });
 
     reveals.forEach(el => observer.observe(el));
