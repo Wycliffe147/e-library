@@ -1238,6 +1238,52 @@ html.dark .btn-cancel {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #1e88e5, #1565c0);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 3000;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+html.dark .back-to-top {
+    background: linear-gradient(135deg, #0d1b3e, #1a2d5a);
+}
+
+.back-to-top.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.5) translateY(50px);
+}
+
+.back-to-top:hover {
+    transform: scale(1.1);
+    background: #1565c0;
+}
+
+.back-to-top.idle {
+    opacity: 0.3;
+    transform: scale(0.9) translateX(5px);
+}
+
+.back-to-top.idle:hover {
+    opacity: 1;
+    transform: scale(1.1) translateX(0);
+}
+
 .open-zip-btn {
     display: inline-block;
     padding: 6px 12px;

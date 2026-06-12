@@ -771,6 +771,42 @@ function initMagicNav() {
     });
 }
 
+function initBackToTop() {
+    const backBtn = document.getElementById("backToTop");
+    if (!backBtn) return;
+
+    let idleTimer;
+
+    function resetIdleTimer() {
+        backBtn.classList.remove("idle");
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+            if (!backBtn.classList.contains("hidden")) {
+                backBtn.classList.add("idle");
+            }
+        }, 3000);
+    }
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backBtn.classList.remove("hidden");
+        } else {
+            backBtn.classList.add("hidden");
+        }
+        resetIdleTimer();
+    }, { passive: true });
+
+    window.addEventListener("mousemove", resetIdleTimer, { passive: true });
+    window.addEventListener("touchstart", resetIdleTimer, { passive: true });
+
+    backBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+}
+
 // ─── Initial load ─────────────────────────────────────────────────────────────
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -782,5 +818,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     initDarkMode();
     initMagicNav();
+    initBackToTop();
     loadHome(false);
 });
