@@ -22,12 +22,18 @@ function getFilesRecursive(dir, category) {
     
     items.forEach(item => {
         const fullPath = path.join(dir, item);
-        if (fs.statSync(fullPath).isDirectory()) {
+        const stats = fs.statSync(fullPath);
+        if (stats.isDirectory()) {
             results = results.concat(getFilesRecursive(fullPath, category));
         } else {
             // Path relative to Media/
             const relPath = path.relative(mediaDir, fullPath);
-            results.push(relPath);
+            const size = getRealSize(fullPath);
+            results.push({
+                name: item,
+                path: relPath,
+                size: size
+            });
         }
     });
     return results;
@@ -76,7 +82,10 @@ export default function handler(req, res) {
     // ?recursive=true → return all file paths inside this folder
     if (recursive === "true") {
         const allFiles = getFilesRecursive(targetDir, category);
-        return res.status(200).json({ files: allFiles });
+        return res.status(200).json({ 
+            files: allFiles.map(f => f.path),
+            filesWithInfo: allFiles 
+        });
     }
 
     const items = fs.readdirSync(targetDir);

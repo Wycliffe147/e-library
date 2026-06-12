@@ -360,7 +360,7 @@ function renderFileCard(file, filePath, isDownloads, size) {
     if (isDownloads) {
         card.innerHTML = `
             <div class="file-top">
-                <input type="checkbox" class="file-checkbox" value="${filePath}">
+                <input type="checkbox" class="file-checkbox" value="${filePath}" data-size="${size || 0}" data-name="${file}">
                 <span>${icon} ${cleanName} ${sizeHTML}</span>
             </div>
             <div class="file-actions">
@@ -371,7 +371,7 @@ function renderFileCard(file, filePath, isDownloads, size) {
     } else {
         card.innerHTML = `
             <div class="file-top">
-                <input type="checkbox" class="file-checkbox" value="${filePath}">
+                <input type="checkbox" class="file-checkbox" value="${filePath}" data-size="${size || 0}" data-name="${file}">
                 <span>${icon} ${cleanName} ${sizeHTML}</span>
             </div>
             <div class="file-actions">
@@ -491,51 +491,127 @@ async function _renderFolder(category, subFolder) {
     renderFolderContents(data.folders, data.files);
 
     document.getElementById("downloadSelected").addEventListener("click", async () => {
-        const selectedFiles = Array.from(document.querySelectorAll(".file-checkbox:checked")).map(cb => cb.value);
-            const selectedFolders = Array.from(document.querySelectorAll(".folder-checkbox:checked"));
+        const selectedFiles = Array.from(document.querySelectorAll(".file-checkbox:checked")).map(cb => ({
+            path: cb.value,
+            name: cb.dataset.name,
+            size: parseInt(cb.dataset.size) || 0
+        }));
+        const selectedFolders = Array.from(document.querySelectorAll(".folder-checkbox:checked"));
 
-            if (!selectedFiles.length && !selectedFolders.length) return alert("No items selected");
+        if (!selectedFiles.length && !selectedFolders.length) return alert("No items selected");
 
-            // Show a "Processing..." hint if downloading folders
-            if (selectedFolders.length > 0) {
-                const btn = document.getElementById("downloadSelected");
-                const originalText = btn.textContent;
-                btn.textContent = "Processing folders...";
-                btn.disabled = true;
+        const btn = document.getElementById("downloadSelected");
+        const originalText = btn.textContent;
+        btn.textContent = "Preparing...";
+        btn.disabled = true;
+
+        try {
+            let allFiles = [...selectedFiles];
+
+            for (const folderCb of selectedFolders) {
+                const folderPath = folderCb.dataset.path;
+                const folderName = folderCb.dataset.name;
+                // Fetch recursively to get all files AND their sizes
+                const res = await fetch(`/api/files?category=${encodeURIComponent(category)}&subpath=${encodeURIComponent(folderPath)}&recursive=true`);
+                const data = await res.json();
                 
-                try {
-                    let allFilePaths = [...selectedFiles];
-
-                    for (const folderCb of selectedFolders) {
-                        const folderPath = folderCb.dataset.path;
-                        const res = await fetch(`/api/files?category=${encodeURIComponent(category)}&subpath=${encodeURIComponent(folderPath)}&recursive=true`);
-                        const data = await res.json();
-                        if (data.files) {
-                            allFilePaths = allFilePaths.concat(data.files);
-                        }
-                    }
-
-                    // Remove duplicates
-                    allFilePaths = [...new Set(allFilePaths)].filter(Boolean);
-
-                    if (allFilePaths.length === 0) {
-                        alert("No files found in selected folders.");
-                    } else {
-                        triggerBatchDownload(allFilePaths);
-                    }
-                } catch (err) {
-                    console.error(err);
-                    alert("Error gathering folder files.");
-                } finally {
-                    btn.textContent = originalText;
-                    btn.disabled = false;
+                if (data.filesWithInfo) {
+                    // Assuming API returns an array of {name, path, size}
+                    allFiles = allFiles.concat(data.filesWithInfo.map(f => ({
+                        path: f.path,
+                        name: f.name,
+                        size: f.size || 0
+                    })));
+                } else if (data.files) {
+                    // Fallback if API only returns paths
+                    allFiles = allFiles.concat(data.files.map(path => ({
+                        path: path,
+                        name: path.split("/").pop(),
+                        size: 0
+                    })));
                 }
-            } else {
-                triggerBatchDownload(selectedFiles);
             }
-        });
 
-        function triggerBatchDownload(paths) {
+            // Remove duplicates based on path
+            const uniqueFiles = [];
+            const seenPaths = new Set();
+            for (const f of allFiles) {
+                if (!seenPaths.has(f.path)) {
+                    seenPaths.add(f.path);
+                    uniqueFiles.push(f);
+                }
+            }
+
+            if (uniqueFiles.length === 0) {
+                alert("No files found to download.");
+                return;
+            }
+
+            showDownloadConfirmation(uniqueFiles);
+
+        } catch (err) {
+            console.error(err);
+            alert("Error preparing download.");
+        } finally {
+            btn.textContent = originalText;
+            btn.disabled = false;
+        }
+    });
+
+    function showDownloadConfirmation(files) {
+        const totalSize = files.reduce((acc, f) => acc + f.size, 0);
+        const count = files.length;
+
+        const modal = document.createElement("div");
+        modal.className = "confirm-modal";
+        modal.innerHTML = `
+            <div class="confirm-modal-content">
+                <div class="confirm-modal-header">
+                    <h3>Confirm Download</h3>
+                    <button class="close-confirm-modal">&times;</button>
+                </div>
+                <div class="confirm-modal-body">
+                    <p>You are about to download <strong>${count}</strong> item${count !== 1 ? 's' : ''}.</p>
+                    <div class="confirm-item-list-container">
+                        <ul class="confirm-item-list">
+                            ${files.map(f => `
+                                <li>
+                                    <span class="entry-name">${f.name}</span>
+                                    <span class="entry-size">${formatBytes(f.size)}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="confirm-summary">
+                        <span>Total Size: <strong>${formatBytes(totalSize)}</strong></span>
+                    </div>
+                </div>
+                <div class="confirm-modal-footer">
+                    <button class="btn-cancel">Cancel</button>
+                    <button class="btn-confirm">Download Now</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        const closeModal = () => document.body.removeChild(modal);
+
+        modal.querySelector(".close-confirm-modal").onclick = closeModal;
+        modal.querySelector(".btn-cancel").onclick = closeModal;
+        
+        modal.querySelector(".btn-confirm").onclick = () => {
+            closeModal();
+            triggerBatchDownload(files.map(f => f.path));
+        };
+
+        // Close on outside click
+        modal.onclick = (e) => {
+            if (e.target === modal) closeModal();
+        };
+    }
+
+    function triggerBatchDownload(paths) {
             paths.forEach((filePath, index) => {
                 setTimeout(() => {
                     const filename = filePath.split("/").pop();
