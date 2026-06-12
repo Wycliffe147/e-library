@@ -598,17 +598,19 @@ async function _renderFolder(category, subFolder) {
 function activateScrollReveal() {
     const reveals = document.querySelectorAll(".reveal");
 
-    function revealOnScroll() {
-        const triggerBottom = window.innerHeight * 0.85;
-        reveals.forEach(el => {
-            if (el.getBoundingClientRect().top < triggerBottom) {
-                el.classList.add("active");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+                observer.unobserve(entry.target); // Stop watching once revealed
             }
         });
-    }
+    }, { 
+        threshold: 0.1, // Trigger when 10% is visible
+        rootMargin: "0px 0px -50px 0px" // Trigger slightly before it hits the bottom
+    });
 
-    window.addEventListener("scroll", revealOnScroll);
-    revealOnScroll();
+    reveals.forEach(el => observer.observe(el));
 }
 
 // ─── Magic Nav ───────────────────────────────────────────────────────────────
