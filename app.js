@@ -175,15 +175,26 @@ function _renderHome() {
     });
 
     // Fetch counts in parallel
+    let totalFiles = 0;
+    let countsFetched = 0;
+
     categories.forEach(async ({ category }) => {
         try {
             const res = await fetch(`/api/files?category=${encodeURIComponent(category)}&count=true`);
             const data = await res.json();
             const el = document.getElementById(`count-${category}`);
             if (el) el.textContent = `${data.total} file${data.total !== 1 ? "s" : ""}`;
+            
+            totalFiles += data.total;
         } catch {
             const el = document.getElementById(`count-${category}`);
             if (el) el.textContent = "";
+        } finally {
+            countsFetched++;
+            if (countsFetched === categories.length) {
+                const totalEl = document.getElementById("total-books");
+                if (totalEl) totalEl.textContent = totalFiles;
+            }
         }
     });
 }
