@@ -787,12 +787,7 @@ html.dark body::before {
     inset: 0;
     background: rgba(10, 13, 20, 0.78);
     pointer-events: none;
-    z-index: 0;
-}
-
-html.dark body > :not(.magic-nav):not(.zip-modal) {
-    position: relative;
-    z-index: 1;
+    z-index: -1; /* Push it behind all content */
 }
 
 /* Dark: header gradient */
