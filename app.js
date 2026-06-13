@@ -232,13 +232,13 @@ function _renderAbout() {
                 <div class="about-flex reveal">
                     <img src="/Media/images/about.png" alt="About image" class="about-image" />
                     <p>
-                        I think having this website is better than relying on WhatsApp groups alone
-                        because documents have to be sent every time someone new wants them.
+                        "I think having this website is better than relying on WhatsApp groups alone
+                        because documents have to be sent every time someone new wants them."
                     </p>
                 </div>
                 <div class="tech-stack">
-                    <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, Vercel serverless functions</p>
-                    <p><strong>Features:</strong> SPA navigation, search functionality, responsive layout, dynamic breadcrumbs.</p>
+                    <p><strong>Technologies:</strong> HTML5, CSS3, Modern JavaScript (ES6+), Node.js, Vercel Serverless Functions, GitHub API (for automation).</p>
+                    <p><strong>Features:</strong> Single Page Application (SPA) navigation, real-time search, dark mode theme, ZIP file content preview, dynamic library statistics, automated "Last Updated" tracking, and a fully responsive mobile-first layout.</p>
                 </div>
             </div>
         </section>
