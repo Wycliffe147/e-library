@@ -315,21 +315,32 @@ h2 {
 }
 
 .select-all-toggle {
-    color: #007BFF;
+    background: #f0f4f8;
+    color: #1e88e5;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid #d1d9e6;
     cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-decoration: underline;
-    opacity: 0.8;
-    transition: opacity 0.2s;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    user-select: none;
 }
 
 .select-all-toggle:hover {
-    opacity: 1;
+    background: #e1e9f1;
+    border-color: #b8c5d6;
 }
 
 html.dark .select-all-toggle {
+    background: #1e293b;
     color: #6ab0ff;
+    border-color: #334155;
+}
+
+html.dark .select-all-toggle:hover {
+    background: #2d3748;
+    border-color: #475569;
 }
 
 /* Folder Cards */
