@@ -1233,57 +1233,7 @@ html.dark .btn-cancel {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* Back to Top Button */
-.back-to-top {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, #1e88e5, #1565c0);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    z-index: 3000;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-html.dark .back-to-top {
-    background: linear-gradient(135deg, #1e88e5, #1565c0);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
-.back-to-top.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.5) translateY(50px);
-}
-
-.back-to-top:hover {
-    transform: scale(1.1);
-    filter: brightness(1.1);
-}
-
-.back-to-top.idle {
-    opacity: 0.3;
-    transform: scale(0.9) translateX(5px);
-}
-
-html.dark .back-to-top.idle {
-    opacity: 0.5; /* Higher visibility in dark mode */
-}
-
-.back-to-top.idle:hover {
-    opacity: 1;
-    transform: scale(1.1) translateX(0);
-}
+/* Consolidated Magic Nav (Bottom Right) */
 
 .open-zip-btn {
     display: inline-block;
@@ -1333,18 +1283,19 @@ html.dark .back-to-top.idle {
 /* Magic Nav Styles */
 .magic-nav {
     position: fixed;
-    top: 15px;
-    left: 15px;
+    bottom: 20px;
+    right: 20px;
     z-index: 3000;
     display: flex;
     align-items: center;
+    flex-direction: row-reverse; /* Circle on right, ribbon to left */
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .magic-nav.hidden {
     opacity: 0;
     pointer-events: none;
-    transform: scale(0.5) translateY(-50px);
+    transform: scale(0.5) translateY(50px);
 }
 
 .magic-nav.visible {
@@ -1355,8 +1306,12 @@ html.dark .back-to-top.idle {
 
 .magic-nav.idle {
     opacity: 0.3;
-    transform: scale(0.9) translateX(-5px);
+    transform: scale(0.9) translateX(5px);
     pointer-events: none;
+}
+
+html.dark .magic-nav.idle {
+    opacity: 0.5;
 }
 
 .magic-nav.idle:hover {
@@ -1368,7 +1323,7 @@ html.dark .back-to-top.idle {
 .magic-nav-circle {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #1565c0, #1e88e5);
+    background: linear-gradient(135deg, #1e88e5, #1565c0);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -1381,7 +1336,7 @@ html.dark .back-to-top.idle {
 }
 
 html.dark .magic-nav-circle {
-    background: linear-gradient(135deg, #0d1b3e, #1a2d5a);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .magic-nav-circle img {
@@ -1396,53 +1351,47 @@ html.dark .magic-nav-circle {
 }
 
 .magic-nav.expanded .magic-nav-circle img {
-    transform: rotate(90deg);
+    transform: rotate(90deg) scale(0.8);
 }
 
-/* Ribbon Menu */
 .magic-nav-ribbon {
-    background: rgba(21, 101, 192, 0.95);
+    background: rgba(30, 41, 59, 0.95);
     backdrop-filter: blur(10px);
-    height: 40px;
     display: flex;
     align-items: center;
-    padding: 0 20px 0 35px;
-    margin-left: -25px;
-    border-radius: 0 20px 20px 0;
-    box-shadow: 5px 4px 15px rgba(0, 0, 0, 0.2);
+    gap: 15px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     opacity: 0;
-    transform: translateX(-20px);
     pointer-events: none;
+    transform: translateX(20px);
     transition: all 0.3s ease;
-    z-index: 1;
+    margin-right: 15px;
 }
 
 html.dark .magic-nav-ribbon {
-    background: rgba(13, 27, 62, 0.95);
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .magic-nav.expanded .magic-nav-ribbon {
     opacity: 1;
-    transform: translateX(0);
     pointer-events: auto;
+    transform: translateX(0);
 }
 
 .magic-nav-ribbon a {
-    color: white;
     text-decoration: none;
+    color: white;
+    font-weight: 600;
     font-size: 0.9rem;
-    font-weight: 500;
-    margin-right: 15px;
     white-space: nowrap;
     transition: opacity 0.2s;
 }
 
-.magic-nav-ribbon a:last-child {
-    margin-right: 0;
-}
-
 .magic-nav-ribbon a:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 /* Morph Entrance Animation */

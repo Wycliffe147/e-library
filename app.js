@@ -695,116 +695,88 @@ function initMagicNav() {
     const header = document.querySelector(".header");
     const magicNav = document.getElementById("magicNav");
     const circle = document.querySelector(".magic-nav-circle");
+    const topBtn = document.getElementById("ribbonBackToTop");
 
     if (!header || !magicNav) return;
+
+    let headerVisible = true;
+    let lastScroll = window.scrollY;
+    let idleTimer;
 
     // Detect when header scrolls out of view
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-                // Header is out - show magic nav
-                magicNav.classList.remove("hidden");
-                magicNav.classList.add("visible");
-            } else {
-                // Header is in - hide magic nav
-                magicNav.classList.add("hidden");
-                magicNav.classList.remove("visible");
-                magicNav.classList.remove("expanded");
-            }
+            headerVisible = entry.isIntersecting;
+            updateNavVisibility();
         });
     }, { 
         threshold: 0,
-        rootMargin: "-20px 0px 0px 0px" // Trigger slightly before it's fully gone
+        rootMargin: "-20px 0px 0px 0px"
     });
 
     observer.observe(header);
 
-    // Toggle expanded ribbon
+    function updateNavVisibility() {
+        const currentScroll = window.scrollY;
+        const scrollingUp = currentScroll < lastScroll;
+
+        // Smart Scroll: Show only if (header is gone) AND (scrolling up OR at very bottom)
+        const atBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10;
+        
+        if (!headerVisible && (scrollingUp || atBottom)) {
+            magicNav.classList.remove("hidden");
+            magicNav.classList.add("visible");
+        } else {
+            // Hide if scrolling down OR header is back
+            magicNav.classList.add("hidden");
+            magicNav.classList.remove("visible");
+            magicNav.classList.remove("expanded");
+        }
+        lastScroll = currentScroll;
+    }
+
+    function resetIdleTimer() {
+        magicNav.classList.remove("idle");
+        clearTimeout(idleTimer);
+        if (!magicNav.classList.contains("expanded") && !magicNav.classList.contains("hidden")) {
+            idleTimer = setTimeout(() => {
+                magicNav.classList.add("idle");
+            }, 3000);
+        }
+    }
+
+    window.addEventListener("scroll", () => {
+        updateNavVisibility();
+        resetIdleTimer();
+        
+        // Auto-close ribbon on significant scroll
+        if (Math.abs(window.scrollY - lastScroll) > 100) {
+            magicNav.classList.remove("expanded");
+        }
+    }, { passive: true });
+
     circle.addEventListener("click", (e) => {
         e.stopPropagation();
         magicNav.classList.toggle("expanded");
+        resetIdleTimer();
     });
 
-    // Close ribbon when clicking anywhere else
+    if (topBtn) {
+        topBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            magicNav.classList.remove("expanded");
+        });
+    }
+
     document.addEventListener("click", (e) => {
         if (!magicNav.contains(e.target)) {
             magicNav.classList.remove("expanded");
         }
     });
 
-    // Close ribbon on significant scroll
-    let lastScroll = window.scrollY;
-    let idleTimer;
-
-    function resetIdleTimer() {
-        magicNav.classList.remove("idle");
-        clearTimeout(idleTimer);
-        
-        // Only start idle timer if NOT expanded
-        if (!magicNav.classList.contains("expanded")) {
-            idleTimer = setTimeout(() => {
-                magicNav.classList.add("idle");
-            }, 3000); // 3 seconds of stillness
-        }
-    }
-
-    window.addEventListener("scroll", () => {
-        resetIdleTimer();
-        if (Math.abs(window.scrollY - lastScroll) > 50) {
-            magicNav.classList.remove("expanded");
-            lastScroll = window.scrollY;
-        }
-    }, { passive: true });
-
-    // Also wake up on touch/move
     window.addEventListener("touchstart", resetIdleTimer, { passive: true });
     window.addEventListener("mousemove", resetIdleTimer, { passive: true });
-
-    // If user expands, stop the idle timer
-    circle.addEventListener("click", () => {
-        if (magicNav.classList.contains("expanded")) {
-            clearTimeout(idleTimer);
-            magicNav.classList.remove("idle");
-        } else {
-            resetIdleTimer();
-        }
-    });
-}
-
-function initBackToTop() {
-    const backBtn = document.getElementById("backToTop");
-    if (!backBtn) return;
-
-    let idleTimer;
-
-    function resetIdleTimer() {
-        backBtn.classList.remove("idle");
-        clearTimeout(idleTimer);
-        idleTimer = setTimeout(() => {
-            if (!backBtn.classList.contains("hidden")) {
-                backBtn.classList.add("idle");
-            }
-        }, 3000);
-    }
-
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
-            backBtn.classList.remove("hidden");
-        } else {
-            backBtn.classList.add("hidden");
-        }
-        resetIdleTimer();
-    }, { passive: true });
-
-    window.addEventListener("mousemove", resetIdleTimer, { passive: true });
-    window.addEventListener("touchstart", resetIdleTimer, { passive: true });
-
-    backBtn.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
 }
 
 // ─── Initial load ─────────────────────────────────────────────────────────────
@@ -818,6 +790,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
     initDarkMode();
     initMagicNav();
-    initBackToTop();
     loadHome(false);
 });
