@@ -38,7 +38,7 @@ export default async function handler(req, res) {
         .map(part => encodeURIComponent(part))
         .join("/");
 
-    const targetUrl = `${host}/${user}/${repo}/${branch}/Media/${cleanPath}`;
+    const targetUrl = `${host}/${user}/${repo}/${branch}/public/Media/${cleanPath}`;
 
     if (mode === 'download') {
         return res.redirect(targetUrl);
