@@ -285,6 +285,53 @@ h2 {
     box-shadow: 0 0 3px rgba(0,115,230,0.5);
 }
 
+.folder-actions-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#downloadSelected {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+#downloadSelected:hover:not(:disabled) {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#downloadSelected:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.select-all-toggle {
+    color: #007BFF;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: underline;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.select-all-toggle:hover {
+    opacity: 1;
+}
+
+html.dark .select-all-toggle {
+    color: #6ab0ff;
+}
+
 /* Folder Cards */
 .folder-card {
     background: #e8f0fe;

@@ -439,9 +439,31 @@ async function _renderFolder(category, subFolder) {
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search in this folder..." />
         </div>
-        <button id="downloadSelected">Download Selected</button>
+        <div class="folder-actions-bar">
+            <button id="downloadSelected">Download Selected</button>
+            <span id="selectAllToggle" class="select-all-toggle">Select All</span>
+        </div>
         <div class="grid"></div>
     `;
+
+    const selectAllToggle = document.getElementById("selectAllToggle");
+    
+    function updateSelectAllToggleText() {
+        if (!selectAllToggle) return;
+        const allCheckboxes = document.querySelectorAll(".file-checkbox, .folder-checkbox");
+        const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
+        selectAllToggle.textContent = allChecked && allCheckboxes.length > 0 ? "Deselect All" : "Select All";
+    }
+
+    selectAllToggle.addEventListener("click", () => {
+        const allCheckboxes = document.querySelectorAll(".file-checkbox, .folder-checkbox");
+        const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
+        
+        allCheckboxes.forEach(cb => {
+            cb.checked = !allChecked;
+        });
+        updateSelectAllToggleText();
+    });
 
     document.querySelectorAll(".breadcrumb").forEach(span => {
         span.addEventListener("click", e => {
@@ -451,6 +473,12 @@ async function _renderFolder(category, subFolder) {
     });
 
     const grid = document.querySelector(".grid");
+
+    grid.addEventListener("change", (e) => {
+        if (e.target.classList.contains("file-checkbox") || e.target.classList.contains("folder-checkbox")) {
+            updateSelectAllToggleText();
+        }
+    });
 
     function renderFolderContents(folders, files) {
         grid.innerHTML = "";
@@ -489,6 +517,7 @@ async function _renderFolder(category, subFolder) {
     }
 
     renderFolderContents(data.folders, data.files);
+    updateSelectAllToggleText();
 
     document.getElementById("downloadSelected").addEventListener("click", async () => {
         const selectedFiles = Array.from(document.querySelectorAll(".file-checkbox:checked")).map(cb => ({
