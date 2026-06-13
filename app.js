@@ -819,9 +819,33 @@ function initMagicNav() {
     window.addEventListener("mousemove", resetIdleTimer, { passive: true });
 }
 
+// ─── Footer Stats ─────────────────────────────────────────────────────────────
+
+async function updateLastUpdated() {
+    const el = document.getElementById("last-updated");
+    if (!el) return;
+
+    try {
+        const response = await fetch("https://api.github.com/repos/Wycliffe147/e-library/commits/main");
+        const data = await response.json();
+        
+        if (data && data.commit && data.commit.committer && data.commit.committer.date) {
+            const date = new Date(data.commit.committer.date);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            el.textContent = date.toLocaleDateString('en-US', options);
+        } else {
+            throw new Error("Invalid response");
+        }
+    } catch (err) {
+        console.error("Error fetching last update:", err);
+        el.textContent = "Recently";
+    }
+}
+
 // ─── Initial load ─────────────────────────────────────────────────────────────
 
 window.addEventListener("DOMContentLoaded", () => {
+    updateLastUpdated();
     history.replaceState({ view: "home" }, "");
 
     // Wire up dark mode toggle button
