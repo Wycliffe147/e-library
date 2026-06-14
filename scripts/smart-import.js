@@ -11,6 +11,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from 'dotenv';
 import pdf from 'pdf-parse/lib/pdf-parse.js';
 import { extractDocxWithUnderlines } from './docx-extractor.js';
+import WordExtractor from 'word-extractor';
 
 dotenv.config();
 
@@ -46,12 +47,16 @@ async function processPaper(filePath) {
     
     if (ext === '.docx') {
         rawText = await extractDocxWithUnderlines(filePath);
+    } else if (ext === '.doc') {
+        const extractor = new WordExtractor();
+        const extracted = await extractor.extract(filePath);
+        rawText = extracted.getBody();
     } else if (ext === '.pdf') {
         const dataBuffer = fs.readFileSync(filePath);
         const pdfData = await pdf(dataBuffer);
         rawText = pdfData.text;
     } else {
-        console.error(`Error: Unsupported file type: ${ext}. Only .docx and .pdf are supported.`);
+        console.error(`Error: Unsupported file type: ${ext}. Only .docx, .doc and .pdf are supported.`);
         return;
     }
 

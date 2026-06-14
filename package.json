@@ -19,6 +19,7 @@
     "@google/generative-ai": "^0.24.1",
     "dotenv": "^17.4.2",
     "mammoth": "^1.12.0",
-    "pdf-parse": "^2.4.5"
+    "pdf-parse": "^2.4.5",
+    "word-extractor": "^1.0.4"
   }
 }
