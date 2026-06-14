@@ -38,22 +38,22 @@ export default async function handler(req, res) {
 
         res.write(`Upload complete: ${fileName}\n`);
         res.write(`Triggering AI Import logic...\n\n`);
-
-        // Step 3: Run the import script
-        const scriptPath = path.join(process.cwd(), 'scripts', 'smart-import.js');
         
-        // Ensure scripts are executable if needed, but 'node' works
-        const process = spawn('node', [scriptPath, tempPath]);
+        // Step 3: Run the import script
+        const scriptPath = path.resolve(process.cwd(), 'scripts', 'smart-import.js');
+        res.write(`Running script: ${scriptPath}\n`);
 
-        process.stdout.on('data', (data) => {
+        const child = spawn('node', [scriptPath, tempPath]);
+
+        child.stdout.on('data', (data) => {
             res.write(data.toString());
         });
 
-        process.stderr.on('data', (data) => {
+        child.stderr.on('data', (data) => {
             res.write(`Error: ${data.toString()}`);
         });
 
-        process.on('close', (code) => {
+        child.on('close', (code) => {
             res.write(`\n--- Process finished with code ${code} ---\n`);
             
             // Cleanup temp file
