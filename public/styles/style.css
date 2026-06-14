@@ -1620,35 +1620,38 @@ html.dark .footer-section h3 {
 .quiz-card {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
 .quiz-meta {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     opacity: 0.7;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+    margin-bottom: -5px;
 }
 
 .quiz-question {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: normal;
-    line-height: 1.5;
+    line-height: 1.4;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .quiz-options {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 10px;
 }
 
 .quiz-option-btn {
-    padding: 14px 20px;
+    padding: 10px 15px;
     background-color: var(--bg-folder);
-    border: 2px solid transparent;
-    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
     text-align: left;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.2s;
     color: var(--text-primary);
@@ -1656,7 +1659,7 @@ html.dark .footer-section h3 {
 
 .quiz-option-btn:hover:not(:disabled) {
     background-color: var(--bg-folder-hover);
-    transform: translateX(5px);
+    border-color: var(--primary-color);
 }
 
 .quiz-option-btn.correct {
@@ -1672,11 +1675,10 @@ html.dark .footer-section h3 {
 }
 
 #quiz-feedback {
-    padding: 20px;
-    border-radius: 10px;
-    background-color: rgba(0,0,0,0.05);
-    margin-top: 10px;
-    animation: fadeIn 0.3s ease-out;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(0,0,0,0.03);
+    margin-top: 5px;
 }
 
 html.dark #quiz-feedback {
