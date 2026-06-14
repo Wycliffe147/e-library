@@ -15,7 +15,7 @@ async function extractText(filePath) {
     if (stats.size < 1000) {
         const content = fs.readFileSync(filePath, 'utf8');
         if (content.includes('https://git-lfs.github.com/spec/')) {
-            console.log("Detected Git LFS pointer. Fetching actual file from GitHub...");
+            console.log(`Fetching LFS file from GitHub: ${path.basename(filePath)}`);
             const relPath = path.relative(path.join(projectRoot, 'public'), filePath);
             const user = "Wycliffe147";
             const repo = "e-library";
@@ -37,10 +37,25 @@ async function extractText(filePath) {
     return result.value;
 }
 
-function parseMCQs(text, source) {
+function parseAnswers(keyText) {
+    const answerMap = {};
+    // Match patterns like "1. B" or "2) A" or "3: C"
+    const regex = /(\d+)\.?[\)\s\:]+([A-D])\b/gi;
+    let match;
+    while ((match = regex.exec(keyText)) !== null) {
+        const qNum = parseInt(match[1]);
+        const letter = match[2].toUpperCase();
+        const index = "ABCD".indexOf(letter);
+        answerMap[qNum] = index;
+    }
+    return answerMap;
+}
+
+function parseMCQs(text, source, answerMap = {}) {
     const questions = [];
     const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
     
+    let qCounter = 0;
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         const isQuestion = line.includes('____') || line.includes('___') || line.endsWith('?');
@@ -56,11 +71,14 @@ function parseMCQs(text, source) {
             );
 
             if (looksLikeOptions) {
+                qCounter++;
+                const correctIdx = answerMap[qCounter] !== undefined ? answerMap[qCounter] : 0;
+                
                 questions.push({
                     topic: "Imported",
                     question: line,
                     options: [opt1, opt2, opt3, opt4],
-                    answer: 0, 
+                    answer: correctIdx, 
                     explanation: `From ${source}.`,
                     source: source
                 });
@@ -72,21 +90,31 @@ function parseMCQs(text, source) {
 }
 
 async function run() {
-    const testFile = process.argv[2];
-    if (!testFile) {
-        console.log("Usage: node scripts/import-questions.js <path-to-docx>");
+    const examFile = process.argv[2];
+    const keyFile = process.argv[3];
+
+    if (!examFile) {
+        console.log("Usage: node scripts/import-questions.js <exam-docx> [key-docx]");
         return;
     }
 
     const quizDataPath = path.join(projectRoot, 'public', 'quiz-data.json');
 
     try {
-        const text = await extractText(testFile);
-        const source = path.basename(testFile);
-        const newQuestions = parseMCQs(text, source);
+        let answerMap = {};
+        if (keyFile) {
+            console.log(`Parsing Marking Key: ${path.basename(keyFile)}...`);
+            const keyText = await extractText(keyFile);
+            answerMap = parseAnswers(keyText);
+            console.log(`Found ${Object.keys(answerMap).length} answers in key.`);
+        }
+
+        console.log(`Parsing Exam: ${path.basename(examFile)}...`);
+        const examText = await extractText(examFile);
+        const source = path.basename(examFile);
+        const newQuestions = parseMCQs(examText, source, answerMap);
         
-        console.log(`\n--- Results for ${source} ---`);
-        console.log(`Found ${newQuestions.length} potential questions.`);
+        console.log(`Found ${newQuestions.length} questions in exam.`);
         
         if (newQuestions.length > 0) {
             let existingData = [];
@@ -107,10 +135,7 @@ async function run() {
             });
 
             fs.writeFileSync(quizDataPath, JSON.stringify(existingData, null, 2));
-            console.log(`Successfully merged ${addedCount} new questions into public/quiz-data.json.`);
-            if (newQuestions.length > addedCount) {
-                console.log(`${newQuestions.length - addedCount} duplicates were skipped.`);
-            }
+            console.log(`Successfully merged ${addedCount} questions into public/quiz-data.json.`);
         }
     } catch (err) {
         console.error("Error:", err);
