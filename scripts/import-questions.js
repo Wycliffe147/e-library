@@ -75,8 +75,8 @@ async function extractText(filePath) {
     html = html.replace(/<\/div>/g, '\n');
     html = html.replace(/<br\s*\/?>/g, '\n');
     
-    // Strip all HTML tags EXCEPT u, b, i, strong, em
-    html = html.replace(/<(?!u|b|i|strong|em|\/u|\/b|\/i|\/strong|\/em)[^>]+>/g, '');
+    // ONLY keep <u> tags. Strip everything else (bold, strong, em, etc)
+    html = html.replace(/<(?!u|\/u)[^>]+>/g, '');
     
     return html;
 }
@@ -109,57 +109,61 @@ async function parseMCQs(text, source, answerMap = {}, useAI = false) {
     const questions = [];
     const allLines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
     
-    // Find Section A and Section B to restrict scope
+    // Find Section A accurately
     const sectionAIndex = allLines.findIndex(l => l.match(/Section\s+A/i));
-    const sectionBIndex = allLines.findIndex(l => l.match(/SECTION\s+B/i));
+    if (sectionAIndex === -1) {
+        console.warn("Could not find 'Section A'.");
+        return [];
+    }
     
-    const lines = allLines.slice(sectionAIndex !== -1 ? sectionAIndex + 1 : 0);
-
+    const lines = allLines.slice(sectionAIndex + 1);
     let qCounter = 0;
 
     for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
+        let line = lines[i];
         
-        // Stop only if the line explicitly starts with Section B (avoiding merged lines)
+        // Stop if we hit Section B (explicitly at start of line)
         if (line.match(/^SECTION\s+B/i)) break;
 
-        // Skip obvious headers, instructions, and metadata
-        if (line.match(/^(Questions?|Section|Instructions?|Answer all|Choose the|In each|Turn over|PAPER I|Subject Number|Friday,|Time allowed:|Turn over|Questions \d+ to \d+)/i)) continue;
+        // Skip headers, instructions, and metadata
+        if (line.match(/^(Questions?|Section|Instructions?|Answer all|Choose the|In each|Turn over|PAPER I|Subject Number|Friday,|Time allowed:|Turn over|Total|Do not write)/i)) continue;
         if (line.length < 10) continue; 
         if (line.match(/^[A-D](\.|\s|–|-)/i)) continue; 
 
-        // Potential question found. Look ahead for 4 lines of options.
+        // Check for 4 options ahead
         let potentialOpts = [];
         let lookAhead = 1;
         while (potentialOpts.length < 4 && (i + lookAhead) < lines.length) {
             const nextLine = lines[i + lookAhead];
             if (nextLine.match(/^(Questions?|Section|Instructions?|Answer all|Choose the|In each|Turn over|PAPER I|SECTION [B-Z])/i)) break;
-            
             potentialOpts.push(nextLine);
             lookAhead++;
         }
 
         if (potentialOpts.length === 4) {
             qCounter++;
+            // If the question line contains "SECTION B" at the end, clean it
+            const cleanQuestion = line.replace(/SECTION\s+B.*/i, '').trim();
+            
             let correctIdx = answerMap[qCounter] !== undefined ? answerMap[qCounter] : 0;
             let explanation = `From ${source}.`;
 
             if (useAI && GEMINI_API_KEY) {
                 process.stdout.write(`Asking AI for Q${qCounter}... `);
-                const aiResult = await getAIAnswer(line, potentialOpts, answerMap[qCounter] !== undefined ? answerMap[qCounter] : null);
+                const aiResult = await getAIAnswer(cleanQuestion, potentialOpts, answerMap[qCounter] !== undefined ? answerMap[qCounter] : null);
                 if (aiResult) {
                     correctIdx = aiResult.index;
                     explanation = aiResult.explanation;
                     console.log("Done.");
                 } else {
-                    console.log("Failed, using default.");
+                    console.log("Failed.");
                 }
                 await new Promise(r => setTimeout(r, 12000));
             }
 
             questions.push({
                 topic: "English Grammar",
-                question: line.replace(/SECTION\s+B.*/i, '').trim(), // Clean up if SECTION B is appended
+                question: cleanQuestion,
                 options: potentialOpts,
                 answer: correctIdx, 
                 explanation: explanation,
@@ -168,7 +172,7 @@ async function parseMCQs(text, source, answerMap = {}, useAI = false) {
             i += (lookAhead - 1);
         }
     }
-    console.log(`Found ${questions.length} questions in source.`);
+    console.log(`Successfully identified ${questions.length} MCQs.`);
     return questions;
 }
 
