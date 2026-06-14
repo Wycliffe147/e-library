@@ -1,45 +1,6 @@
 [
   {
-    "topic": "Prepositional Structures",
-    "question": "Limbikani says he is not scared ________ this year’s examinations.",
-    "options": [
-      "with",
-      "by",
-      "at",
-      "of"
-    ],
-    "answer": 3,
-    "explanation": "Adjectives expressing fear, such as 'scared' or 'afraid,' are customarily followed by the preposition 'of'.",
-    "source": "Sample Question"
-  },
-  {
-    "topic": "Verb Tenses",
-    "question": "By the time the teacher arrived, the students ________ the classroom.",
-    "options": [
-      "had left",
-      "have left",
-      "left",
-      "were leaving"
-    ],
-    "answer": 0,
-    "explanation": "The past perfect tense ('had left') is used to describe an action that was completed before another action in the past.",
-    "source": "Sample Question"
-  },
-  {
-    "topic": "Phrasal Verbs",
-    "question": "The meeting was ________ because the chairman was ill.",
-    "options": [
-      "put off",
-      "put out",
-      "put up",
-      "put down"
-    ],
-    "answer": 0,
-    "explanation": "'Put off' means to postpone something to a later time.",
-    "source": "Sample Question"
-  },
-  {
-    "topic": "Imported",
+    "topic": "English Grammar",
     "question": "By the time I joined him, he ____in Lilongwe for twenty years.",
     "options": [
       "has been",
@@ -47,12 +8,12 @@
       "have had been",
       "had had been"
     ],
-    "answer": 0,
-    "explanation": "From 2026 NED MOCK JCE ENG P1.docx.",
+    "answer": 1,
+    "explanation": "The past perfect tense ('had been') is required here because the action of living in Lilongwe occurred and continued up to a specific point in the past ('by the time I joined him').",
     "source": "2026 NED MOCK JCE ENG P1.docx"
   },
   {
-    "topic": "Imported",
+    "topic": "English Grammar",
     "question": "The students always ______ for me in the laboratory.",
     "options": [
       "will wait",
@@ -60,12 +21,12 @@
       "waits",
       "wait"
     ],
-    "answer": 0,
-    "explanation": "From 2026 NED MOCK JCE ENG P1.docx.",
+    "answer": 3,
+    "explanation": "The subject 'The students' is plural, requiring the plural verb 'wait' to agree with it in the simple present tense. The adverb 'always' indicates a habitual action, which is typically expressed using the simple present.",
     "source": "2026 NED MOCK JCE ENG P1.docx"
   },
   {
-    "topic": "Imported",
+    "topic": "English Grammar",
     "question": "Mphatso _____ over if he sees you.",
     "options": [
       "would come",
@@ -73,12 +34,12 @@
       "would have come",
       "comes"
     ],
-    "answer": 0,
-    "explanation": "From 2026 NED MOCK JCE ENG P1.docx.",
+    "answer": 1,
+    "explanation": "This is a first conditional sentence, which refers to a realistic future situation. It uses the simple present tense ('sees') in the if-clause and 'will' + base verb ('will come') in the main clause.",
     "source": "2026 NED MOCK JCE ENG P1.docx"
   },
   {
-    "topic": "Imported",
+    "topic": "English Grammar",
     "question": "They have refused to give any official _____ on the matter.",
     "options": [
       "comment",
@@ -87,11 +48,11 @@
       "statement"
     ],
     "answer": 0,
-    "explanation": "From 2026 NED MOCK JCE ENG P1.docx.",
+    "explanation": "The collocation 'to give a comment' (or 'make a comment') is standard when refusing to speak to the media or express an opinion on a topic. While 'statement' is also used, 'issue' or 'make' is more typically paired with 'official statement' in this context.",
     "source": "2026 NED MOCK JCE ENG P1.docx"
   },
   {
-    "topic": "Imported",
+    "topic": "English Grammar",
     "question": "It _______ me when a student writes an interesting story.",
     "options": [
       "amazes",
@@ -100,11 +61,11 @@
       "startles"
     ],
     "answer": 0,
-    "explanation": "From 2026 NED MOCK JCE ENG P1.docx.",
+    "explanation": "The verb 'amazes' is the most suitable fit because discovering an interesting story written by a student evokes positive wonder and admiration. Other options like 'stuns' or 'startles' imply shock or fright, which do not fit the positive context of the sentence.",
     "source": "2026 NED MOCK JCE ENG P1.docx"
   },
   {
-    "topic": "Imported",
+    "topic": "English Grammar",
     "question": "She was advised to meet the ________ for her decaying teeth.",
     "options": [
       "doctor",
@@ -112,164 +73,8 @@
       "dentist",
       "physiotherapist"
     ],
-    "answer": 0,
-    "explanation": "From 2026 NED MOCK JCE ENG P1.docx.",
+    "answer": 2,
+    "explanation": "A dentist is a medical professional who specializes in the care and treatment of teeth, making them the correct choice for dealing with tooth decay. Other options do not specialize in oral healthcare.",
     "source": "2026 NED MOCK JCE ENG P1.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "My brother has been ______ in the army.",
-    "options": [
-      "enlisted",
-      "enrolled",
-      "admitted",
-      "registered"
-    ],
-    "answer": 2,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "Mr. Banda pays the ________ for his policy at the end of each month.",
-    "options": [
-      "salary",
-      "premium",
-      "contribution",
-      "fees"
-    ],
-    "answer": 3,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "Our grandmother _______ the history of the family since last month.",
-    "options": [
-      "has been writing",
-      "is writing",
-      "has written",
-      "writes"
-    ],
-    "answer": 0,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "Jacqueline _______ better after taking the first dose of the medicine.",
-    "options": [
-      "is feeling",
-      "has felt",
-      "had felt",
-      "felt"
-    ],
-    "answer": 2,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "If he _______ the bus, he would have been involved in the accident.",
-    "options": [
-      "boards",
-      "will board",
-      "had boarded",
-      "has boarded"
-    ],
-    "answer": 1,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "He ____ his employee due to the mistake.",
-    "options": [
-      "ran down",
-      "run over",
-      "run after",
-      "run into"
-    ],
-    "answer": 2,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "Rabecca ______ farming as a business.",
-    "options": [
-      "took in",
-      "took up",
-      "took on",
-      "took out"
-    ],
-    "answer": 3,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "They put up a sign to _________ intruders from their property.",
-    "options": [
-      "keep off",
-      "keep in",
-      "keep up",
-      "keep out"
-    ],
-    "answer": 1,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "The store stocks __________ sculptures.",
-    "options": [
-      "miniature imported ceramic",
-      "imported miniature ceramic",
-      "miniature ceramic imported",
-      "imported ceramic miniature"
-    ],
-    "answer": 2,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "We admired her _________ shoe.",
-    "options": [
-      "leather comfortable new walking",
-      "walking new leather comfortable",
-      "comfortable new leather walking",
-      "new walking comfortable leather"
-    ],
-    "answer": 3,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "They brought a __________ container.",
-    "options": [
-      "cubic plastic bulky storage",
-      "bulky plastic storage cubic",
-      "plastic cubic storage bulky",
-      "bulky cubic plastic storage"
-    ],
-    "answer": 2,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
-  },
-  {
-    "topic": "Imported",
-    "question": "These _______ pots are beautiful.",
-    "options": [
-      "clay heavy flower spherical",
-      "heavy spherical clay flower",
-      "spherical clay heavy flower",
-      "clay heavy flower spherical"
-    ],
-    "answer": 1,
-    "explanation": "From 2025 SHED MOCK  ENGLISH P I.docx.",
-    "source": "2025 SHED MOCK  ENGLISH P I.docx"
   }
 ]
