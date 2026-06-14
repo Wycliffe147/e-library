@@ -16,6 +16,8 @@
     "adm-zip": "^0.5.10"
   },
   "devDependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^17.4.2",
     "mammoth": "^1.12.0",
     "pdf-parse": "^2.4.5"
   }
