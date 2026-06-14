@@ -9,7 +9,7 @@
       "had had been"
     ],
     "answer": 1,
-    "explanation": "The past perfect tense ('had been') is required here because the action of living in Lilongwe occurred and continued up to a specific point in the past ('by the time I joined him').",
+    "explanation": "The past perfect tense 'had been' is correct because it describes a state that was ongoing up to a specific point in the past ('joined').",
     "source": "2026 NED MOCK JCE ENG P1.docx"
   },
   {
@@ -22,7 +22,7 @@
       "wait"
     ],
     "answer": 3,
-    "explanation": "The subject 'The students' is plural, requiring the plural verb 'wait' to agree with it in the simple present tense. The adverb 'always' indicates a habitual action, which is typically expressed using the simple present.",
+    "explanation": "The subject 'The students' is plural, which requires the plural verb form 'wait' to agree with it. The adverb 'always' indicates a present habitual action, making the simple present tense the most appropriate choice.",
     "source": "2026 NED MOCK JCE ENG P1.docx"
   },
   {
@@ -35,7 +35,7 @@
       "comes"
     ],
     "answer": 1,
-    "explanation": "This is a first conditional sentence, which refers to a realistic future situation. It uses the simple present tense ('sees') in the if-clause and 'will' + base verb ('will come') in the main clause.",
+    "explanation": "This is a first conditional sentence, which expresses a real possibility in the future. It uses the present simple tense ('sees') in the if-clause and the future simple tense ('will come') in the main clause.",
     "source": "2026 NED MOCK JCE ENG P1.docx"
   },
   {
@@ -48,7 +48,7 @@
       "statement"
     ],
     "answer": 0,
-    "explanation": "The collocation 'to give a comment' (or 'make a comment') is standard when refusing to speak to the media or express an opinion on a topic. While 'statement' is also used, 'issue' or 'make' is more typically paired with 'official statement' in this context.",
+    "explanation": "The noun 'comment' fits best here as 'official comment' is a standard collocation, especially in the context of refusing to provide information or opinions to the media.",
     "source": "2026 NED MOCK JCE ENG P1.docx"
   },
   {
@@ -61,7 +61,7 @@
       "startles"
     ],
     "answer": 0,
-    "explanation": "The verb 'amazes' is the most suitable fit because discovering an interesting story written by a student evokes positive wonder and admiration. Other options like 'stuns' or 'startles' imply shock or fright, which do not fit the positive context of the sentence.",
+    "explanation": "The verb 'amazes' is the most appropriate fit because it expresses a feeling of great wonder or admiration at a student's creative achievement. Other options like 'stuns' or 'startles' imply shock or fright, which do not fit the positive context of the sentence.",
     "source": "2026 NED MOCK JCE ENG P1.docx"
   },
   {
@@ -73,8 +73,190 @@
       "dentist",
       "physiotherapist"
     ],
-    "answer": 2,
-    "explanation": "A dentist is a medical professional who specializes in the care and treatment of teeth, making them the correct choice for dealing with tooth decay. Other options do not specialize in oral healthcare.",
+    "answer": 1,
+    "explanation": "A clinician refers to any healthcare professional involved in direct patient care, which encompasses dental practitioners who diagnose and treat decaying teeth. Thus, it serves as an appropriate overarching term for the medical professional she was advised to see.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "The girl read widely and made consultations before her lesson.",
+    "options": [
+      "conjunction",
+      "preposition",
+      "adjective",
+      "adverb"
+    ],
+    "answer": 1,
+    "explanation": "In this sentence, the word 'before' functions as a preposition because it links the noun phrase 'her lesson' to the rest of the sentence, indicating a relationship of time.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "His means are plenty.",
+    "options": [
+      "adjective",
+      "pronoun",
+      "noun",
+      "adverb"
+    ],
+    "answer": 0,
+    "explanation": "In this sentence, the word 'plenty' functions as a predicate adjective meaning 'plentiful' or 'abundant', modifying the noun 'means'.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "During New Year, we had a train ride to Balaka.",
+    "options": [
+      "noun",
+      "verb",
+      "adverb",
+      "adjective"
+    ],
+    "answer": 0,
+    "explanation": "In the phrase 'a train ride', 'ride' is a noun functioning as the direct object of the verb 'had', while 'train' acts as a noun adjunct (adjective) modifying it.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "James withdrew huge sums of money from his bank account.",
+    "options": [
+      "adverb",
+      "verb",
+      "noun",
+      "adjective"
+    ],
+    "answer": 1,
+    "explanation": "The word 'withdrew' is the past tense of 'withdraw' and functions as the main verb of the sentence, representing the action performed by the subject 'James'.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "Thumbiko has managed to keep his head above water this term.",
+    "options": [
+      "escape the water",
+      "avoid failure",
+      "swim with the head above water",
+      "struggle"
+    ],
+    "answer": 1,
+    "explanation": "The idiom 'keep one's head above water' means to survive or avoid failure despite facing difficult circumstances or a heavy workload. In this context, it indicates that Thumbiko successfully avoided academic failure during the term.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "I showed a clean pair of heels when the Head teacher summoned me to his office.",
+    "options": [
+      "ran away",
+      "bought new shoes",
+      "showed the heels",
+      "came close"
+    ],
+    "answer": 0,
+    "explanation": "The idiom 'show a clean pair of heels' means to run away or flee from a situation. Therefore, 'ran away' is the correct interpretation of the phrase in this context.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "Henry’s outstanding results made his parents full of beans.",
+    "options": [
+      "very excited",
+      "very serious",
+      "very sad",
+      "very doubtful"
+    ],
+    "answer": 0,
+    "explanation": "The idiom 'full of beans' means to be lively, energetic, and in high spirits. In this context, it expresses that Henry's parents were very excited and happy about his outstanding results.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "The crowd hung on the president’s lips as he announced the new policy.",
+    "options": [
+      "laughed loudly",
+      "lost interest",
+      "shouted at him",
+      "listened attentively"
+    ],
+    "answer": 1,
+    "explanation": "In this context, the phrase 'hung on the president's lips' is interpreted as the crowd lingering passively or becoming disengaged, suggesting they ultimately lost interest in the announcement.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "Jenala consented to the marriage arrangements.",
+    "options": [
+      "agreed",
+      "denied",
+      "adapted",
+      "refused"
+    ],
+    "answer": 0,
+    "explanation": "From 2026 NED MOCK JCE ENG P1.docx.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "My appetite for food lessened by over-eating.",
+    "options": [
+      "strengthened",
+      "damaged",
+      "decreased",
+      "changed"
+    ],
+    "answer": 0,
+    "explanation": "From 2026 NED MOCK JCE ENG P1.docx.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "My brother was told to do his work with great haste.",
+    "options": [
+      "slowness",
+      "laziness",
+      "relaxation",
+      "hurry"
+    ],
+    "answer": 0,
+    "explanation": "From 2026 NED MOCK JCE ENG P1.docx.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "Maria was given money out of love.",
+    "options": [
+      "jealousy",
+      "empathy",
+      "care",
+      "hatred"
+    ],
+    "answer": 0,
+    "explanation": "From 2026 NED MOCK JCE ENG P1.docx.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "Habakuk bought an ancient pot for his mother.",
+    "options": [
+      "modern",
+      "famous",
+      "interesting",
+      "old"
+    ],
+    "answer": 0,
+    "explanation": "From 2026 NED MOCK JCE ENG P1.docx.",
+    "source": "2026 NED MOCK JCE ENG P1.docx"
+  },
+  {
+    "topic": "English Grammar",
+    "question": "His gigantic body was due to diet.",
+    "options": [
+      "long",
+      "small",
+      "weak",
+      "fat"
+    ],
+    "answer": 3,
+    "explanation": "The word 'fat' is the only option that logically describes a diet (one high in fat or promoting weight gain) that would result in a 'gigantic' body.",
     "source": "2026 NED MOCK JCE ENG P1.docx"
   }
 ]
