@@ -1,8 +1,15 @@
+/**
+ * SMART IMPORT SYSTEM
+ * 
+ * TODO: Future Upgrade - Replace this CLI/Shortcut workflow with a 
+ * Web-based Admin Interface (/admin) for better file management and previewing.
+ */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from 'dotenv';
+import pdf from 'pdf-parse/lib/pdf-parse.js';
 import { extractDocxWithUnderlines } from './docx-extractor.js';
 
 dotenv.config();
@@ -19,8 +26,34 @@ async function processPaper(filePath) {
         return;
     }
 
+    const fileName = path.basename(filePath);
+    const quizDataPath = path.join(projectRoot, 'public', 'quiz-data.json');
+    let existingData = [];
+    if (fs.existsSync(quizDataPath)) {
+        existingData = JSON.parse(fs.readFileSync(quizDataPath, 'utf8'));
+    }
+
+    const isDuplicate = existingData.some(q => q.source === fileName);
+    if (isDuplicate) {
+        console.log(`\x1b[33mNotice: "${fileName}" has already been added to the library.\x1b[0m`);
+        console.log(`Re-importing will replace the existing questions from this source.`);
+    }
+
+    const ext = path.extname(filePath).toLowerCase();
+    let rawText = "";
+
     console.log(`Step 1: Extracting text from ${path.basename(filePath)}...`);
-    const rawText = await extractDocxWithUnderlines(filePath);
+    
+    if (ext === '.docx') {
+        rawText = await extractDocxWithUnderlines(filePath);
+    } else if (ext === '.pdf') {
+        const dataBuffer = fs.readFileSync(filePath);
+        const pdfData = await pdf(dataBuffer);
+        rawText = pdfData.text;
+    } else {
+        console.error(`Error: Unsupported file type: ${ext}. Only .docx and .pdf are supported.`);
+        return;
+    }
 
     console.log("Step 2: Asking Gemini to extract, solve, and format questions...");
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
@@ -90,7 +123,7 @@ async function processPaper(filePath) {
 
 const fileArg = process.argv[2];
 if (!fileArg) {
-    console.log("Usage: node scripts/smart-import.js <path-to-docx>");
+    console.log("Usage: node scripts/smart-import.js <path-to-docx-or-pdf>");
 } else {
     processPaper(fileArg);
 }
