@@ -4,20 +4,23 @@
         "question": "Limbikani says he is not scared ________ this year’s examinations.",
         "options": ["with", "by", "at", "of"],
         "answer": 3,
-        "explanation": "Adjectives expressing fear, such as 'scared' or 'afraid,' are customarily followed by the preposition 'of'."
+        "explanation": "Adjectives expressing fear, such as 'scared' or 'afraid,' are customarily followed by the preposition 'of'.",
+        "source": "Sample Question"
     },
     {
         "topic": "Verb Tenses",
         "question": "By the time the teacher arrived, the students ________ the classroom.",
         "options": ["had left", "have left", "left", "were leaving"],
         "answer": 0,
-        "explanation": "The past perfect tense ('had left') is used to describe an action that was completed before another action in the past."
+        "explanation": "The past perfect tense ('had left') is used to describe an action that was completed before another action in the past.",
+        "source": "Sample Question"
     },
     {
         "topic": "Phrasal Verbs",
         "question": "The meeting was ________ because the chairman was ill.",
         "options": ["put off", "put out", "put up", "put down"],
         "answer": 0,
-        "explanation": "'Put off' means to postpone something to a later time."
+        "explanation": "'Put off' means to postpone something to a later time.",
+        "source": "Sample Question"
     }
 ]

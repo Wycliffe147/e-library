@@ -334,6 +334,7 @@ function initQuiz(questions) {
                     `).join("")}
                 </div>
                 <div id="quiz-feedback" class="hidden"></div>
+                <div class="quiz-source">Source: ${q.source || "Unknown"}</div>
                 <button id="next-btn" class="btn-confirm hidden">Next Question</button>
             </div>
         `;
