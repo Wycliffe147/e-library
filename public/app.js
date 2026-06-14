@@ -77,6 +77,8 @@ window.addEventListener("popstate", e => {
         navigateTo(() => loadAbout(false), "About - e-library");
     } else if (state.view === "request") {
         navigateTo(() => loadRequest(false), "Request - e-library");
+    } else if (state.view === "practice") {
+        navigateTo(() => loadPractice(false), "Practice - e-library");
     } else if (state.view === "folder") {
         const folderTitle = state.subFolder ? `${state.category} > ${state.subFolder}` : state.category;
         navigateTo(() => loadFolder(state.category, state.subFolder, false), `${folderTitle} - e-library`);
@@ -270,7 +272,109 @@ function _renderRequest() {
     `;
 }
 
-// ─── Debounce helper ─────────────────────────────────────────────────────────
+// ─── Practice (Quiz) ─────────────────────────────────────────────────────────
+
+async function loadPractice(push = true) {
+    if (push) {
+        history.pushState({ view: "practice" }, "");
+        await navigateTo(_renderPractice, "Practice - e-library");
+    } else {
+        _renderPractice();
+    }
+}
+
+async function _renderPractice() {
+    app.innerHTML = `
+        <div class="practice-container">
+            <div id="quiz-header">
+                <h2>Interactive Practice</h2>
+                <p>Test your knowledge with these practice questions.</p>
+            </div>
+            <div id="quiz-app">
+                <div class="skeleton-line skeleton-pulse" style="width:100%;height:100px;margin-bottom:20px"></div>
+            </div>
+        </div>
+    `;
+
+    try {
+        const res = await fetch("/quiz-data.json");
+        const questions = await res.json();
+        initQuiz(questions);
+    } catch (err) {
+        document.getElementById("quiz-app").innerHTML = `<p class="error-text">Failed to load practice questions.</p>`;
+    }
+}
+
+function initQuiz(questions) {
+    const quizApp = document.getElementById("quiz-app");
+    let currentIdx = 0;
+    let score = 0;
+
+    function renderQuestion() {
+        if (currentIdx >= questions.length) {
+            quizApp.innerHTML = `
+                <div class="quiz-results">
+                    <h3>Practice Complete!</h3>
+                    <p>Your score: <strong>${score} / ${questions.length}</strong></p>
+                    <button class="btn-confirm" onclick="loadPractice()">Restart</button>
+                    <button class="btn-cancel" onclick="loadHome()">Back Home</button>
+                </div>
+            `;
+            return;
+        }
+
+        const q = questions[currentIdx];
+        quizApp.innerHTML = `
+            <div class="quiz-card">
+                <div class="quiz-meta">Topic: ${q.topic} | Question ${currentIdx + 1} of ${questions.length}</div>
+                <div class="quiz-question">${q.question}</div>
+                <div class="quiz-options">
+                    ${q.options.map((opt, i) => `
+                        <button class="quiz-option-btn" data-index="${i}">${opt}</button>
+                    `).join("")}
+                </div>
+                <div id="quiz-feedback" class="hidden"></div>
+                <button id="next-btn" class="btn-confirm hidden">Next Question</button>
+            </div>
+        `;
+
+        const btns = quizApp.querySelectorAll(".quiz-option-btn");
+        const feedback = document.getElementById("quiz-feedback");
+        const nextBtn = document.getElementById("next-btn");
+
+        btns.forEach(btn => {
+            btn.onclick = () => {
+                const selectedIdx = parseInt(btn.dataset.index);
+                const isCorrect = selectedIdx === q.answer;
+                
+                // Disable all buttons
+                btns.forEach(b => b.disabled = true);
+                
+                // Highlight correct/incorrect
+                btn.classList.add(isCorrect ? "correct" : "incorrect");
+                btns[q.answer].classList.add("correct");
+
+                if (isCorrect) score++;
+
+                feedback.innerHTML = `
+                    <p class="${isCorrect ? 'text-correct' : 'text-incorrect'}">
+                        ${isCorrect ? "<strong>Correct!</strong>" : "<strong>Incorrect.</strong>"}
+                    </p>
+                    <p class="explanation">${q.explanation}</p>
+                `;
+                feedback.classList.remove("hidden");
+                nextBtn.classList.remove("hidden");
+            };
+        });
+
+        nextBtn.onclick = () => {
+            currentIdx++;
+            renderQuestion();
+        };
+    }
+
+    renderQuestion();
+}
 
 function debounce(fn, delay) {
     let timer;
