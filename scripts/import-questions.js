@@ -64,7 +64,11 @@ async function extractText(filePath) {
     const result = await mammoth.convertToHtml({ 
         buffer: buffer,
         styleMap: [
-            "u => u"
+            "u => u",
+            "strike => del",
+            "b => b",
+            "i => i",
+            "strong => b"
         ]
     });
     let html = result.value;

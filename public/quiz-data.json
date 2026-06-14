@@ -79,7 +79,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "The girl read widely and made consultations before her lesson.",
+    "question": "The girl <u>read</u> widely and made consultations before her lesson.",
     "options": [
       "conjunction",
       "preposition",
@@ -92,7 +92,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "His means are plenty.",
+    "question": "His <u>means</u> are plenty.",
     "options": [
       "adjective",
       "pronoun",
@@ -105,7 +105,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "During New Year, we had a train ride to Balaka.",
+    "question": "During New Year, we had a train <u>ride</u> to Balaka.",
     "options": [
       "noun",
       "verb",
@@ -118,7 +118,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "James withdrew huge sums of money from his bank account.",
+    "question": "James <u>withdrew</u> huge sums of money from his bank account.",
     "options": [
       "adverb",
       "verb",
@@ -131,7 +131,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "Thumbiko has managed to keep his head above water this term.",
+    "question": "Thumbiko has managed to <u>keep his head above water</u> this term.",
     "options": [
       "escape the water",
       "avoid failure",
@@ -144,7 +144,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "I showed a clean pair of heels when the Head teacher summoned me to his office.",
+    "question": "I <u>showed a clean pair of heels</u> when the Head teacher summoned me to his office.",
     "options": [
       "ran away",
       "bought new shoes",
@@ -157,7 +157,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "Henry’s outstanding results made his parents full of beans.",
+    "question": "Henry’s outstanding results made his parents <u>full of beans</u>.",
     "options": [
       "very excited",
       "very serious",
@@ -170,7 +170,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "The crowd hung on the president’s lips as he announced the new policy.",
+    "question": "The crowd <u>hung on the president’s lips</u> as he announced the new policy.",
     "options": [
       "laughed loudly",
       "lost interest",
@@ -183,7 +183,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "Jenala consented to the marriage arrangements.",
+    "question": "Jenala <u>consented</u> to the marriage arrangements.",
     "options": [
       "agreed",
       "denied",
@@ -196,7 +196,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "My appetite for food lessened by over-eating.",
+    "question": "My appetite for food <u>lessened</u> by over-eating.",
     "options": [
       "strengthened",
       "damaged",
@@ -209,7 +209,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "My brother was told to do his work with great haste.",
+    "question": "My brother was told to do his work with great <u>haste</u>.",
     "options": [
       "slowness",
       "laziness",
@@ -222,7 +222,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "Maria was given money out of love.",
+    "question": "Maria was given money out of <u>love</u>.",
     "options": [
       "jealousy",
       "empathy",
@@ -235,7 +235,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "Habakuk bought an ancient pot for his mother.",
+    "question": "Habakuk bought an <u>ancient</u> pot for his mother.",
     "options": [
       "modern",
       "famous",
@@ -248,7 +248,7 @@
   },
   {
     "topic": "English Grammar",
-    "question": "His gigantic body was due to diet.",
+    "question": "His <u>gigantic</u> body was due to diet.",
     "options": [
       "long",
       "small",

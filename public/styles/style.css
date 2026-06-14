@@ -1632,7 +1632,7 @@ html.dark .footer-section h3 {
 
 .quiz-question {
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: normal;
     line-height: 1.5;
 }
 
