@@ -310,6 +310,13 @@ function initQuiz(questions) {
     let currentIdx = 0;
     let score = 0;
 
+    function scrollToQuiz() {
+        const header = document.getElementById("quiz-header");
+        if (header) {
+            header.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
     function renderQuestion() {
         if (currentIdx >= questions.length) {
             quizApp.innerHTML = `
@@ -320,6 +327,7 @@ function initQuiz(questions) {
                     <button class="btn-cancel" onclick="loadHome()">Back Home</button>
                 </div>
             `;
+            scrollToQuiz();
             return;
         }
 
@@ -330,7 +338,9 @@ function initQuiz(questions) {
                 <div class="quiz-question">${q.question}</div>
                 <div class="quiz-options">
                     ${q.options.map((opt, i) => `
-                        <button class="quiz-option-btn" data-index="${i}">${opt}</button>
+                        <button class="quiz-option-btn" data-index="${i}">
+                            <strong>${"ABCD"[i]}.</strong> ${opt}
+                        </button>
                     `).join("")}
                 </div>
                 <div id="quiz-feedback" class="hidden"></div>
@@ -338,6 +348,8 @@ function initQuiz(questions) {
                 <button id="next-btn" class="btn-confirm hidden">Next Question</button>
             </div>
         `;
+
+        scrollToQuiz();
 
         const btns = quizApp.querySelectorAll(".quiz-option-btn");
         const feedback = document.getElementById("quiz-feedback");
