@@ -143,10 +143,10 @@ function _renderHome() {
     showHomeSkeleton();
 
     const categories = [
-        { id: "card1", category: "Books",  img: "/public/Media/images/Excel_Phy.png",   label: "Read books, pamphlets & notes" },
-        { id: "card2", category: "Exams",  img: "/public/Media/images/MANEB_Maths.png", label: "See exam/test papers" },
-        { id: "card4", category: "Zips",   img: "/public/Media/images/zips.png",         label: "Download zip packages" },
-        { id: "card3", category: "Q&A",    img: "/public/Media/images/Q&A.png",          label: "Study questions & model answers" },
+        { id: "card1", category: "Books",  img: "/Media/images/Excel_Phy.png",   label: "Read books, pamphlets & notes" },
+        { id: "card2", category: "Exams",  img: "/Media/images/MANEB_Maths.png", label: "See exam/test papers" },
+        { id: "card4", category: "Zips",   img: "/Media/images/zips.png",         label: "Download zip packages" },
+        { id: "card3", category: "Q&A",    img: "/Media/images/Q&A.png",          label: "Study questions & model answers" },
     ];
 
     app.innerHTML = `
@@ -230,7 +230,7 @@ function _renderAbout() {
                     This e-library allows students to browse, search, and read educational resources online.
                 </p>
                 <div class="about-flex reveal">
-                    <img src="/public/Media/images/about.png" alt="About image" class="about-image" />
+                    <img src="/Media/images/about.png" alt="About image" class="about-image" />
                     <p>
                         "I think having this website is better than relying on WhatsApp groups alone
                         because documents have to be sent every time someone new wants them."

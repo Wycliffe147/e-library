@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         "pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
     };
 
-    const lfsExtensions = ["pdf", "zip"];
+    const lfsExtensions = ["pdf", "zip", "doc", "docx", "xls", "xlsx", "ppt", "pptx"];
     const ext = file.split(".").pop().toLowerCase();
 
     const host = lfsExtensions.includes(ext)
