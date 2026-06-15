@@ -82,11 +82,30 @@ export async function processPaper(filePath, onLog = (msg) => console.log(msg)) 
 
     const prompt = `
     Extract Multiple Choice Questions from this text into a JSON array.
-    Fields: "topic", "question", "options", "answer", "explanation", "source".
-    Preserve <u> tags. Source: "${fileName}"
     
-    TEXT:
-    ${rawText.substring(0, 10000)} 
+    FOR EACH QUESTION:
+    1. Identify the question text (preserve <u> tags for underlined words).
+    2. Extract exactly 4 options into an array.
+    3. Determine the correct answer and provide its INDEX (0 for the 1st option, 1 for the 2nd, 2 for the 3rd, or 3 for the 4th).
+    4. Write a 1-sentence explanation of why that specific answer is correct.
+    
+    CRITICAL RULES:
+    - The "answer" field MUST be a number (0, 1, 2, or 3). Do NOT put text in the answer field.
+    - Topic should be "English Grammar" or similar.
+    - Source must be: "${fileName}"
+
+    JSON STRUCTURE:
+    {
+      "topic": "...",
+      "question": "...",
+      "options": ["A", "B", "C", "D"],
+      "answer": 0,
+      "explanation": "...",
+      "source": "..."
+    }
+
+    TEXT TO PROCESS:
+    ${rawText.substring(0, 10000)}
     `;
 
     try {
