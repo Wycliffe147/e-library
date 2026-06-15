@@ -17,74 +17,76 @@ dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const projectRoot = path.join(__dirname, '..');
+const projectRoot = process.cwd();
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
 
 export async function processPaper(filePath, onLog = (msg) => console.log(msg)) {
     if (!GEMINI_API_KEY) {
-        onLog("Error: GEMINI_API_KEY is not set in .env");
-        return;
+        onLog("ERROR: GEMINI_API_KEY is missing!");
+        onLog("Please add it to your Vercel Project Settings > Environment Variables.");
+        return false;
     }
 
     const fileName = path.basename(filePath);
     const quizDataPath = path.join(projectRoot, 'public', 'quiz-data.json');
     let existingData = [];
-    if (fs.existsSync(quizDataPath)) {
-        existingData = JSON.parse(fs.readFileSync(quizDataPath, 'utf8'));
+    
+    try {
+        if (fs.existsSync(quizDataPath)) {
+            existingData = JSON.parse(fs.readFileSync(quizDataPath, 'utf8'));
+        }
+    } catch (e) {
+        onLog("Notice: Could not read existing quiz-data.json, starting fresh.");
     }
 
     const isDuplicate = existingData.some(q => q.source === fileName);
     if (isDuplicate) {
-        onLog(`Notice: "${fileName}" has already been added to the library.`);
-        onLog(`Re-importing will replace the existing questions from this source.`);
+        onLog(`Notice: "${fileName}" has already been added.`);
     }
 
     const ext = path.extname(filePath).toLowerCase();
     let rawText = "";
 
-    onLog(`Step 1: Extraction: ${path.basename(filePath)}...`);
+    onLog(`Step 1: Extracting text from ${fileName}...`);
     
-    if (ext === '.docx') {
-        rawText = await extractDocxWithUnderlines(filePath);
-    } else if (ext === '.doc') {
-        const extractor = new WordExtractor();
-        const extracted = await extractor.extract(filePath);
-        rawText = extracted.getBody();
-    } else if (ext === '.pdf') {
-        const dataBuffer = fs.readFileSync(filePath);
-        const parser = new PDFParse({ data: dataBuffer });
-        const pdfData = await parser.getText();
-        rawText = pdfData.text;
-    } else {
-        onLog(`Error: Unsupported file type: ${ext}. Only .docx, .doc and .pdf are supported.`);
-        return;
+    try {
+        if (ext === '.docx') {
+            rawText = await extractDocxWithUnderlines(filePath);
+        } else if (ext === '.doc') {
+            const extractor = new WordExtractor();
+            const extracted = await extractor.extract(filePath);
+            rawText = extracted.getBody();
+        } else if (ext === '.pdf') {
+            const dataBuffer = fs.readFileSync(filePath);
+            const parser = new PDFParse({ data: dataBuffer });
+            const pdfData = await parser.getText();
+            rawText = pdfData.text;
+        } else {
+            onLog(`Error: Unsupported file type: ${ext}`);
+            return false;
+        }
+    } catch (e) {
+        onLog(`Extraction Error: ${e.message}`);
+        return false;
     }
 
-    onLog("Step 2: AI logic: extracting & solving questions...");
+    if (!rawText || rawText.length < 50) {
+        onLog("Error: Could not extract enough text from the file.");
+        return false;
+    }
+
+    onLog("Step 2: Sending to Gemini AI (this may take a moment)...");
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = `
-    You are an expert exam processor. I will provide you with text from a school exam paper.
+    Extract Multiple Choice Questions from this text into a JSON array.
+    Fields: "topic", "question", "options", "answer", "explanation", "source".
+    Preserve <u> tags. Source: "${fileName}"
     
-    YOUR TASKS:
-    1. Identify all Multiple Choice Questions (MCQs).
-    2. Extract them into a JSON array.
-    3. For EACH question:
-       - Keep the original question text. **IMPORTANT**: Preserve the <u> tags for underlined words.
-       - Identify the 4 options.
-       - Determine the CORRECT answer (0-3).
-       - Write a concise 1-2 sentence explanation of why that answer is correct.
-    
-    RULES:
-    - Only return valid JSON. No markdown code blocks.
-    - Fields: "topic", "question", "options", "answer", "explanation", "source".
-    - Topic should be based on the subject (e.g., "English Grammar").
-    - Source should be: "${path.basename(filePath)}"
-
-    EXAM TEXT:
-    ${rawText}
+    TEXT:
+    ${rawText.substring(0, 10000)} 
     `;
 
     try {
@@ -92,37 +94,33 @@ export async function processPaper(filePath, onLog = (msg) => console.log(msg)) 
         const response = await result.response;
         let jsonText = response.text().trim();
         
-        // Remove markdown formatting if the AI added it
-        if (jsonText.startsWith("```json")) {
-            jsonText = jsonText.split("```json")[1].split("```")[0].trim();
-        } else if (jsonText.startsWith("```")) {
-            jsonText = jsonText.split("```")[1].split("```")[0].trim();
-        }
+        if (jsonText.includes("```json")) jsonText = jsonText.split("```json")[1].split("```")[0];
+        else if (jsonText.includes("```")) jsonText = jsonText.split("```")[1].split("```")[0];
 
-        const newQuestions = JSON.parse(jsonText);
-        onLog(`Step 3: AI found and solved ${newQuestions.length} questions.`);
+        const newQuestions = JSON.parse(jsonText.trim());
+        onLog(`Step 3: AI found ${newQuestions.length} questions.`);
 
-        onLog("Step 4: Merging into public/quiz-data.json...");
-        let data = [];
-        if (fs.existsSync(quizDataPath)) {
-            data = JSON.parse(fs.readFileSync(quizDataPath, 'utf8'));
-        }
-
-        // Remove old questions from this same source to avoid duplicates
-        const filteredData = data.filter(q => q.source !== path.basename(filePath));
+        onLog("Step 4: Attempting to save...");
         
-        // Add new ones
+        // Remove old questions from same source
+        const filteredData = existingData.filter(q => q.source !== fileName);
         const updatedData = [...filteredData, ...newQuestions];
         
-        fs.writeFileSync(quizDataPath, JSON.stringify(updatedData, null, 2));
-        onLog("Done! Your e-library is updated.");
-        return true;
+        try {
+            fs.writeFileSync(quizDataPath, JSON.stringify(updatedData, null, 2));
+            onLog("✅ SUCCESS: Library updated.");
+            return true;
+        } catch (writeErr) {
+            onLog("⚠️ WARNING: Could not write to public/quiz-data.json.");
+            onLog(`Reason: ${writeErr.message}`);
+            onLog("Vercel's file system is read-only. You must run this locally or use a database.");
+            onLog("\n--- GENERATED DATA (Copy this) ---\n");
+            onLog(JSON.stringify(newQuestions, null, 2));
+            return true; // We return true because the AI part actually worked
+        }
 
     } catch (error) {
-        onLog(`AI Error: ${error.message}`);
-        if (error.message.includes("404")) {
-            onLog("Tip: Check if your GEMINI_API_KEY is valid and the model name 'gemini-1.5-flash' is supported.");
-        }
+        onLog(`AI/JSON Error: ${error.message}`);
         return false;
     }
 }
