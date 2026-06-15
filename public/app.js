@@ -30,6 +30,14 @@ function toggleDarkMode() {
     if (btn) updateToggleIcon(btn);
 }
 
+function formatSize(bytes) {
+    if (bytes === 0) return "0 B";
+    const k = 1024;
+    const sizes = ["B", "KB", "MB", "GB", "TB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+}
+
 // ─── Page Transitions ────────────────────────────────────────────────────────
 
 function transitionOut() {
@@ -178,6 +186,7 @@ function _renderHome() {
 
     // Fetch counts in parallel
     let totalFiles = 0;
+    let totalSize = 0;
     let countsFetched = 0;
 
     categories.forEach(async ({ category }) => {
@@ -188,6 +197,7 @@ function _renderHome() {
             if (el) el.textContent = `${data.total} file${data.total !== 1 ? "s" : ""}`;
             
             totalFiles += data.total;
+            totalSize += (data.size || 0);
         } catch {
             const el = document.getElementById(`count-${category}`);
             if (el) el.textContent = "";
@@ -196,6 +206,9 @@ function _renderHome() {
             if (countsFetched === categories.length) {
                 const totalEl = document.getElementById("total-books");
                 if (totalEl) totalEl.textContent = totalFiles;
+
+                const sizeEl = document.getElementById("total-size");
+                if (sizeEl) sizeEl.textContent = formatSize(totalSize);
             }
         }
     });

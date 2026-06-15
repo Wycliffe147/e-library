@@ -22,7 +22,8 @@ export default function handler(req, res) {
     const filteredFiles = allFiles.filter(f => f.path.replace(/\\/g, "/").startsWith(normalizedRequestPath));
 
     if (count === "true") {
-        return res.status(200).json({ total: filteredFiles.length });
+        const totalSize = filteredFiles.reduce((sum, f) => sum + (f.size || 0), 0);
+        return res.status(200).json({ total: filteredFiles.length, size: totalSize });
     }
 
     if (recursive === "true") {
