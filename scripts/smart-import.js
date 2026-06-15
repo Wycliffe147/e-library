@@ -78,7 +78,7 @@ export async function processPaper(filePath, onLog = (msg) => console.log(msg)) 
 
     onLog("Step 2: Sending to Gemini AI (this may take a moment)...");
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
 
     const prompt = `
     Extract Multiple Choice Questions from this text into a JSON array.
