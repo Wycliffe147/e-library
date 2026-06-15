@@ -11410,64 +11410,14 @@
     "size": 2218717
   },
   {
-    "name": "2024 CEED mock .zip",
-    "path": "Zips/2024 CEED mock .zip",
-    "size": 9256439
-  },
-  {
-    "name": "2024 JCE CHIEF EXAMINER'S REPORTS.zip",
-    "path": "Zips/2024 JCE CHIEF EXAMINER'S REPORTS.zip",
-    "size": 11984839
-  },
-  {
-    "name": "2024 SEED MSCE MOCK FINAL_042835.zip",
-    "path": "Zips/2024 SEED MSCE MOCK FINAL_042835.zip",
-    "size": 17889975
-  },
-  {
-    "name": "2025 JCE  - CHIEF EXAMINER'S REPORT....zip",
-    "path": "Zips/2025 JCE  - CHIEF EXAMINER'S REPORT....zip",
-    "size": 12810975
-  },
-  {
     "name": "2025 JCE MOCK READY FOR USE.zip",
     "path": "Zips/2025 JCE MOCK READY FOR USE.zip",
     "size": 25942297
   },
   {
-    "name": "2025 MSCE CHIEF EXAMINERS REPORTS.zip",
-    "path": "Zips/2025 MSCE CHIEF EXAMINERS REPORTS.zip",
-    "size": 16096398
-  },
-  {
-    "name": "2025 SHED MSCE MOCK EXAMS_060116.zip",
-    "path": "Zips/2025 SHED MSCE MOCK EXAMS_060116.zip",
-    "size": 15529877
-  },
-  {
     "name": "2025-t1-mzn-exams-20-nov.zip",
     "path": "Zips/2025-t1-mzn-exams-20-nov.zip",
     "size": 28832650
-  },
-  {
-    "name": "2026 BSS JCE CLUSTER MOCK.zip",
-    "path": "Zips/2026 BSS JCE CLUSTER MOCK.zip",
-    "size": 34708192
-  },
-  {
-    "name": "2026 CEED EXAMINATIONS PROVISIONAL MARKING KEYS_111851.zip",
-    "path": "Zips/2026 CEED EXAMINATIONS PROVISIONAL MARKING KEYS_111851.zip",
-    "size": 17471203
-  },
-  {
-    "name": "2026 ISAM JCE MOCK.zip",
-    "path": "Zips/2026 ISAM JCE MOCK.zip",
-    "size": 8323850
-  },
-  {
-    "name": "2026 JCE AND MSCE (ISAMA).zip",
-    "path": "Zips/2026 JCE AND MSCE (ISAMA).zip",
-    "size": 11775821
   },
   {
     "name": "2026 MJ JCE MOCK.zip",
@@ -11485,78 +11435,43 @@
     "size": 64970435
   },
   {
-    "name": "2026 MSCE NED MOCK.zip",
-    "path": "Zips/2026 MSCE NED MOCK.zip",
-    "size": 10148262
-  },
-  {
-    "name": "2026 MULANJE DISTRICT JCE MOCK.zip",
-    "path": "Zips/2026 MULANJE DISTRICT JCE MOCK.zip",
-    "size": 35251381
-  },
-  {
     "name": "2026 NAMITETE CLUSTER JCE MOCK.zip",
     "path": "Zips/2026 NAMITETE CLUSTER JCE MOCK.zip",
     "size": 25160613
   },
   {
-    "name": "2026 NED MOCK JCE-1.zip",
-    "path": "Zips/2026 NED MOCK JCE-1.zip",
-    "size": 8229872
-  },
-  {
-    "name": "2026 NED MOCK JCE.zip",
-    "path": "Zips/2026 NED MOCK JCE.zip",
-    "size": 8229482
-  },
-  {
-    "name": "2026 SEED MSCE MOCK MARKING KEYS.zip",
-    "path": "Zips/2026 SEED MSCE MOCK MARKING KEYS.zip",
-    "size": 5967558
-  },
-  {
-    "name": "2026 ST-MARY'S MOCK 2 .zip",
-    "path": "Zips/2026 ST-MARY'S MOCK 2 .zip",
-    "size": 12377770
-  },
-  {
-    "name": "2026 SWED MOCK FULL PACKAGE.zip",
-    "path": "Zips/2026 SWED MOCK FULL PACKAGE.zip",
-    "size": 20841415
-  },
-  {
-    "name": "2026 SWED MOCK.zip",
-    "path": "Zips/2026 SWED MOCK.zip",
-    "size": 41681027
-  },
-  {
-    "name": "2026 THYOLO JCE MOCK-1.zip",
-    "path": "Zips/2026 THYOLO JCE MOCK-1.zip",
-    "size": 15467940
-  },
-  {
-    "name": "2026 THYOLO JCE MOCK.zip",
-    "path": "Zips/2026 THYOLO JCE MOCK.zip",
-    "size": 15474830
+    "name": "2026 BSS JCE CLUSTER MOCK.zip",
+    "path": "Zips/BSS/2026 BSS JCE CLUSTER MOCK.zip",
+    "size": 34708192
   },
   {
     "name": "BSS JCE CLUSTER MOCK_2026.zip",
-    "path": "Zips/BSS JCE CLUSTER MOCK_2026.zip",
+    "path": "Zips/BSS/BSS JCE CLUSTER MOCK_2026.zip",
     "size": 10689524
   },
   {
+    "name": "2024 CEED mock .zip",
+    "path": "Zips/CEED/2024 CEED mock .zip",
+    "size": 9256439
+  },
+  {
+    "name": "2026 CEED EXAMINATIONS PROVISIONAL MARKING KEYS_111851.zip",
+    "path": "Zips/CEED/2026 CEED EXAMINATIONS PROVISIONAL MARKING KEYS_111851.zip",
+    "size": 17471203
+  },
+  {
     "name": "2023 CEED EXAMS PDF.zip",
-    "path": "Zips/CEED (Central Eastern Education Division)/2023 CEED EXAMS PDF.zip",
+    "path": "Zips/CEED/CEED (Central Eastern Education Division)/2023 CEED EXAMS PDF.zip",
     "size": 27954183
   },
   {
     "name": "2024 CEED MOCK.zip",
-    "path": "Zips/CEED (Central Eastern Education Division)/2024 CEED MOCK.zip",
+    "path": "Zips/CEED/CEED (Central Eastern Education Division)/2024 CEED MOCK.zip",
     "size": 32156508
   },
   {
     "name": "CEED MOCK.rar",
-    "path": "Zips/CEED MOCK.rar",
+    "path": "Zips/CEED/CEED MOCK.rar",
     "size": 31777020
   },
   {
@@ -11585,9 +11500,34 @@
     "size": 8666699
   },
   {
+    "name": "2024 JCE CHIEF EXAMINER'S REPORTS.zip",
+    "path": "Zips/Examiner_Reports/2024 JCE CHIEF EXAMINER'S REPORTS.zip",
+    "size": 11984839
+  },
+  {
+    "name": "2025 JCE  - CHIEF EXAMINER'S REPORT....zip",
+    "path": "Zips/Examiner_Reports/2025 JCE  - CHIEF EXAMINER'S REPORT....zip",
+    "size": 12810975
+  },
+  {
+    "name": "2025 MSCE CHIEF EXAMINERS REPORTS.zip",
+    "path": "Zips/Examiner_Reports/2025 MSCE CHIEF EXAMINERS REPORTS.zip",
+    "size": 16096398
+  },
+  {
     "name": "EXAMINER'S REPORTS 2021-24.zip",
-    "path": "Zips/EXAMINER'S REPORTS 2021-24.zip",
+    "path": "Zips/Examiner_Reports/EXAMINER'S REPORTS 2021-24.zip",
     "size": 3150536
+  },
+  {
+    "name": "2026 ISAM JCE MOCK.zip",
+    "path": "Zips/ISAMA/2026 ISAM JCE MOCK.zip",
+    "size": 8323850
+  },
+  {
+    "name": "2026 JCE AND MSCE (ISAMA).zip",
+    "path": "Zips/ISAMA/2026 JCE AND MSCE (ISAMA).zip",
+    "size": 11775821
   },
   {
     "name": "KU JCE 2026-1.zip",
@@ -11611,23 +11551,18 @@
   },
   {
     "name": "LOYOLA MOCK 2026.zip",
-    "path": "Zips/LOYOLA MOCK 2026.zip",
+    "path": "Zips/Loyola/LOYOLA MOCK 2026.zip",
     "size": 26134004
   },
   {
     "name": "LOYOLA_MOCK_2026.zip",
-    "path": "Zips/LOYOLA_MOCK_2026.zip",
+    "path": "Zips/Loyola/LOYOLA_MOCK_2026.zip",
     "size": 26134004
   },
   {
     "name": "MANGOCHI DIOCESE MOCK ALL PAPERS.zip",
-    "path": "Zips/MANGOCHI DIOCESE MOCK ALL PAPERS.zip",
+    "path": "Zips/Mangochi/MANGOCHI DIOCESE MOCK ALL PAPERS.zip",
     "size": 15760843
-  },
-  {
-    "name": "MWANZA CLUSTER 2024 MSCE MOCK.zip",
-    "path": "Zips/MWANZA CLUSTER 2024 MSCE MOCK.zip",
-    "size": 9083568
   },
   {
     "name": "2025 MANGOCHI DIOCESE MOCK ALL PAPERS.zip",
@@ -11645,6 +11580,11 @@
     "size": 9708130
   },
   {
+    "name": "2026 MULANJE DISTRICT JCE MOCK.zip",
+    "path": "Zips/Mulanje/2026 MULANJE DISTRICT JCE MOCK.zip",
+    "size": 35251381
+  },
+  {
     "name": "2024 Mwanza cluster mock.zip",
     "path": "Zips/Mwanza/2024 Mwanza cluster mock.zip",
     "size": 9083568
@@ -11652,11 +11592,11 @@
   {
     "name": "MWANZA CLUSTER 2024 MSCE MOCK.zip",
     "path": "Zips/Mwanza/MWANZA CLUSTER 2024 MSCE MOCK.zip",
-    "size": 2
+    "size": 9083568
   },
   {
     "name": "2023 MZUZU CITY CLUSTER F1 AND F3.zip",
-    "path": "Zips/Mzuzu City/2023 MZUZU CITY CLUSTER F1 AND F3.zip",
+    "path": "Zips/Mzuzu/Mzuzu City/2023 MZUZU CITY CLUSTER F1 AND F3.zip",
     "size": 21248698
   },
   {
@@ -11675,8 +11615,18 @@
     "size": 10148262
   },
   {
+    "name": "2026 NED MOCK JCE-1.zip",
+    "path": "Zips/NED/2026 NED MOCK JCE-1.zip",
+    "size": 8229872
+  },
+  {
+    "name": "2026 NED MOCK JCE.zip",
+    "path": "Zips/NED/2026 NED MOCK JCE.zip",
+    "size": 8229482
+  },
+  {
     "name": "NED JCE.zip",
-    "path": "Zips/NED JCE.zip",
+    "path": "Zips/NED/NED JCE.zip",
     "size": 11868689
   },
   {
@@ -11700,6 +11650,11 @@
     "size": 17889975
   },
   {
+    "name": "2024 SEED MSCE MOCK FINAL_042835.zip",
+    "path": "Zips/SEED/2024 SEED MSCE MOCK FINAL_042835.zip",
+    "size": 17889975
+  },
+  {
     "name": "2025 SEED MOCK MAIN PAPERS.zip",
     "path": "Zips/SEED/2025 SEED MOCK MAIN PAPERS.zip",
     "size": 72477267
@@ -11715,6 +11670,11 @@
     "size": 10663293
   },
   {
+    "name": "2026 SEED MSCE MOCK MARKING KEYS.zip",
+    "path": "Zips/SEED/2026 SEED MSCE MOCK MARKING KEYS.zip",
+    "size": 5967558
+  },
+  {
     "name": "2024_SHED_MSCE_MOCK_EXAMINATIONS.zip",
     "path": "Zips/SHED/2024_SHED_MSCE_MOCK_EXAMINATIONS.zip",
     "size": 12985371
@@ -11725,19 +11685,19 @@
     "size": 14981827
   },
   {
+    "name": "2025 SHED MSCE MOCK EXAMS_060116.zip",
+    "path": "Zips/SHED/2025 SHED MSCE MOCK EXAMS_060116.zip",
+    "size": 15529877
+  },
+  {
     "name": "SHED MOCK.zip",
-    "path": "Zips/SHED MOCK.zip",
+    "path": "Zips/SHED/SHED MOCK.zip",
     "size": 95486914
   },
   {
     "name": "SHED MSCE MOCK 2026.zip",
-    "path": "Zips/SHED MSCE MOCK 2026.zip",
+    "path": "Zips/SHED/SHED MSCE MOCK 2026.zip",
     "size": 71362764
-  },
-  {
-    "name": "ST. PATRICKS MOCK 2026.zip",
-    "path": "Zips/ST. PATRICKS MOCK 2026.zip",
-    "size": 12115902
   },
   {
     "name": "2025 swed .zip",
@@ -11745,9 +11705,39 @@
     "size": 15226027
   },
   {
+    "name": "2026 SWED MOCK FULL PACKAGE.zip",
+    "path": "Zips/SWED/2026 SWED MOCK FULL PACKAGE.zip",
+    "size": 20841415
+  },
+  {
+    "name": "2026 SWED MOCK.zip",
+    "path": "Zips/SWED/2026 SWED MOCK.zip",
+    "size": 41681027
+  },
+  {
     "name": "SWED MOCK 2025 FINAL TO DISTRIBUTE.zip",
-    "path": "Zips/SWED MOCK 2025 FINAL TO DISTRIBUTE.zip",
+    "path": "Zips/SWED/SWED MOCK 2025 FINAL TO DISTRIBUTE.zip",
     "size": 39727305
+  },
+  {
+    "name": "2026 ST-MARY'S MOCK 2 .zip",
+    "path": "Zips/St_Marys/2026 ST-MARY'S MOCK 2 .zip",
+    "size": 12377770
+  },
+  {
+    "name": "ST. PATRICKS MOCK 2026.zip",
+    "path": "Zips/St_Marys/ST. PATRICKS MOCK 2026.zip",
+    "size": 12115902
+  },
+  {
+    "name": "2026 THYOLO JCE MOCK-1.zip",
+    "path": "Zips/Thyolo/2026 THYOLO JCE MOCK-1.zip",
+    "size": 15467940
+  },
+  {
+    "name": "2026 THYOLO JCE MOCK.zip",
+    "path": "Zips/Thyolo/2026 THYOLO JCE MOCK.zip",
+    "size": 15474830
   },
   {
     "name": "Excel_Phy.png",
