@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Paper Import - e-library</title>
+    <link rel="stylesheet" href="/styles/main.css"> <!-- Assuming there's a main.css -->
+    <style>
+        :root {
+            --bg: #f4f7f6;
+            --text: #333;
+            --primary: #4CAF50;
+            --card-bg: #fff;
+            --border: #ddd;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1a1a;
+                --text: #eee;
+                --primary: #45a049;
+                --card-bg: #2d2d2d;
+                --border: #444;
+            }
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+        }
+        .file-item:hover { background: rgba(0,0,0,0.05); }
+        .file-item.selected { background: var(--primary); color: white; }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            background: var(--primary);
+            color: white;
+        }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        #log {
+            font-family: monospace;
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            height: 150px;
+            overflow-y: auto;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .question-card {
+            border-left: 5px solid var(--primary);
+            margin-top: 15px;
+        }
+        .question-card h4 { margin-top: 0; }
+        .options { margin-left: 20px; }
+        .option { margin: 5px 0; }
+        .correct { color: var(--primary); font-weight: bold; }
+        
+        .actions {
+            position: sticky;
+            bottom: 20px;
+            display: flex;
+            gap: 10px;
+            background: var(--bg);
+            padding: 10px;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>Local Paper Import</h2>
+            <a href="/" class="btn" style="background: #666; text-decoration: none;">Exit Admin</a>
+        </header>
+
+        <div class="card" id="step1">
+            <h3>Step 1: Select a file from your phone</h3>
+            <p style="font-size: 0.9em; opacity: 0.8;">Scanning Download and Documents folders...</p>
+            <ul id="fileList" class="file-list">
+                <li>Loading files...</li>
+            </ul>
+            <button id="processBtn" class="btn" disabled style="margin-top: 20px; width: 100%;">Process with Gemini AI</button>
+        </div>
+
+        <div id="log"></div>
+
+        <div id="step2" style="display: none;">
+            <h3>Step 2: Review Questions</h3>
+            <div id="questionCount" style="margin-bottom: 15px; font-weight: bold;"></div>
+            <div id="questionsContainer"></div>
+            
+            <div class="actions">
+                <button id="saveBtn" class="btn">Save all to Library</button>
+                <button id="cancelBtn" class="btn" style="background: #ff5252;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedFile = null;
+        let generatedQuestions = [];
+
+        // Load files on start
+        async function loadFiles() {
+            const res = await fetch('/api/local-files');
+            const files = await res.json();
+            const list = document.getElementById('fileList');
+            list.innerHTML = '';
+            
+            if (files.length === 0) {
+                list.innerHTML = '<li>No .pdf or .docx files found in Download/Documents.</li>';
+                return;
+            }
+
+            files.forEach(f => {
+                const li = document.createElement('li');
+                li.className = 'file-item';
+                li.innerHTML = `<span>${f.name}</span> <small style="opacity:0.6">${f.location.replace('/storage/emulated/0', '')}</small>`;
+                li.onclick = () => {
+                    document.querySelectorAll('.file-item').forEach(i => i.classList.remove('selected'));
+                    li.classList.add('selected');
+                    selectedFile = f;
+                    document.getElementById('processBtn').disabled = false;
+                };
+                list.appendChild(li);
+            });
+        }
+
+        document.getElementById('processBtn').onclick = async () => {
+            if (!selectedFile) return;
+            
+            const logEl = document.getElementById('log');
+            const processBtn = document.getElementById('processBtn');
+            logEl.style.display = 'block';
+            logEl.innerHTML = 'Starting AI Process...\n';
+            processBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/local-import', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ filePath: selectedFile.path })
+                });
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n');
+                    
+                    lines.forEach(line => {
+                        if (line.startsWith('data: ')) {
+                            const data = JSON.parse(line.substring(6));
+                            if (data.message) {
+                                logEl.innerHTML += data.message + '\n';
+                                logEl.scrollTop = logEl.scrollHeight;
+                            }
+                            if (data.result) {
+                                if (data.result.success) {
+                                    showReview(data.result.questions);
+                                } else {
+                                    alert('Error: ' + data.result.error);
+                                }
+                            }
+                        }
+                    });
+                }
+            } catch (err) {
+                alert('Connection Error: ' + err.message);
+            } finally {
+                processBtn.disabled = false;
+            }
+        };
+
+        function showReview(questions) {
+            generatedQuestions = questions;
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('log').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+            
+            const container = document.getElementById('questionsContainer');
+            document.getElementById('questionCount').textContent = `Found ${questions.length} questions.`;
+            container.innerHTML = '';
+
+            questions.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = 'card question-card';
+                card.innerHTML = `
+                    <h4>Q${idx + 1}: ${q.question}</h4>
+                    <div class="options">
+                        ${q.options.map((opt, i) => `<div class="option ${i === q.answer ? 'correct' : ''}">${String.fromCharCode(65 + i)}. ${opt}</div>`).join('')}
+                    </div>
+                    <p style="margin-top:10px; font-size: 0.9em;"><i>Explanation: ${q.explanation}</i></p>
+                    <p style="font-size: 0.8em; opacity: 0.6;">Topic: ${q.topic}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        document.getElementById('saveBtn').onclick = async () => {
+            const btn = document.getElementById('saveBtn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            try {
+                const res = await fetch('/api/save-questions', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        questions: generatedQuestions,
+                        source: selectedFile.name
+                    })
+                });
+                const result = await res.json();
+                if (result.success) {
+                    alert(`Success! ${result.count} questions added.`);
+                    window.location.href = '/';
+                } else {
+                    alert('Save failed: ' + result.error);
+                }
+            } catch (err) {
+                alert('Save error: ' + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Save all to Library';
+            }
+        };
+
+        document.getElementById('cancelBtn').onclick = () => {
+            if (confirm('Discard these questions?')) {
+                location.reload();
+            }
+        };
+
+        loadFiles();
+    </script>
+</body>
+</html>

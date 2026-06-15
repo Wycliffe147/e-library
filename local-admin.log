@@ -1,0 +1,2 @@
+◇ injected env (1) from .env // tip: ⌘ enable debugging { debug: true }
+Local Admin Server running at http://localhost:3333/local-admin.html

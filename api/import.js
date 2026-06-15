@@ -40,7 +40,7 @@ export default async function handler(req, res) {
         res.write(`Triggering AI Import logic...\n\n`);
         
         // Step 3: Run the import logic directly
-        const success = await processPaper(tempPath, (msg) => {
+        const result = await processPaper(tempPath, (msg) => {
             res.write(msg + '\n');
         });
 
@@ -51,10 +51,10 @@ export default async function handler(req, res) {
             fs.unlinkSync(tempPath);
         } catch (e) {}
 
-        if (success) {
+        if (result.success) {
             res.write(`SUCCESS: ${fileName} has been imported to the library.`);
         } else {
-            res.write(`FAILED: Import process failed. Check the logs above.`);
+            res.write(`FAILED: Import process failed. Reason: ${result.error || 'Unknown error'}`);
         }
         res.end();
 

@@ -9,7 +9,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from 'dotenv';
-import { PDFParse } from 'pdf-parse';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const pdf = require('pdf-parse');
 import { extractDocxWithUnderlines } from './docx-extractor.js';
 import WordExtractor from 'word-extractor';
 
@@ -21,11 +23,11 @@ const projectRoot = process.cwd();
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
 
-export async function processPaper(filePath, onLog = (msg) => console.log(msg)) {
+export async function processPaper(filePath, onLog = (msg) => console.log(msg), saveToLibrary = true) {
     if (!GEMINI_API_KEY) {
         onLog("ERROR: GEMINI_API_KEY is missing!");
         onLog("Please add it to your Vercel Project Settings > Environment Variables.");
-        return false;
+        return { success: false, error: "Missing API Key" };
     }
 
     const fileName = path.basename(filePath);
@@ -59,25 +61,25 @@ export async function processPaper(filePath, onLog = (msg) => console.log(msg)) 
             rawText = extracted.getBody();
         } else if (ext === '.pdf') {
             const dataBuffer = fs.readFileSync(filePath);
-            const parser = new PDFParse({ data: dataBuffer });
-            const pdfData = await parser.getText();
+            const pdfData = await pdf(dataBuffer);
             rawText = pdfData.text;
         } else {
             onLog(`Error: Unsupported file type: ${ext}`);
-            return false;
+            return { success: false, error: "Unsupported file type" };
         }
     } catch (e) {
         onLog(`Extraction Error: ${e.message}`);
-        return false;
+        return { success: false, error: e.message };
     }
 
     if (!rawText || rawText.length < 50) {
         onLog("Error: Could not extract enough text from the file.");
-        return false;
+        return { success: false, error: "Text extraction failed" };
     }
 
     onLog("Step 2: Sending to Gemini AI (rotating through models if quota hit)...");
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+    // RESTORED original preferred list order with exact valid names
     const models = ["gemini-3.5-flash", "gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
     
     let result = null;
@@ -128,21 +130,22 @@ export async function processPaper(filePath, onLog = (msg) => console.log(msg)) 
             const response = await aiResult.response;
             result = response.text().trim();
             usedModel = modelName;
-            break; // Success! Exit the loop
+            break; 
         } catch (error) {
             const errorMsg = error.message.toLowerCase();
-            if (errorMsg.includes("429") || errorMsg.includes("quota") || errorMsg.includes("limit exceeded")) {
-                onLog(`Quota hit for ${modelName}. Falling back...`);
+            // Expanded fallback triggers to include 503/Service Unavailable
+            if (errorMsg.includes("429") || errorMsg.includes("quota") || errorMsg.includes("limit") || errorMsg.includes("503") || errorMsg.includes("unavailable") || errorMsg.includes("overloaded")) {
+                onLog(`Model ${modelName} busy or limited. Falling back...`);
                 continue;
             }
             onLog(`AI Error with ${modelName}: ${error.message}`);
-            return false;
+            return { success: false, error: error.message };
         }
     }
 
     if (!result) {
         onLog("Error: All Gemini models reached their quota. Please try again tomorrow.");
-        return false;
+        return { success: false, error: "Quota exceeded" };
     }
 
     try {
@@ -153,28 +156,28 @@ export async function processPaper(filePath, onLog = (msg) => console.log(msg)) 
         const newQuestions = JSON.parse(jsonText.trim());
         onLog(`Step 3: AI (${usedModel}) found ${newQuestions.length} questions.`);
 
+        if (!saveToLibrary) {
+            return { success: true, questions: newQuestions };
+        }
+
         onLog("Step 4: Attempting to save...");
         
-        // Remove old questions from same source
         const filteredData = existingData.filter(q => q.source !== fileName);
         const updatedData = [...filteredData, ...newQuestions];
         
         try {
             fs.writeFileSync(quizDataPath, JSON.stringify(updatedData, null, 2));
             onLog("✅ SUCCESS: Library updated.");
-            return true;
+            return { success: true, questions: newQuestions };
         } catch (writeErr) {
             onLog("⚠️ WARNING: Could not write to public/quiz-data.json.");
             onLog(`Reason: ${writeErr.message}`);
-            onLog("Vercel's file system is read-only. You must run this locally or use a database.");
-            onLog("\n--- GENERATED DATA (Copy this) ---\n");
-            onLog(JSON.stringify(newQuestions, null, 2));
-            return true; // We return true because the AI part actually worked
+            return { success: true, questions: newQuestions, warning: "Filesystem is read-only" };
         }
 
     } catch (error) {
         onLog(`AI/JSON Error: ${error.message}`);
-        return false;
+        return { success: false, error: error.message };
     }
 }
 
