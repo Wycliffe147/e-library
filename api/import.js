@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { spawn } from 'child_process';
 import os from 'os';
+import { processPaper } from '../scripts/smart-import.js';
 
 export const config = {
     api: {
@@ -39,35 +39,24 @@ export default async function handler(req, res) {
         res.write(`Upload complete: ${fileName}\n`);
         res.write(`Triggering AI Import logic...\n\n`);
         
-        // Step 3: Run the import script
-        const scriptPath = path.resolve(process.cwd(), 'scripts', 'smart-import.js');
-        res.write(`Running script: ${scriptPath}\n`);
-
-        const child = spawn('node', [scriptPath, tempPath]);
-
-        child.stdout.on('data', (data) => {
-            res.write(data.toString());
+        // Step 3: Run the import logic directly
+        const success = await processPaper(tempPath, (msg) => {
+            res.write(msg + '\n');
         });
 
-        child.stderr.on('data', (data) => {
-            res.write(`Error: ${data.toString()}`);
-        });
+        res.write(`\n--- Process finished ---\n`);
+        
+        // Cleanup temp file
+        try {
+            fs.unlinkSync(tempPath);
+        } catch (e) {}
 
-        child.on('close', (code) => {
-            res.write(`\n--- Process finished with code ${code} ---\n`);
-            
-            // Cleanup temp file
-            try {
-                fs.unlinkSync(tempPath);
-            } catch (e) {}
-
-            if (code === 0) {
-                res.write(`SUCCESS: ${fileName} has been imported to the library.`);
-            } else {
-                res.write(`FAILED: Import process failed. Check the logs above.`);
-            }
-            res.end();
-        });
+        if (success) {
+            res.write(`SUCCESS: ${fileName} has been imported to the library.`);
+        } else {
+            res.write(`FAILED: Import process failed. Check the logs above.`);
+        }
+        res.end();
 
     } catch (error) {
         console.error('Import API error:', error);

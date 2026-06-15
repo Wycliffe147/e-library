@@ -9,7 +9,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from 'dotenv';
-import pdf from 'pdf-parse/lib/pdf-parse.js';
+import { PDFParse } from 'pdf-parse';
 import { extractDocxWithUnderlines } from './docx-extractor.js';
 import WordExtractor from 'word-extractor';
 
@@ -21,9 +21,9 @@ const projectRoot = path.join(__dirname, '..');
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
 
-async function processPaper(filePath) {
+export async function processPaper(filePath, onLog = (msg) => console.log(msg)) {
     if (!GEMINI_API_KEY) {
-        console.error("Error: GEMINI_API_KEY is not set in .env");
+        onLog("Error: GEMINI_API_KEY is not set in .env");
         return;
     }
 
@@ -36,14 +36,14 @@ async function processPaper(filePath) {
 
     const isDuplicate = existingData.some(q => q.source === fileName);
     if (isDuplicate) {
-        console.log(`\x1b[33mNotice: "${fileName}" has already been added to the library.\x1b[0m`);
-        console.log(`Re-importing will replace the existing questions from this source.`);
+        onLog(`Notice: "${fileName}" has already been added to the library.`);
+        onLog(`Re-importing will replace the existing questions from this source.`);
     }
 
     const ext = path.extname(filePath).toLowerCase();
     let rawText = "";
 
-    console.log(`Step 1: Extracting text from ${path.basename(filePath)}...`);
+    onLog(`Step 1: Extraction: ${path.basename(filePath)}...`);
     
     if (ext === '.docx') {
         rawText = await extractDocxWithUnderlines(filePath);
@@ -53,17 +53,17 @@ async function processPaper(filePath) {
         rawText = extracted.getBody();
     } else if (ext === '.pdf') {
         const dataBuffer = fs.readFileSync(filePath);
-        const pdfData = await pdf(dataBuffer);
+        const parser = new PDFParse({ data: dataBuffer });
+        const pdfData = await parser.getText();
         rawText = pdfData.text;
     } else {
-        console.error(`Error: Unsupported file type: ${ext}. Only .docx, .doc and .pdf are supported.`);
+        onLog(`Error: Unsupported file type: ${ext}. Only .docx, .doc and .pdf are supported.`);
         return;
     }
 
-    console.log("Step 2: Asking Gemini to extract, solve, and format questions...");
+    onLog("Step 2: AI logic: extracting & solving questions...");
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-    // Use gemini-3.5-flash as confirmed by available models list
-    const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = `
     You are an expert exam processor. I will provide you with text from a school exam paper.
@@ -100,10 +100,9 @@ async function processPaper(filePath) {
         }
 
         const newQuestions = JSON.parse(jsonText);
-        console.log(`Step 3: AI found and solved ${newQuestions.length} questions.`);
+        onLog(`Step 3: AI found and solved ${newQuestions.length} questions.`);
 
-        console.log("Step 4: Merging into public/quiz-data.json...");
-        const quizDataPath = path.join(projectRoot, 'public', 'quiz-data.json');
+        onLog("Step 4: Merging into public/quiz-data.json...");
         let data = [];
         if (fs.existsSync(quizDataPath)) {
             data = JSON.parse(fs.readFileSync(quizDataPath, 'utf8'));
@@ -116,19 +115,23 @@ async function processPaper(filePath) {
         const updatedData = [...filteredData, ...newQuestions];
         
         fs.writeFileSync(quizDataPath, JSON.stringify(updatedData, null, 2));
-        console.log("Done! Your e-library is updated.");
+        onLog("Done! Your e-library is updated.");
+        return true;
 
     } catch (error) {
-        console.error("AI Error:", error.message);
+        onLog(`AI Error: ${error.message}`);
         if (error.message.includes("404")) {
-            console.log("Tip: Check if your GEMINI_API_KEY is valid and the model name 'gemini-1.5-flash' is supported.");
+            onLog("Tip: Check if your GEMINI_API_KEY is valid and the model name 'gemini-1.5-flash' is supported.");
         }
+        return false;
     }
 }
 
-const fileArg = process.argv[2];
-if (!fileArg) {
-    console.log("Usage: node scripts/smart-import.js <path-to-docx-or-pdf>");
-} else {
-    processPaper(fileArg);
+if (process.argv[1] === __filename) {
+    const fileArg = process.argv[2];
+    if (!fileArg) {
+        console.log("Usage: node scripts/smart-import.js <path-to-docx-or-pdf>");
+    } else {
+        processPaper(fileArg);
+    }
 }
