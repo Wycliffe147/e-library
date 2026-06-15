@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local Paper Import - e-library</title>
-    <link rel="stylesheet" href="/styles/main.css"> <!-- Assuming there's a main.css -->
     <style>
         :root {
             --bg: #f4f7f6;
@@ -37,7 +36,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .card {
             background: var(--card-bg);
@@ -47,20 +46,44 @@
             border: 1px solid var(--border);
             margin-bottom: 20px;
         }
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text);
+        }
+        .breadcrumb {
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            opacity: 0.8;
+            word-break: break-all;
+        }
         .file-list {
             list-style: none;
             padding: 0;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
         }
         .file-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 12px;
             border-bottom: 1px solid var(--border);
             cursor: pointer;
         }
+        .file-item:last-child { border-bottom: none; }
         .file-item:hover { background: rgba(0,0,0,0.05); }
         .file-item.selected { background: var(--primary); color: white; }
+        .file-item .icon { margin-right: 12px; font-size: 1.2em; }
         
         .btn {
             padding: 10px 20px;
@@ -70,6 +93,7 @@
             font-weight: bold;
             background: var(--primary);
             color: white;
+            transition: opacity 0.2s;
         }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
         
@@ -89,7 +113,6 @@
             border-left: 5px solid var(--primary);
             margin-top: 15px;
         }
-        .question-card h4 { margin-top: 0; }
         .options { margin-left: 20px; }
         .option { margin: 5px 0; }
         .correct { color: var(--primary); font-weight: bold; }
@@ -102,6 +125,7 @@
             background: var(--bg);
             padding: 10px;
             border-top: 1px solid var(--border);
+            z-index: 100;
         }
     </style>
 </head>
@@ -109,22 +133,30 @@
     <div class="container">
         <header>
             <h2>Local Paper Import</h2>
-            <a href="/" class="btn" style="background: #666; text-decoration: none;">Exit Admin</a>
+            <a href="/" class="btn" style="background: #666; text-decoration: none;">Exit</a>
         </header>
 
         <div class="card" id="step1">
-            <h3>Step 1: Select a file from your phone</h3>
-            <p style="font-size: 0.9em; opacity: 0.8;">Scanning Download and Documents folders...</p>
+            <h3>Select Paper</h3>
+            
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search for a file name...">
+                <button id="searchBtn" class="btn">Search</button>
+            </div>
+
+            <div class="breadcrumb" id="breadcrumb">/sdcard</div>
+            
             <ul id="fileList" class="file-list">
-                <li>Loading files...</li>
+                <li>Loading storage...</li>
             </ul>
+            
             <button id="processBtn" class="btn" disabled style="margin-top: 20px; width: 100%;">Process with Gemini AI</button>
         </div>
 
         <div id="log"></div>
 
         <div id="step2" style="display: none;">
-            <h3>Step 2: Review Questions</h3>
+            <h3>Review Questions</h3>
             <div id="questionCount" style="margin-bottom: 15px; font-weight: bold;"></div>
             <div id="questionsContainer"></div>
             
@@ -138,32 +170,84 @@
     <script>
         let selectedFile = null;
         let generatedQuestions = [];
+        let currentPath = '/sdcard';
 
-        // Load files on start
-        async function loadFiles() {
-            const res = await fetch('/api/local-files');
-            const files = await res.json();
-            const list = document.getElementById('fileList');
-            list.innerHTML = '';
+        async function browse(path) {
+            const res = await fetch(`/api/browse?path=${encodeURIComponent(path)}`);
+            const data = await res.json();
             
-            if (files.length === 0) {
-                list.innerHTML = '<li>No .pdf or .docx files found in Download/Documents.</li>';
+            if (data.error) {
+                alert(data.error);
                 return;
             }
 
-            files.forEach(f => {
+            currentPath = data.currentPath;
+            document.getElementById('breadcrumb').textContent = currentPath;
+            
+            const list = document.getElementById('fileList');
+            list.innerHTML = '';
+
+            // Back button
+            if (currentPath !== '/') {
                 const li = document.createElement('li');
                 li.className = 'file-item';
-                li.innerHTML = `<span>${f.name}</span> <small style="opacity:0.6">${f.location.replace('/storage/emulated/0', '')}</small>`;
+                li.innerHTML = `<span class="icon">📁</span> <strong>.. (Back)</strong>`;
+                li.onclick = () => browse(data.parentPath);
+                list.appendChild(li);
+            }
+
+            data.items.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'file-item';
+                const icon = item.type === 'folder' ? '📁' : '📄';
+                li.innerHTML = `<span class="icon">${icon}</span> <span>${item.name}</span>`;
+                
+                li.onclick = () => {
+                    if (item.type === 'folder') {
+                        browse(item.path);
+                    } else {
+                        document.querySelectorAll('.file-item').forEach(i => i.classList.remove('selected'));
+                        li.classList.add('selected');
+                        selectedFile = { path: item.path, name: item.name };
+                        document.getElementById('processBtn').disabled = false;
+                    }
+                };
+                list.appendChild(li);
+            });
+        }
+
+        async function search() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) return browse(currentPath);
+
+            const list = document.getElementById('fileList');
+            list.innerHTML = '<li>Searching...</li>';
+
+            const res = await fetch(`/api/search?q=${encodeURIComponent(query)}&base=${encodeURIComponent(currentPath)}`);
+            const data = await res.json();
+
+            list.innerHTML = '';
+            if (data.length === 0) {
+                list.innerHTML = '<li>No matches found.</li>';
+                return;
+            }
+
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'file-item';
+                li.innerHTML = `<span class="icon">🔍</span> <div>${item.name}<br><small style="opacity:0.6">${item.location}</small></div>`;
                 li.onclick = () => {
                     document.querySelectorAll('.file-item').forEach(i => i.classList.remove('selected'));
                     li.classList.add('selected');
-                    selectedFile = f;
+                    selectedFile = { path: item.path, name: item.name };
                     document.getElementById('processBtn').disabled = false;
                 };
                 list.appendChild(li);
             });
         }
+
+        document.getElementById('searchBtn').onclick = search;
+        document.getElementById('searchInput').onkeypress = (e) => { if(e.key === 'Enter') search(); };
 
         document.getElementById('processBtn').onclick = async () => {
             if (!selectedFile) return;
@@ -193,18 +277,22 @@
                     
                     lines.forEach(line => {
                         if (line.startsWith('data: ')) {
-                            const data = JSON.parse(line.substring(6));
-                            if (data.message) {
-                                logEl.innerHTML += data.message + '\n';
-                                logEl.scrollTop = logEl.scrollHeight;
-                            }
-                            if (data.result) {
-                                if (data.result.success) {
-                                    showReview(data.result.questions);
-                                } else {
-                                    alert('Error: ' + data.result.error);
+                            const raw = line.substring(6).trim();
+                            if(!raw) return;
+                            try {
+                                const data = JSON.parse(raw);
+                                if (data.message) {
+                                    logEl.innerHTML += data.message + '\n';
+                                    logEl.scrollTop = logEl.scrollHeight;
                                 }
-                            }
+                                if (data.result) {
+                                    if (data.result.success) {
+                                        showReview(data.result.questions);
+                                    } else {
+                                        alert('Error: ' + data.result.error);
+                                    }
+                                }
+                            } catch(e) {}
                         }
                     });
                 }
@@ -275,7 +363,7 @@
             }
         };
 
-        loadFiles();
+        browse('/sdcard');
     </script>
 </body>
 </html>

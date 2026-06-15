@@ -17,37 +17,77 @@ process.on('unhandledRejection', (reason, promise) => {
     console.error('CRITICAL: Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
-// Helper to list files in common Android locations
-function listLocalFiles() {
-    const locations = [
-        '/sdcard/Download',
-        '/sdcard/Documents',
-        '/storage/emulated/0/Download',
-        '/storage/emulated/0/Documents'
-    ];
+// Helper to list files and folders in a specific directory
+function browseDirectory(dirPath) {
+    try {
+        if (!fs.existsSync(dirPath)) return { error: "Directory not found" };
+        
+        const stats = fs.statSync(dirPath);
+        if (!stats.isDirectory()) return { error: "Not a directory" };
+
+        const items = fs.readdirSync(dirPath, { withFileTypes: true });
+        
+        const folders = items
+            .filter(item => item.isDirectory())
+            .map(item => ({ name: item.name, path: path.join(dirPath, item.name), type: 'folder' }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+
+        const files = items
+            .filter(item => !item.isDirectory() && item.name.match(/\.(pdf|docx|doc)$/i))
+            .map(item => ({ name: item.name, path: path.join(dirPath, item.name), type: 'file' }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+
+        return {
+            currentPath: dirPath,
+            parentPath: path.dirname(dirPath),
+            items: [...folders, ...files]
+        };
+    } catch (e) {
+        return { error: e.message };
+    }
+}
+
+// Helper for recursive search (limited depth for performance)
+function searchFiles(baseDir, query, maxDepth = 3) {
+    let results = [];
     
-    let allFiles = [];
-    locations.forEach(loc => {
+    function walk(dir, depth) {
+        if (depth > maxDepth) return;
         try {
-            if (fs.existsSync(loc)) {
-                const files = fs.readdirSync(loc)
-                    .filter(f => f.match(/\.(pdf|docx|doc)$/i))
-                    .map(f => ({ name: f, path: path.join(loc, f), location: loc }));
-                allFiles = [...allFiles, ...files];
+            const items = fs.readdirSync(dir, { withFileTypes: true });
+            for (const item of items) {
+                const fullPath = path.join(dir, item.name);
+                if (item.isDirectory()) {
+                    walk(fullPath, depth + 1);
+                } else if (item.name.toLowerCase().includes(query.toLowerCase()) && item.name.match(/\.(pdf|docx|doc)$/i)) {
+                    results.push({ name: item.name, path: fullPath, location: dir });
+                }
             }
         } catch (e) {}
-    });
-    return allFiles;
+    }
+
+    walk(baseDir, 0);
+    return results;
 }
 
 const server = http.createServer(async (req, res) => {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
+    const query = parsedUrl.query;
 
-    // API: List local files
-    if (pathname === '/api/local-files' && req.method === 'GET') {
+    // API: Browse Directory
+    if (pathname === '/api/browse' && req.method === 'GET') {
+        const dir = query.path || '/sdcard';
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify(listLocalFiles()));
+        return res.end(JSON.stringify(browseDirectory(dir)));
+    }
+
+    // API: Search Files
+    if (pathname === '/api/search' && req.method === 'GET') {
+        const q = query.q || '';
+        const base = query.base || '/sdcard';
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify(searchFiles(base, q)));
     }
 
     // API: AI Import (without saving)

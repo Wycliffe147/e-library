@@ -126,16 +126,28 @@ export async function processPaper(filePath, onLog = (msg) => console.log(msg), 
         try {
             onLog(`Trying model: ${modelName}...`);
             const model = genAI.getGenerativeModel({ model: modelName });
-            const aiResult = await model.generateContent(prompt);
+            
+            // Add a 60-second timeout to the AI request
+            const timeoutPromise = new Promise((_, reject) => 
+                setTimeout(() => reject(new Error("Timeout: AI took too long to respond")), 60000)
+            );
+
+            const aiResult = await Promise.race([
+                model.generateContent(prompt),
+                timeoutPromise
+            ]);
+
             const response = await aiResult.response;
             result = response.text().trim();
             usedModel = modelName;
             break; 
         } catch (error) {
             const errorMsg = error.message.toLowerCase();
-            // Expanded fallback triggers to include 503/Service Unavailable
-            if (errorMsg.includes("429") || errorMsg.includes("quota") || errorMsg.includes("limit") || errorMsg.includes("503") || errorMsg.includes("unavailable") || errorMsg.includes("overloaded")) {
-                onLog(`Model ${modelName} busy or limited. Falling back...`);
+            // Expanded fallback triggers to include timeouts
+            if (errorMsg.includes("429") || errorMsg.includes("quota") || errorMsg.includes("limit") || 
+                errorMsg.includes("503") || errorMsg.includes("unavailable") || errorMsg.includes("overloaded") ||
+                errorMsg.includes("timeout")) {
+                onLog(`Model ${modelName} ${errorMsg.includes("timeout") ? "timed out" : "busy"}. Falling back...`);
                 continue;
             }
             onLog(`AI Error with ${modelName}: ${error.message}`);
