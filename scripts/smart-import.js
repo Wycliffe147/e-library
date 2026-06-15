@@ -76,9 +76,12 @@ export async function processPaper(filePath, onLog = (msg) => console.log(msg)) 
         return false;
     }
 
-    onLog("Step 2: Sending to Gemini AI (this may take a moment)...");
+    onLog("Step 2: Sending to Gemini AI (rotating through models if quota hit)...");
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+    const models = ["gemini-3.5-flash", "gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
+    
+    let result = null;
+    let usedModel = "";
 
     const prompt = `
     Extract Multiple Choice Questions from this text into a JSON array.
@@ -86,17 +89,26 @@ export async function processPaper(filePath, onLog = (msg) => console.log(msg)) 
     FOR EACH QUESTION:
     1. Identify the question text (preserve <u> tags for underlined words).
     2. Extract exactly 4 options into an array.
-    3. Determine the correct answer and provide its INDEX (0 for the 1st option, 1 for the 2nd, 2 for the 3rd, or 3 for the 4th).
+    3. Determine the correct answer and provide its INDEX (0, 1, 2, or 3).
     4. Write a 1-sentence explanation of why that specific answer is correct.
     
     CRITICAL RULES:
-    - The "answer" field MUST be a number (0, 1, 2, or 3). Do NOT put text in the answer field.
-    - Topic should be "English Grammar" or similar.
+    - The "answer" field MUST be a number (0, 1, 2, or 3).
+    - You MUST categorize each question into one of these specific topics:
+      * Prepositional Structures
+      * Registers
+      * Verb Tenses
+      * Conditional Sentences
+      * Phrasal Verbs
+      * Parts of Speech (Nouns, Pronouns, Verbs, Adjectives, Adverbs, Prepositions, Conjunctions)
+      * Order of Adjectives
+      * Subordinate Clauses
+      * Phrases
     - Source must be: "${fileName}"
 
     JSON STRUCTURE:
     {
-      "topic": "...",
+      "topic": "Selected Topic from List Above",
       "question": "...",
       "options": ["A", "B", "C", "D"],
       "answer": 0,
@@ -108,16 +120,38 @@ export async function processPaper(filePath, onLog = (msg) => console.log(msg)) 
     ${rawText.substring(0, 10000)}
     `;
 
+    for (const modelName of models) {
+        try {
+            onLog(`Trying model: ${modelName}...`);
+            const model = genAI.getGenerativeModel({ model: modelName });
+            const aiResult = await model.generateContent(prompt);
+            const response = await aiResult.response;
+            result = response.text().trim();
+            usedModel = modelName;
+            break; // Success! Exit the loop
+        } catch (error) {
+            const errorMsg = error.message.toLowerCase();
+            if (errorMsg.includes("429") || errorMsg.includes("quota") || errorMsg.includes("limit exceeded")) {
+                onLog(`Quota hit for ${modelName}. Falling back...`);
+                continue;
+            }
+            onLog(`AI Error with ${modelName}: ${error.message}`);
+            return false;
+        }
+    }
+
+    if (!result) {
+        onLog("Error: All Gemini models reached their quota. Please try again tomorrow.");
+        return false;
+    }
+
     try {
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        let jsonText = response.text().trim();
-        
+        let jsonText = result;
         if (jsonText.includes("```json")) jsonText = jsonText.split("```json")[1].split("```")[0];
         else if (jsonText.includes("```")) jsonText = jsonText.split("```")[1].split("```")[0];
 
         const newQuestions = JSON.parse(jsonText.trim());
-        onLog(`Step 3: AI found ${newQuestions.length} questions.`);
+        onLog(`Step 3: AI (${usedModel}) found ${newQuestions.length} questions.`);
 
         onLog("Step 4: Attempting to save...");
         

@@ -1,20 +1,20 @@
 [
   {
-    "topic": "English Grammar",
-    "question": "Most white ladies are fond ________ going for a walk with their pets.",
+    "topic": "Prepositional Structures",
+    "question": "Most white ladies are fond________ \ngoing for a walk with their pets.",
     "options": [
       "for",
       "of",
       "on",
-      "off"
+      "of"
     ],
     "answer": 1,
-    "explanation": "The adjective 'fond' is conventionally followed by the preposition 'of' to express liking or affection.",
+    "explanation": "The correct idiomatic expression is 'fond of', meaning to have a liking or affection for something.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "I handed _______ my old comic books to my little cousin.",
+    "topic": "Phrasal Verbs",
+    "question": "I handed _______ my old comic books \n     to my little cousin.",
     "options": [
       "up",
       "on",
@@ -22,12 +22,12 @@
       "down"
     ],
     "answer": 3,
-    "explanation": "The phrasal verb 'hand down' is used here to mean passing possessions to a younger relative.",
+    "explanation": "The phrasal verb 'hand down' means to pass something on to a younger person or successor.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "I got all the questions wrong ________ the second one.",
+    "topic": "Prepositional Structures",
+    "question": "I got all the questions wrong ________ \n    the second one.",
     "options": [
       "besides",
       "beside",
@@ -35,12 +35,12 @@
       "among"
     ],
     "answer": 2,
-    "explanation": "The preposition 'except' is used to introduce the only statement or item that is excluded from the main statement.",
+    "explanation": "'Except' is the correct preposition to indicate exclusion, meaning 'not including' or 'apart from'.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "There are angry students all _______ the road.",
+    "topic": "Prepositional Structures",
+    "question": "There are angry students all _______ the \n    road.",
     "options": [
       "along",
       "across",
@@ -48,12 +48,12 @@
       "over"
     ],
     "answer": 3,
-    "explanation": "The prepositional phrase 'all over' means spread across or present throughout the entire physical area of the road.",
+    "explanation": "The phrase 'all over' indicates widespread distribution or presence throughout an area, fitting for angry students occupying a road.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "The moon does not shine _______ its own light.",
+    "topic": "Prepositional Structures",
+    "question": "The moon does not shine _______ its \n    own light.",
     "options": [
       "by",
       "from",
@@ -61,12 +61,12 @@
       "on"
     ],
     "answer": 0,
-    "explanation": "The preposition 'by' is used to indicate the source or agency of the light being produced.",
+    "explanation": "The correct preposition in the phrase 'by its own light' signifies the source or means of illumination.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "I am taking ________ my mum for dinner tonight.",
+    "topic": "Phrasal Verbs",
+    "question": "I am taking ________ my mum for \n    dinner tonight.",
     "options": [
       "off",
       "in",
@@ -74,12 +74,12 @@
       "out"
     ],
     "answer": 3,
-    "explanation": "The phrasal verb 'take out' means to invite someone to a social outing or restaurant and pay for them.",
+    "explanation": "The phrasal verb 'take out' means to invite someone to a restaurant or other form of entertainment, usually paying for them.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "The class representative was asked to ________ the books to the class.",
+    "topic": "Phrasal Verbs",
+    "question": "The class representative was asked to \n     ________ the books to the class.",
     "options": [
       "give over",
       "give out",
@@ -87,12 +87,12 @@
       "give in"
     ],
     "answer": 1,
-    "explanation": "The phrasal verb 'give out' means to distribute items to a group of people.",
+    "explanation": "The phrasal verb 'give out' means to distribute or hand out something to a group of people.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "I was completely _____ with Ayanda's story without knowing that it was a lie.",
+    "topic": "Phrasal Verbs",
+    "question": "I was completely _____ with Ayanda's \n    story without knowing that it was a lie.",
     "options": [
       "carried off",
       "carried over",
@@ -100,12 +100,12 @@
       "carried away"
     ],
     "answer": 3,
-    "explanation": "The idiomatic phrase 'carried away' means to be so filled with strong feelings or deception that one loses control or objective judgment.",
+    "explanation": "The phrasal verb 'carried away' means to become overly excited or emotionally involved to the point of losing control or judgment.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "They are ______ their coach for their success in the competition.",
+    "topic": "Prepositional Structures",
+    "question": "They are ______ their coach for their \n     success in the competition.",
     "options": [
       "indebted to",
       "indebted for",
@@ -113,12 +113,12 @@
       "indebted in"
     ],
     "answer": 0,
-    "explanation": "The adjective 'indebted' is followed by the preposition 'to' when indicating the person to whom gratitude is owed.",
+    "explanation": "The correct prepositional structure is 'indebted to someone for something', meaning obligated or grateful to a person.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "The man visited his wife's parents to try to ______ their differences.",
+    "topic": "Phrasal Verbs",
+    "question": "The man visited his wife's parents to \n     try to ______ their differences.",
     "options": [
       "make off",
       "make over",
@@ -126,12 +126,12 @@
       "make up"
     ],
     "answer": 3,
-    "explanation": "The phrasal verb 'make up' is used to mean reconciling or resolving differences and disagreements.",
+    "explanation": "The phrasal verb 'make up' means to reconcile or resolve an argument or disagreement.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "The riots _______ avoided if you had been careful in the first place.",
+    "topic": "Conditional Sentences",
+    "question": "The riots _______ avoided if you had \n       been careful in the first place.",
     "options": [
       "could be",
       "would be",
@@ -139,12 +139,12 @@
       "will have been"
     ],
     "answer": 2,
-    "explanation": "This sentence requires a third conditional structure, using 'could have been' in the main clause to describe a hypothetical past result.",
+    "explanation": "This is a Third Conditional sentence (unreal past), requiring 'could have been' in the main clause to match 'if you had been' in the conditional clause.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "If you ________ them now, they will come in large numbers.",
+    "topic": "Conditional Sentences",
+    "question": "If you ________ them now, they will \n      come in large numbers.",
     "options": [
       "called",
       "call",
@@ -152,12 +152,12 @@
       "may call"
     ],
     "answer": 1,
-    "explanation": "This first conditional sentence uses the simple present tense 'call' in the if-clause to describe a likely future action.",
+    "explanation": "This is a First Conditional sentence (real present/future), requiring the simple present 'call' in the if-clause to match 'will come' in the main clause.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "I would buy the shirt if I _______ what you wanted.",
+    "topic": "Conditional Sentences",
+    "question": "I would buy the shirt if I _______ what \n      you wanted.",
     "options": [
       "knew",
       "would know",
@@ -165,11 +165,11 @@
       "would have known"
     ],
     "answer": 0,
-    "explanation": "This second conditional sentence uses the simple past tense 'knew' in the conditional clause to express an imaginary present or future scenario.",
+    "explanation": "This is a Second Conditional sentence (unreal present), requiring the simple past 'knew' in the if-clause to match 'would buy' in the main clause.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
+    "topic": "Verb Tenses",
     "question": "Fifty thousand kwacha _______ to be spent in a day.",
     "options": [
       "were a lot of money",
@@ -178,12 +178,12 @@
       "have been a lot of money"
     ],
     "answer": 1,
-    "explanation": "Specific sums of money, even if plural in form, are treated as a singular collective unit and require the singular verb 'was'.",
+    "explanation": "When referring to a sum of money as a single unit, the verb should be singular, making 'was' the correct choice.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "Some textbooks are made _______ because of the adoption of the new curriculum.",
+    "topic": "Registers",
+    "question": "Some textbooks are made _______ \n      because of the adoption of the new  \n      curriculum.",
     "options": [
       "obsolete",
       "odd",
@@ -191,12 +191,12 @@
       "stale"
     ],
     "answer": 0,
-    "explanation": "The word 'obsolete' means no longer produced or used, which correctly describes books replaced by a new curriculum.",
+    "explanation": "'Obsolete' is the most appropriate word to describe something that is no longer useful or in production due to being out of date.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "He committed ______ by killing his own parents.",
+    "topic": "Registers",
+    "question": "He committed ______ by killing his \n      own parents.",
     "options": [
       "suicide",
       "homicide",
@@ -204,11 +204,11 @@
       "fratricide"
     ],
     "answer": 2,
-    "explanation": "'Parricide' is the specific term used for the act of killing one's parents or close relatives.",
+    "explanation": "'Parricide' specifically refers to the act of killing one's own parents.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
+    "topic": "Registers",
     "question": "The audience ________ her for the good performance.",
     "options": [
       "booed",
@@ -217,11 +217,11 @@
       "applauded"
     ],
     "answer": 3,
-    "explanation": "'Applauded' is the most suitable verb to describe an audience expressing approval of a good performance by clapping.",
+    "explanation": "'Applauded' means to show approval by clapping, which is the most common and appropriate reaction to a good performance.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
+    "topic": "Registers",
     "question": "The librarian fined Meria because the book she borrowed was ________.",
     "options": [
       "late",
@@ -230,38 +230,38 @@
       "overdue"
     ],
     "answer": 3,
-    "explanation": "'Overdue' is the standard administrative term for library books that are kept past their return date.",
+    "explanation": "'Overdue' is the specific term used for something (like a book or payment) that has passed its due date.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "The flooding has destroyed <u>their</u> storage facility.",
+    "topic": "Parts of Speech",
+    "question": "The flooding has destroyed their storage <u>facility</u>.",
     "options": [
       "noun",
       "adjective",
       "adverb",
       "pronoun"
     ],
-    "answer": 3,
-    "explanation": "The word 'their' is classified as a possessive pronoun used to show ownership of the storage facility.",
+    "answer": 0,
+    "explanation": "'Facility' is a noun, referring to a place, building, or service provided for a particular purpose.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "The lion left its kill to the <u>scavenging</u> hyenas.",
+    "topic": "Parts of Speech",
+    "question": "The lion left <u>its</u> kill to the scavenging \n       hyenas.",
     "options": [
       "verb",
       "pronoun",
       "noun",
       "adjective"
     ],
-    "answer": 3,
-    "explanation": "The word 'scavenging' is a present participle acting as an adjective that modifies the noun 'hyenas'.",
+    "answer": 1,
+    "explanation": "'Its' is a possessive pronoun (or possessive determiner) showing ownership and referring to 'the lion'.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "The visitors helped <u>themselves</u> to the snacks after the prayers.",
+    "topic": "Parts of Speech",
+    "question": "The visitors helped <u>themselves</u> to the \n       snacks after the prayers.",
     "options": [
       "adjective",
       "noun",
@@ -269,24 +269,24 @@
       "adverb"
     ],
     "answer": 2,
-    "explanation": "'Themselves' is a reflexive pronoun functioning as the direct object of the verb 'helped'.",
+    "explanation": "'Themselves' is a reflexive pronoun, referring back to the subject 'the visitors'.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "She made me whisper to my desk mate <u>while</u> the class was in progress.",
+    "topic": "Parts of Speech",
+    "question": "She made me <u>whisper</u> to my desk mate \n      while the class was in progress.",
     "options": [
       "adverb",
       "verb",
       "adjective",
       "conjunction"
     ],
-    "answer": 3,
-    "explanation": "The word 'while' is a subordinating conjunction that links the subordinate clause of time to the main clause.",
+    "answer": 1,
+    "explanation": "'Whisper' acts as a bare infinitive verb, indicating the action that was performed.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
+    "topic": "Order of Adjectives",
     "question": "The _________ is in the bag.",
     "options": [
       "expensive white linen",
@@ -295,11 +295,11 @@
       "white expensive linen"
     ],
     "answer": 0,
-    "explanation": "Adjectives must follow the order of opinion ('expensive'), color ('white'), and material ('linen').",
+    "explanation": "The correct order of adjectives is Opinion (expensive) + Color (white) + Material (linen).",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
+    "topic": "Order of Adjectives",
     "question": "This popular film features ___ animals.",
     "options": [
       "scary land enormous",
@@ -308,12 +308,12 @@
       "enormous scary land"
     ],
     "answer": 1,
-    "explanation": "The correct order of adjectives is opinion ('scary') followed by size ('enormous') and classifier/type ('land').",
+    "explanation": "The correct order of adjectives is Opinion (scary) + Size (enormous) + Type/Qualifier (land).",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "I bought some _______ pots as a gift to my grandmother.",
+    "topic": "Order of Adjectives",
+    "question": "I bought some _______ pots as a gift to \n      my grandmother.",
     "options": [
       "earthen twenty flower",
       "flower earthen twenty",
@@ -321,11 +321,11 @@
       "twenty earthen flower"
     ],
     "answer": 3,
-    "explanation": "The correct adjective ordering requires the number ('twenty') first, material ('earthen') second, and the purpose/noun adjunct ('flower') last.",
+    "explanation": "The correct order of adjectives is Quantity (twenty) + Material (earthen) + Purpose (flower).",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
+    "topic": "Order of Adjectives",
     "question": "The school has bought _____ resources.",
     "options": [
       "local helpful multi-coloured teaching",
@@ -334,11 +334,11 @@
       "helpful multi-coloured local teaching"
     ],
     "answer": 3,
-    "explanation": "Adjectives must be ordered by opinion ('helpful'), color ('multi-coloured'), origin/location ('local'), and purpose ('teaching').",
+    "explanation": "The correct order of adjectives is Opinion (helpful) + Color (multi-coloured) + Origin (local) + Purpose (teaching).",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
+    "topic": "Subordinate Clauses",
     "question": "He labours <u>that he may get basic needs for his family</u>.",
     "options": [
       "noun clause, object of 'labours'",
@@ -347,12 +347,12 @@
       "adverb phrase, modifying 'labours'"
     ],
     "answer": 2,
-    "explanation": "The underlined section contains a subject and a verb and functions as an adverb clause of purpose modifying the verb 'labours'.",
+    "explanation": "The underlined part is a clause that explains the purpose or reason why 'he labours', thus functioning as an adverb clause modifying the verb 'labours'.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
-    "question": "The song <u>that is playing in the background</u> is new.",
+    "topic": "Subordinate Clauses",
+    "question": "The song <u>that is playing in the \nbackground</u> is new",
     "options": [
       "adjective clause, qualifying 'song'",
       "adjective phrase, qualifying 'is'",
@@ -360,11 +360,11 @@
       "noun clause, in apposition to 'song'"
     ],
     "answer": 0,
-    "explanation": "The relative clause 'that is playing in the background' functions as an adjective clause qualifying the noun 'song'.",
+    "explanation": "The underlined part is a clause that describes or gives more information about the noun 'song', functioning as an adjective clause.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
+    "topic": "Phrases",
     "question": "The judge was a man <u>with a kind heart</u>.",
     "options": [
       "noun clause, object of 'was'",
@@ -373,11 +373,11 @@
       "adverb phrase, modifying 'was'"
     ],
     "answer": 2,
-    "explanation": "The prepositional phrase 'with a kind heart' acts as an adjective phrase that describes and qualifies the noun 'man'.",
+    "explanation": "The underlined part is a phrase (lacking a subject and a finite verb) that describes the noun 'man', thus functioning as an adjective phrase.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   },
   {
-    "topic": "English Grammar",
+    "topic": "Subordinate Clauses",
     "question": "<u>That he arrived late</u> is unfortunate.",
     "options": [
       "noun phrase, subject of 'is'",
@@ -386,7 +386,7 @@
       "adverb phrase, modifying 'is'"
     ],
     "answer": 1,
-    "explanation": "The underlined segment contains a subject and a verb, starts with the conjunction 'that', and functions as the noun clause subject of the verb 'is'.",
+    "explanation": "The underlined part is a clause that functions as the subject of the main verb 'is', making it a noun clause.",
     "source": "2025 SEED ENGLISH PAPER I MOCK.doc"
   }
 ]
