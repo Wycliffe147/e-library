@@ -11425,19 +11425,9 @@
     "size": 35172893
   },
   {
-    "name": "2026 MSCE CWED MOCK .zip",
-    "path": "Zips/2026 MSCE CWED MOCK .zip",
-    "size": 7779066
-  },
-  {
     "name": "2026 MSCE Maranatha academy mock 2 schools Library.zip",
     "path": "Zips/2026 MSCE Maranatha academy mock 2 schools Library.zip",
     "size": 64970435
-  },
-  {
-    "name": "2026 NAMITETE CLUSTER JCE MOCK.zip",
-    "path": "Zips/2026 NAMITETE CLUSTER JCE MOCK.zip",
-    "size": 25160613
   },
   {
     "name": "2026 BSS JCE CLUSTER MOCK.zip",
@@ -11475,8 +11465,13 @@
     "size": 31777020
   },
   {
+    "name": "2026 MSCE CWED MOCK .zip",
+    "path": "Zips/CWED (Central West Education Division)/2026 MSCE CWED MOCK .zip",
+    "size": 7779066
+  },
+  {
     "name": "CWED MARKING KEYS.zip",
-    "path": "Zips/CWED MARKING KEYS.zip",
+    "path": "Zips/CWED (Central West Education Division)/CWED MARKING KEYS.zip",
     "size": 6265446
   },
   {
@@ -11628,6 +11623,11 @@
     "name": "NED JCE.zip",
     "path": "Zips/NED (Northern Education Division)/NED JCE.zip",
     "size": 11868689
+  },
+  {
+    "name": "2026 NAMITETE CLUSTER JCE MOCK.zip",
+    "path": "Zips/Namitete/2026 NAMITETE CLUSTER JCE MOCK.zip",
+    "size": 25160613
   },
   {
     "name": "2024 NSANJE MSCE MOCK .zip",
