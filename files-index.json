@@ -300,6 +300,11 @@
     "size": 4589653
   },
   {
+    "name": "KAYEMBE_AGRICULTURE_BOOK_4.pdf",
+    "path": "Books/Agriculture/KAYEMBE_AGRICULTURE_BOOK_4.pdf",
+    "size": 4589653
+  },
+  {
     "name": "MUSHROOM_PRODUCTION_(EVAGELIST)-1.pdf",
     "path": "Books/Agriculture/MUSHROOM_PRODUCTION_(EVAGELIST)-1.pdf",
     "size": 475521
@@ -925,6 +930,16 @@
     "size": 11118
   },
   {
+    "name": "form3_Bios_notes.pdf",
+    "path": "Books/Biology/form3_Bios_notes.pdf",
+    "size": 6019081
+  },
+  {
+    "name": "form_3_Biology_Book_3_Excel_and_Succeed.pdf",
+    "path": "Books/Biology/form_3_Biology_Book_3_Excel_and_Succeed.pdf",
+    "size": 5173118
+  },
+  {
     "name": "Business studies preamble Forms 3-4_1.doc",
     "path": "Books/Business Studies/Business studies preamble Forms 3-4_1.doc",
     "size": 220160
@@ -1350,9 +1365,19 @@
     "size": 451997
   },
   {
+    "name": "African_short_stories-2.pdf",
+    "path": "Books/English/African_short_stories-2.pdf",
+    "size": 512074
+  },
+  {
     "name": "Basic_English_Grammar_Book_2 (2)_1.pdf",
     "path": "Books/English/Basic_English_Grammar_Book_2 (2)_1.pdf",
     "size": 1999133
+  },
+  {
+    "name": "COMPLETE MSCE ENGLISH GRAMMAR By WONGANI CHIPETA(BAED).pdf",
+    "path": "Books/English/COMPLETE MSCE ENGLISH GRAMMAR By WONGANI CHIPETA(BAED).pdf",
+    "size": 1332599
   },
   {
     "name": "COMPLETE MSCE ENGLISSH GRAMMAR by WONGNI CHIPETA(BAED)_1.pdf",
@@ -1433,6 +1458,16 @@
     "name": "ENGLISH_EXAM_SYLLABUS_(1).pdf",
     "path": "Books/English/ENGLISH_EXAM_SYLLABUS_(1).pdf",
     "size": 3874658
+  },
+  {
+    "name": "ENGLISH_GRAMMAR_(1).pdf",
+    "path": "Books/English/ENGLISH_GRAMMAR_(1).pdf",
+    "size": 3274657
+  },
+  {
+    "name": "ENGLISH_LETTER_WRITING_BY_KD.pdf",
+    "path": "Books/English/ENGLISH_LETTER_WRITING_BY_KD.pdf",
+    "size": 151603
   },
   {
     "name": "ESSAYS_MACBETH.pdf",
@@ -1540,6 +1575,11 @@
     "size": 1381523
   },
   {
+    "name": "Literary_Devices.pdf",
+    "path": "Books/English/Literary_Devices.pdf",
+    "size": 139210
+  },
+  {
     "name": "MACBERTH WITH MODERN ENGLISH_1.pdf",
     "path": "Books/English/MACBERTH WITH MODERN ENGLISH_1.pdf",
     "size": 516114
@@ -1573,6 +1613,11 @@
     "name": "MACBETH__ESSAYS_2020.pdf",
     "path": "Books/English/MACBETH__ESSAYS_2020.pdf",
     "size": 271299
+  },
+  {
+    "name": "MSCE ENGLISH BOOK FOR ALL GENERATIONS.pdf",
+    "path": "Books/English/MSCE ENGLISH BOOK FOR ALL GENERATIONS.pdf",
+    "size": 2099100
   },
   {
     "name": "Mabeth-PDF.pdf",
@@ -1685,6 +1730,11 @@
     "size": 355808
   },
   {
+    "name": "_Your_English_Vocabulary_for_TOEFL_4th_ed-1.pdf",
+    "path": "Books/English/_Your_English_Vocabulary_for_TOEFL_4th_ed-1.pdf",
+    "size": 688810
+  },
+  {
     "name": "__10._MAJOR_THEMES_IN_THE_BOOK_MACBETH.pdf",
     "path": "Books/English/__10._MAJOR_THEMES_IN_THE_BOOK_MACBETH.pdf",
     "size": 266291
@@ -1710,9 +1760,19 @@
     "size": 9858966
   },
   {
+    "name": "macbeth_full_novel.pdf",
+    "path": "Books/English/macbeth_full_novel.pdf",
+    "size": 268734
+  },
+  {
     "name": "macbeth_kamwetsa_1.pdf",
     "path": "Books/English/macbeth_kamwetsa_1.pdf",
     "size": 604342
+  },
+  {
+    "name": "pearl_question_&_answers_(1).pdf",
+    "path": "Books/English/pearl_question_&_answers_(1).pdf",
+    "size": 185256
   },
   {
     "name": "pt_English_Mastering-Msce-English_Mkhwayi.pdf",
@@ -1723,6 +1783,11 @@
     "name": "the_pearl_by_john_steinbeck_entire_text_1.pdf",
     "path": "Books/English/the_pearl_by_john_steinbeck_entire_text_1.pdf",
     "size": 243156
+  },
+  {
+    "name": "themes_in_pearl-mode.pdf",
+    "path": "Books/English/themes_in_pearl-mode.pdf",
+    "size": 221963
   },
   {
     "name": "2026 CEED FRENCH II.pdf",
@@ -1835,6 +1900,11 @@
     "size": 4007684
   },
   {
+    "name": "HUMAN_GEOGRAPHY_NOTES-1.pdf",
+    "path": "Books/Geography/HUMAN_GEOGRAPHY_NOTES-1.pdf",
+    "size": 1289687
+  },
+  {
     "name": "HUMAN_GEOGRAPHY_NOTES.pdf",
     "path": "Books/Geography/HUMAN_GEOGRAPHY_NOTES.pdf",
     "size": 1286836
@@ -1855,6 +1925,11 @@
     "size": 8269498
   },
   {
+    "name": "Map_reading_&_intepretation_(1).pdf",
+    "path": "Books/Geography/Map_reading_&_intepretation_(1).pdf",
+    "size": 2106012
+  },
+  {
     "name": "complete geography note form 3.pdf",
     "path": "Books/Geography/complete geography note form 3.pdf",
     "size": 9805696
@@ -1868,6 +1943,11 @@
     "name": "geography_notes_form_2-1_1.pdf",
     "path": "Books/Geography/geography_notes_form_2-1_1.pdf",
     "size": 861663
+  },
+  {
+    "name": "map_reading_geography_pamphlet-1.pdf",
+    "path": "Books/Geography/map_reading_geography_pamphlet-1.pdf",
+    "size": 2438221
   },
   {
     "name": "physical_geography.pdf",
@@ -2580,6 +2660,21 @@
     "size": 60397
   },
   {
+    "name": "FORM 3 & 4 SOCIAL holly.pdf",
+    "path": "Books/Social Studies/FORM 3 & 4 SOCIAL holly.pdf",
+    "size": 1286746
+  },
+  {
+    "name": "FORM 3 SOCIAL.pdf",
+    "path": "Books/Social Studies/FORM 3 SOCIAL.pdf",
+    "size": 1807936
+  },
+  {
+    "name": "MSCE_SOCIAL_STUDIES_(3&4).pdf",
+    "path": "Books/Social Studies/MSCE_SOCIAL_STUDIES_(3&4).pdf",
+    "size": 1969672
+  },
+  {
     "name": "SOCIAL P1-2025-2026.docx",
     "path": "Books/Social Studies/SOCIAL P1-2025-2026.docx",
     "size": 59630
@@ -2588,6 +2683,16 @@
     "name": "Social JCE 2026 Chipeta.docx",
     "path": "Books/Social Studies/Social JCE 2026 Chipeta.docx",
     "size": 28609
+  },
+  {
+    "name": "Social_Complete_3_&_4_Notes-1.pdf",
+    "path": "Books/Social Studies/Social_Complete_3_&_4_Notes-1.pdf",
+    "size": 1232770
+  },
+  {
+    "name": "2026 MSCE ALL PRACTICALS .pdf",
+    "path": "Exams/2026 MSCE ALL PRACTICALS .pdf",
+    "size": 157750
   },
   {
     "name": "2014 MANEB Additional maths PI.pdf",
@@ -2683,6 +2788,11 @@
     "name": "Additional Mathematics 2022 Maneb.pdf",
     "path": "Exams/Additional Mathematics/Additional Mathematics 2022 Maneb.pdf",
     "size": 1407643
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Additional Mathematics/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "KARONGA DIOCESE paper 2 2019.docx",
@@ -2790,6 +2900,11 @@
     "size": 259034
   },
   {
+    "name": "2020_Agri_P1_Maneb.pdf",
+    "path": "Exams/Agriculture/2020_Agri_P1_Maneb.pdf",
+    "size": 1810056
+  },
+  {
     "name": "2021_JCE_Agri_Loyola_1.pdf",
     "path": "Exams/Agriculture/2021_JCE_Agri_Loyola_1.pdf",
     "size": 519912
@@ -2845,6 +2960,11 @@
     "size": 1013220
   },
   {
+    "name": "2023_Agriculture_P1_Maneb_Sample-Paper.pdf",
+    "path": "Exams/Agriculture/2023_Agriculture_P1_Maneb_Sample-Paper.pdf",
+    "size": 3638772
+  },
+  {
     "name": "2023_DESHA_agriculture_ll.pdf",
     "path": "Exams/Agriculture/2023_DESHA_agriculture_ll.pdf",
     "size": 713858
@@ -2880,6 +3000,11 @@
     "size": 598909
   },
   {
+    "name": "2024 MANEB Agriculture II.pdf",
+    "path": "Exams/Agriculture/2024 MANEB Agriculture II.pdf",
+    "size": 1134099
+  },
+  {
     "name": "2024 MSCE AGRI PII MWANZA CLUSTER MOCK_1.pdf",
     "path": "Exams/Agriculture/2024 MSCE AGRI PII MWANZA CLUSTER MOCK_1.pdf",
     "size": 498529
@@ -2898,6 +3023,11 @@
     "name": "2024_KUGWETSA_AGRICULTURE_PRACATICAL.pdf",
     "path": "Exams/Agriculture/2024_KUGWETSA_AGRICULTURE_PRACATICAL.pdf",
     "size": 942367
+  },
+  {
+    "name": "2024_MANEB_Agriculture_I (1).pdf",
+    "path": "Exams/Agriculture/2024_MANEB_Agriculture_I (1).pdf",
+    "size": 1909419
   },
   {
     "name": "2024_MANEB_Agriculture_I.pdf",
@@ -2963,6 +3093,11 @@
     "name": "2025 agriculture paper I mock.pdf",
     "path": "Exams/Agriculture/2025 agriculture paper I mock.pdf",
     "size": 182026
+  },
+  {
+    "name": "2025_Agriculture_MANEB_(1).pdf",
+    "path": "Exams/Agriculture/2025_Agriculture_MANEB_(1).pdf",
+    "size": 2907209
   },
   {
     "name": "2025_MSCE_AGRI_PP_I.pdf",
@@ -3073,6 +3208,16 @@
     "name": "AGRICULTURE - 2026 BSS JCE CLUSTER MOCK.pdf",
     "path": "Exams/Agriculture/AGRICULTURE - 2026 BSS JCE CLUSTER MOCK.pdf",
     "size": 1068074
+  },
+  {
+    "name": "AGRICULTURE - PAPER I.pdf",
+    "path": "Exams/Agriculture/AGRICULTURE - PAPER I.pdf",
+    "size": 501042
+  },
+  {
+    "name": "AGRICULTURE - PAPER II.pdf",
+    "path": "Exams/Agriculture/AGRICULTURE - PAPER II.pdf",
+    "size": 598909
   },
   {
     "name": "AGRICULTURE 2026 SHED P2 HI.docx",
@@ -3200,9 +3345,19 @@
     "size": 304537
   },
   {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Agriculture/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
+  },
+  {
     "name": "CHITSEKOFH - JCE AGRICULTURE QUESTIONS & ANSWERS_1.pdf",
     "path": "Exams/Agriculture/CHITSEKOFH - JCE AGRICULTURE QUESTIONS & ANSWERS_1.pdf",
     "size": 3029398
+  },
+  {
+    "name": "CONFIDENTIAL INSTRUCTION - AGRICULTURE II.docx",
+    "path": "Exams/Agriculture/CONFIDENTIAL INSTRUCTION - AGRICULTURE II.docx",
+    "size": 174072
   },
   {
     "name": "H",
@@ -3355,6 +3510,16 @@
     "size": 45043
   },
   {
+    "name": "AGRICULTURE MARKING KEY I.docx",
+    "path": "Exams/Agriculture/Marking Keys/AGRICULTURE MARKING KEY I.docx",
+    "size": 144944
+  },
+  {
+    "name": "AGRICULTURE MARKING KEY II.docx",
+    "path": "Exams/Agriculture/Marking Keys/AGRICULTURE MARKING KEY II.docx",
+    "size": 160339
+  },
+  {
     "name": "Agriculture I 2026 SEED PROVISIONAL MARKING KEY.doc",
     "path": "Exams/Agriculture/Marking Keys/Agriculture I 2026 SEED PROVISIONAL MARKING KEY.doc",
     "size": 71168
@@ -3465,6 +3630,11 @@
     "size": 143549
   },
   {
+    "name": "agriculture_PAPER_II-1.pdf",
+    "path": "Exams/Agriculture/agriculture_PAPER_II-1.pdf",
+    "size": 913305
+  },
+  {
     "name": "myma    Confidential Instruction  Term 2 Agric 2025.docx",
     "path": "Exams/Agriculture/myma    Confidential Instruction  Term 2 Agric 2025.docx",
     "size": 14648
@@ -3558,6 +3728,11 @@
     "name": "2026 SHED RELIGIOUS AND MORAL EDU.pdf",
     "path": "Exams/Bible Knowledge/2026 SHED RELIGIOUS AND MORAL EDU.pdf",
     "size": 285388
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Bible Knowledge/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "BIBLE KNOWLEDGE FOR MSCE.pdf",
@@ -4460,6 +4635,11 @@
     "size": 2344769
   },
   {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Biology/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
+  },
+  {
     "name": "BIO II.docx",
     "path": "Exams/Biology/BIO II.docx",
     "size": 45078
@@ -5100,6 +5280,11 @@
     "size": 1263164
   },
   {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Business Studies/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
+  },
+  {
     "name": "BUSINESS STUDIES JCE_1.pdf",
     "path": "Exams/Business Studies/BUSINESS STUDIES JCE_1.pdf",
     "size": 1002676
@@ -5533,6 +5718,11 @@
     "name": "2026_Chemistry_P1_Winners-Online.pdf",
     "path": "Exams/Chemistry/2026_Chemistry_P1_Winners-Online.pdf",
     "size": 757798
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Chemistry/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "CHEMISTRY - 2026 BSS JCE CLUSTER MOCK.pdf",
@@ -6165,6 +6355,16 @@
     "size": 2598582
   },
   {
+    "name": "2024_MANEB_Chichewa_III.pdf",
+    "path": "Exams/Chichewa/2024_MANEB_Chichewa_III.pdf",
+    "size": 2451860
+  },
+  {
+    "name": "2024_MANEB_Chichewa_PI.pdf",
+    "path": "Exams/Chichewa/2024_MANEB_Chichewa_PI.pdf",
+    "size": 2780536
+  },
+  {
     "name": "2025 SEED CHICHEWA PAPER I MOCK.doc",
     "path": "Exams/Chichewa/2025 SEED CHICHEWA PAPER I MOCK.doc",
     "size": 66048
@@ -6283,6 +6483,11 @@
     "name": "2026 msce chichewa mock.docx",
     "path": "Exams/Chichewa/2026 msce chichewa mock.docx",
     "size": 50561
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Chichewa/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "CHICH MSCE PAPERS .pdf",
@@ -6710,6 +6915,11 @@
     "size": 24222
   },
   {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Clothing & Textiles/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
+  },
+  {
     "name": "SHED CLOTHING AND TEXTILES P1 MARKING KEY.docx",
     "path": "Exams/Clothing & Textiles/Marking Keys/SHED CLOTHING AND TEXTILES P1 MARKING KEY.docx",
     "size": 115942
@@ -6743,6 +6953,11 @@
     "name": "2026 Loyola Jesuit Mock Computer Studies paper II.docx",
     "path": "Exams/Computer Studies/2026 Loyola Jesuit Mock Computer Studies paper II.docx",
     "size": 28473
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Computer Studies/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "2026 Loyola Jesuit Mock Computer Studies Paper II Marking key.docx",
@@ -6883,6 +7098,11 @@
     "name": "2026 SHED MOCK COMPUTER STUDIES PAPER II CONFIDENTIAL INSTRUCTIONS.docx",
     "path": "Exams/Computer studies/2026 SHED MOCK COMPUTER STUDIES PAPER II CONFIDENTIAL INSTRUCTIONS.docx",
     "size": 48991
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Computer studies/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "COMPUTER PI QUESTIONS PAPER.pdf",
@@ -7028,6 +7248,11 @@
     "name": "2024 MSCE English Paper II Mwanza CLUSTER MOCK_1.pdf",
     "path": "Exams/English/2024 MSCE English Paper II Mwanza CLUSTER MOCK_1.pdf",
     "size": 436849
+  },
+  {
+    "name": "2024_MANEB_English_III (1).pdf",
+    "path": "Exams/English/2024_MANEB_English_III (1).pdf",
+    "size": 2412029
   },
   {
     "name": "2024_MANEB_English_III_(1)_(1).pdf",
@@ -7263,6 +7488,11 @@
     "name": "2026_ENGLISH_PAPER_THREE.pdf",
     "path": "Exams/English/2026_ENGLISH_PAPER_THREE.pdf",
     "size": 229065
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/English/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "COMPILATION OF ESSAY QUESTIONS IN MACBETH_1.pdf",
@@ -7895,6 +8125,11 @@
     "size": 315538
   },
   {
+    "name": "papers_MSCE_ENGLISH_PIII.pdf",
+    "path": "Exams/English/papers_MSCE_ENGLISH_PIII.pdf",
+    "size": 261782
+  },
+  {
     "name": "2026 LOYOLA MSCE MOCK FRENCH PI (AutoRecovered) (1).docx",
     "path": "Exams/French/2026 LOYOLA MSCE MOCK FRENCH PI (AutoRecovered) (1).docx",
     "size": 527637
@@ -7903,6 +8138,11 @@
     "name": "2026 LOYOLA MSCE MOCK FRENCH PI (AutoRecovered).docx",
     "path": "Exams/French/2026 LOYOLA MSCE MOCK FRENCH PI (AutoRecovered).docx",
     "size": 527637
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/French/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "2026 CEED FRENCH I PROVISIONAL MARKING KEY.pdf",
@@ -7938,6 +8178,11 @@
     "name": "2024 GEOGRAPHY JCE_MANEB_1.pdf",
     "path": "Exams/Geography/2024 GEOGRAPHY JCE_MANEB_1.pdf",
     "size": 4595643
+  },
+  {
+    "name": "2024 MANEB Geography I.pdf",
+    "path": "Exams/Geography/2024 MANEB Geography I.pdf",
+    "size": 2299100
   },
   {
     "name": "2024 MSCE GEOG MSCE PAPER I mwanza cluster mock_1.pdf",
@@ -8065,6 +8310,11 @@
     "size": 3090337
   },
   {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Geography/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
+  },
+  {
     "name": "GEO MSCE PAPER.pdf",
     "path": "Exams/Geography/GEO MSCE PAPER.pdf",
     "size": 23415018
@@ -8078,6 +8328,16 @@
     "name": "GEOGRAPHY - 2026 BSS JCE CLUSTER MOCK.pdf",
     "path": "Exams/Geography/GEOGRAPHY - 2026 BSS JCE CLUSTER MOCK.pdf",
     "size": 693313
+  },
+  {
+    "name": "GEOGRAPHY - PAPER I.pdf",
+    "path": "Exams/Geography/GEOGRAPHY - PAPER I.pdf",
+    "size": 621709
+  },
+  {
+    "name": "GEOGRAPHY - PAPER II.pdf",
+    "path": "Exams/Geography/GEOGRAPHY - PAPER II.pdf",
+    "size": 700550
   },
   {
     "name": "GEOGRAPHY 3.pdf",
@@ -8205,6 +8465,11 @@
     "size": 416939
   },
   {
+    "name": "Loyola GEOGRAPHY 3 assessment.pdf",
+    "path": "Exams/Geography/Loyola GEOGRAPHY 3 assessment.pdf",
+    "size": 975743
+  },
+  {
     "name": "MSCE 2026  HUMAN GEOG PAPER II (1).docx",
     "path": "Exams/Geography/MSCE 2026  HUMAN GEOG PAPER II (1).docx",
     "size": 504528
@@ -8288,6 +8553,16 @@
     "name": "GEOGRAPHY II MARKING KEY.docx",
     "path": "Exams/Geography/Marking Keys/GEOGRAPHY II MARKING KEY.docx",
     "size": 541384
+  },
+  {
+    "name": "GEOGRAPHY MARKING KEY - PAPER I.docx",
+    "path": "Exams/Geography/Marking Keys/GEOGRAPHY MARKING KEY - PAPER I.docx",
+    "size": 299802
+  },
+  {
+    "name": "GEOGRAPHY MARKING KEY - PAPER II.docx",
+    "path": "Exams/Geography/Marking Keys/GEOGRAPHY MARKING KEY - PAPER II.docx",
+    "size": 210929
   },
   {
     "name": "Geo2-Editted-marking key.pdf",
@@ -8393,6 +8668,11 @@
     "name": "SHED_MOCK_GEOGRAPHY_2026 oral locomotor.docx",
     "path": "Exams/Geography/SHED_MOCK_GEOGRAPHY_2026 oral locomotor.docx",
     "size": 893756
+  },
+  {
+    "name": "_papers_MSCE_GEOGRAPHY_PI-1.pdf",
+    "path": "Exams/Geography/_papers_MSCE_GEOGRAPHY_PI-1.pdf",
+    "size": 878598
   },
   {
     "name": "complete jce geography_1.pdf",
@@ -8548,6 +8828,11 @@
     "name": "2026 SHED MSCE HIST MOCK PAPER I.pdf",
     "path": "Exams/History/2026 SHED MSCE HIST MOCK PAPER I.pdf",
     "size": 285907
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/History/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "FORM 3 HISTORY PAPER 1.docx",
@@ -8875,6 +9160,11 @@
     "size": 528408
   },
   {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Home Economics/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
+  },
+  {
     "name": "CONFIDENTIAL Practical (2).docx",
     "path": "Exams/Home Economics/CONFIDENTIAL Practical (2).docx",
     "size": 15490
@@ -9018,6 +9308,11 @@
     "name": "ARTS AND LIFE SKILLS 2025_1.pdf",
     "path": "Exams/Life Skills/ARTS AND LIFE SKILLS 2025_1.pdf",
     "size": 4614200
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Life Skills/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "JCE SOCIAL AND LIFE SKILLS MOCK PAPER_1.pdf",
@@ -9380,6 +9675,11 @@
     "size": 834107
   },
   {
+    "name": "2024_MANEB_Mathematics_I.pdf",
+    "path": "Exams/Mathematics/2024_MANEB_Mathematics_I.pdf",
+    "size": 1934577
+  },
+  {
     "name": "2024_MSCE_Maths_(II)_1.pdf",
     "path": "Exams/Mathematics/2024_MSCE_Maths_(II)_1.pdf",
     "size": 6425834
@@ -9505,6 +9805,11 @@
     "size": 1583314
   },
   {
+    "name": "2025_maneb_maths_p_2.pdf",
+    "path": "Exams/Mathematics/2025_maneb_maths_p_2.pdf",
+    "size": 3227048
+  },
+  {
     "name": "2026 BUMBA ZONE MOCK - MATHEMATICS.pdf",
     "path": "Exams/Mathematics/2026 BUMBA ZONE MOCK - MATHEMATICS.pdf",
     "size": 1095046
@@ -9543,6 +9848,16 @@
     "name": "2026 CEED SCIENCE MATERIALS.pdf",
     "path": "Exams/Mathematics/2026 CEED SCIENCE MATERIALS.pdf",
     "size": 424323
+  },
+  {
+    "name": "2026 LL CITY ADD MATHS PI MOCK.pdf",
+    "path": "Exams/Mathematics/2026 LL CITY ADD MATHS PI MOCK.pdf",
+    "size": 1249965
+  },
+  {
+    "name": "2026 LL CITY ADD MATHS PII MOCK.pdf",
+    "path": "Exams/Mathematics/2026 LL CITY ADD MATHS PII MOCK.pdf",
+    "size": 1253219
   },
   {
     "name": "2026 MSCE Mara Maths P2 mock 2.pdf",
@@ -9613,6 +9928,11 @@
     "name": "ADDITIONAL_MATHS_PAPER_1 2025_1.pdf",
     "path": "Exams/Mathematics/ADDITIONAL_MATHS_PAPER_1 2025_1.pdf",
     "size": 531353
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Mathematics/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "Ans_MSCE_MATHⅡ_14Coordinate_geometry_1.pdf",
@@ -10240,6 +10560,11 @@
     "size": 3059193
   },
   {
+    "name": "1998 MANEB Physical Science MSCE.pdf",
+    "path": "Exams/Physics/1998 MANEB Physical Science MSCE.pdf",
+    "size": 657258
+  },
+  {
     "name": "2019-2020 MTENDERE MSCE PHYSICS MOCK.pdf",
     "path": "Exams/Physics/2019-2020 MTENDERE MSCE PHYSICS MOCK.pdf",
     "size": 180079
@@ -10538,6 +10863,11 @@
     "name": "2026_Physics_P2_SHED.pdf",
     "path": "Exams/Physics/2026_Physics_P2_SHED.pdf",
     "size": 844436
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Physics/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "JCE PHYSICS  1 & 2.pdf",
@@ -10940,6 +11270,11 @@
     "size": 1012761
   },
   {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Religious & Moral Education/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
+  },
+  {
     "name": "2026 SHED RME MARKING KEY.docx",
     "path": "Exams/Religious & Moral Education/Marking Keys/2026 SHED RME MARKING KEY.docx",
     "size": 47090
@@ -11028,6 +11363,11 @@
     "name": "2026 SHED SOCIAL LIFE QUESTION PAPER II.pdf",
     "path": "Exams/Social Studies/2026 SHED SOCIAL LIFE QUESTION PAPER II.pdf",
     "size": 202961
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Social Studies/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "2026 CEED SOCIAL AND LIFE SKILLS I PROVISIONAL MARKING KEY.pdf",
@@ -11160,6 +11500,26 @@
     "size": 33949
   },
   {
+    "name": "SOCIAL AND LIFE SKILLS - MARKING KEY I.docx",
+    "path": "Exams/Social Studies/SOCIAL AND LIFE SKILLS - MARKING KEY I.docx",
+    "size": 135720
+  },
+  {
+    "name": "SOCIAL AND LIFE SKILLS - PAPER I.pdf",
+    "path": "Exams/Social Studies/SOCIAL AND LIFE SKILLS - PAPER I.pdf",
+    "size": 486169
+  },
+  {
+    "name": "SOCIAL AND LIFE SKILLS - PAPER II.pdf",
+    "path": "Exams/Social Studies/SOCIAL AND LIFE SKILLS - PAPER II.pdf",
+    "size": 562074
+  },
+  {
+    "name": "SOCIAL AND LIFE SKILLS MARKING KEY II.docx",
+    "path": "Exams/Social Studies/SOCIAL AND LIFE SKILLS MARKING KEY II.docx",
+    "size": 141530
+  },
+  {
     "name": "SOCIAL AND LIFE SKILLS PAPER 1.docx",
     "path": "Exams/Social Studies/SOCIAL AND LIFE SKILLS PAPER 1.docx",
     "size": 112937
@@ -11215,6 +11575,11 @@
     "size": 178694
   },
   {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Technical Drawing/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
+  },
+  {
     "name": "2026 SHED TD PII-MARKING KEY.docx",
     "path": "Exams/Technical Drawing/Marking Keys/2026 SHED TD PII-MARKING KEY.docx",
     "size": 552716
@@ -11223,6 +11588,11 @@
     "name": "2026 SHED-TD PAPER  I - MARKING KEY.docx",
     "path": "Exams/Technical Drawing/Marking Keys/2026 SHED-TD PAPER  I - MARKING KEY.docx",
     "size": 1711884
+  },
+  {
+    "name": "All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "path": "Exams/Woodwork/All Subjects MANEB MSCE PAST PAST PAPERS FROM 2020 TO 2023 MSCE EXCEL ACADEMY.pdf",
+    "size": 23560868
   },
   {
     "name": "WOODWORK 1 MARKING KEY.docx",
@@ -11295,6 +11665,11 @@
     "size": 436840
   },
   {
+    "name": "BIOLOGY_PRACTICALS.pdf",
+    "path": "Q&A/Biology/BIOLOGY_PRACTICALS.pdf",
+    "size": 1469989
+  },
+  {
     "name": "BIOS Q&A (EVANGELIST)_1.pdf",
     "path": "Q&A/Biology/BIOS Q&A (EVANGELIST)_1.pdf",
     "size": 538493
@@ -11310,9 +11685,19 @@
     "size": 597176
   },
   {
+    "name": "Bio_Essay_Q_&_Answers(0).pdf",
+    "path": "Q&A/Biology/Bio_Essay_Q_&_Answers(0).pdf",
+    "size": 487736
+  },
+  {
     "name": "Bio_Essay_Q_&_Answers-1_012440.pdf",
     "path": "Q&A/Biology/Bio_Essay_Q_&_Answers-1_012440.pdf",
     "size": 487736
+  },
+  {
+    "name": "Bio_FOOD_TESTS.pdf",
+    "path": "Q&A/Biology/Bio_FOOD_TESTS.pdf",
+    "size": 145133
   },
   {
     "name": "2025 kugwetsa chemistry practical sample-1_1.pdf",
@@ -11395,6 +11780,16 @@
     "size": 8194227
   },
   {
+    "name": "form_3_and_4_MATHS_BY_SHINT_3&4.pdf",
+    "path": "Q&A/Mathematics/form_3_and_4_MATHS_BY_SHINT_3&4.pdf",
+    "size": 2096442
+  },
+  {
+    "name": "form_4MATHEMATIC_QUESTIONS.pdf",
+    "path": "Q&A/Mathematics/form_4MATHEMATIC_QUESTIONS.pdf",
+    "size": 858940
+  },
+  {
     "name": "ANSWERS TO PEOPLE'S OBJECTIONS.pptx",
     "path": "Q&A/Other/ANSWERS TO PEOPLE'S OBJECTIONS.pptx",
     "size": 1795494
@@ -11433,6 +11828,11 @@
     "name": "2026 BSS JCE CLUSTER MOCK.zip",
     "path": "Zips/BSS (Blantyre Secondary School)/2026 BSS JCE CLUSTER MOCK.zip",
     "size": 34708192
+  },
+  {
+    "name": "BLANTYRE SECONDARY 2026 MOCK.zip",
+    "path": "Zips/BSS (Blantyre Secondary School)/BLANTYRE SECONDARY 2026 MOCK.zip",
+    "size": 14964145
   },
   {
     "name": "BSS JCE CLUSTER MOCK_2026.zip",
@@ -11545,9 +11945,9 @@
     "size": 26134004
   },
   {
-    "name": "LOYOLA_MOCK_2026.zip",
-    "path": "Zips/Loyola/LOYOLA_MOCK_2026.zip",
-    "size": 26134004
+    "name": "2026 MARIST MSCE Mock.zip",
+    "path": "Zips/MASHU (Marist Schools Heads Union)/2026 MARIST MSCE Mock.zip",
+    "size": 9156446
   },
   {
     "name": "MANGOCHI DIOCESE MOCK ALL PAPERS.zip",
