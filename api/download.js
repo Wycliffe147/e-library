@@ -23,43 +23,61 @@ export default async function handler(req, res) {
         "pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
     };
 
-    const lfsExtensions = ["pdf", "zip", "doc", "docx", "xls", "xlsx", "ppt", "pptx"];
     const ext = file.split(".").pop().toLowerCase();
-
-    const host = lfsExtensions.includes(ext)
-        ? "https://media.githubusercontent.com/media"
-        : "https://raw.githubusercontent.com";
-
     const user = "Wycliffe147";
     const repo = "e-library";
-    const branch = "main";
 
     const cleanPath = file.split("/")
         .map(part => encodeURIComponent(part))
         .join("/");
 
-    const targetUrl = `${host}/${user}/${repo}/${branch}/public/Media/${cleanPath}`;
+    // Use GitHub API to get the download URL (works for private repos and LFS)
+    const apiUrl = `https://api.github.com/repos/${user}/${repo}/contents/public/Media/${cleanPath}`;
+    
+    const fetchOptions = {
+        headers: {
+            "Accept": "application/vnd.github.v3+json"
+        }
+    };
 
-    if (mode === 'download') {
-        return res.redirect(targetUrl);
+    if (process.env.GITHUB_TOKEN) {
+        fetchOptions.headers["Authorization"] = `token ${process.env.GITHUB_TOKEN}`;
     }
 
     try {
-        const response = await fetch(targetUrl);
-        if (!response.ok) {
-            return res.status(response.status).send(`Failed to fetch file from GitHub: ${response.statusText}`);
+        const apiResponse = await fetch(apiUrl, fetchOptions);
+        if (!apiResponse.ok) {
+            return res.status(apiResponse.status).send(`Failed to fetch file metadata from GitHub: ${apiResponse.statusText}`);
         }
 
-        // Use our mapper, fallback to the response's type, then to octet-stream
+        const metadata = await apiResponse.json();
+        const downloadUrl = metadata.download_url;
+
+        if (!downloadUrl) {
+            return res.status(404).send("Download URL not found for this file.");
+        }
+
+        // Fetch the actual content from the download URL
+        // No token needed here because download_url for private repos includes a temporary token
+        const response = await fetch(downloadUrl);
+        if (!response.ok) {
+            return res.status(response.status).send(`Failed to fetch file content: ${response.statusText}`);
+        }
+
         const contentType = mimeTypes[ext] || response.headers.get("content-type") || "application/octet-stream";
         
         res.setHeader("Content-Type", contentType);
-        res.setHeader("Content-Disposition", "inline");
+        
+        if (mode === 'download') {
+            res.setHeader("Content-Disposition", `attachment; filename="${encodeURIComponent(file.split('/').pop())}"`);
+        } else {
+            res.setHeader("Content-Disposition", "inline");
+        }
 
         const buffer = await response.arrayBuffer();
         res.send(Buffer.from(buffer));
     } catch (error) {
         console.error("Proxy error:", error);
-        res.status(500).send("Error fetching file for inline viewing");
+        res.status(500).send("Error fetching file");
     }
 }

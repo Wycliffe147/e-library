@@ -7,20 +7,40 @@ export default async function handler(req, res) {
         return res.status(400).send("File parameter required");
     }
 
-    // Git LFS logic (same as download.js)
-    const host = "https://media.githubusercontent.com/media";
     const user = "Wycliffe147";
     const repo = "e-library";
-    const branch = "main";
 
     const cleanPath = file.split("/")
         .map(part => encodeURIComponent(part))
         .join("/");
 
-    const targetUrl = `${host}/${user}/${repo}/${branch}/public/Media/${cleanPath}`;
+    // Use GitHub API to get the download URL (works for private repos and LFS)
+    const apiUrl = `https://api.github.com/repos/${user}/${repo}/contents/public/Media/${cleanPath}`;
+    
+    const fetchOptions = {
+        headers: {
+            "Accept": "application/vnd.github.v3+json"
+        }
+    };
+
+    if (process.env.GITHUB_TOKEN) {
+        fetchOptions.headers["Authorization"] = `token ${process.env.GITHUB_TOKEN}`;
+    }
 
     try {
-        const response = await fetch(targetUrl);
+        const apiResponse = await fetch(apiUrl, fetchOptions);
+        if (!apiResponse.ok) {
+            return res.status(apiResponse.status).send(`Failed to fetch ZIP metadata from GitHub: ${apiResponse.statusText}`);
+        }
+
+        const metadata = await apiResponse.json();
+        const downloadUrl = metadata.download_url;
+
+        if (!downloadUrl) {
+            return res.status(404).send("Download URL not found for this ZIP.");
+        }
+
+        const response = await fetch(downloadUrl);
         if (!response.ok) {
             return res.status(response.status).send(`Failed to fetch ZIP from GitHub: ${response.statusText}`);
         }
