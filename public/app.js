@@ -956,11 +956,11 @@ async function updateLastUpdated() {
     if (!el) return;
 
     try {
-        const response = await fetch("https://api.github.com/repos/Wycliffe147/e-library/commits/main");
+        const response = await fetch("/api/last-updated");
         const data = await response.json();
         
-        if (data && data.commit && data.commit.committer && data.commit.committer.date) {
-            const date = new Date(data.commit.committer.date);
+        if (data && data.date) {
+            const date = new Date(data.date);
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             el.textContent = date.toLocaleDateString('en-US', options);
         } else {
