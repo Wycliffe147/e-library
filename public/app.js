@@ -7,9 +7,9 @@ let currentPath = "";
 
 function initDarkMode() {
     const saved = localStorage.getItem("darkMode");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    if (saved === "true" || (saved === null && prefersDark)) {
+    // Only add dark class if explicitly saved as "true"
+    if (saved === "true") {
         document.documentElement.classList.add("dark");
     }
 
