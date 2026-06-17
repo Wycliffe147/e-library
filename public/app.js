@@ -84,8 +84,9 @@ window.addEventListener("popstate", e => {
     } else if (state.view === "about") {
         navigateTo(() => loadAbout(false), "About - e-library");
     } else if (state.view === "request") {
-        navigateTo(() => loadRequest(false), "Request - e-library");
-    } else if (state.view === "practice") {
+        navigateTo(() => loadRequest(false), "Contact - e-library");
+        } else if (state.view === "folder") {
+
         navigateTo(() => loadPractice(false), "Practice - e-library");
     } else if (state.view === "folder") {
         const folderTitle = state.subFolder ? `${state.category} > ${state.subFolder}` : state.category;
@@ -266,7 +267,7 @@ function _renderAbout() {
 async function loadRequest(push = true) {
     if (push) {
         history.pushState({ view: "request" }, "");
-        await navigateTo(_renderRequest, "Request - e-library");
+        await navigateTo(_renderRequest, "Contact - e-library");
     } else {
         _renderRequest();
     }
@@ -274,8 +275,9 @@ async function loadRequest(push = true) {
 
 function _renderRequest() {
     app.innerHTML = `
-        <div class="contact-section">
-            <h2>Request a Book / Paper</h2>
+        <section class="request-section">
+            <h2>Contact Me</h2>
+
             <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
             <ul>
                 <li>Email: <a href="mailto:wycliffemwanganda@gmail.com">Email me</a></li>
