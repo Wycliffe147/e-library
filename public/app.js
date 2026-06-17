@@ -275,7 +275,7 @@ async function loadRequest(push = true) {
 
 function _renderRequest() {
     app.innerHTML = `
-        <section class="request-section">
+        <section class="contact-section">
             <h2>Contact Me</h2>
 
             <p>If you want a specific book, pamphlet, or exam paper added to the library, reach out:</p>
