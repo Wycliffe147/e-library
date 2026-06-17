@@ -1341,13 +1341,14 @@ html.dark .btn-cancel {
 /* Magic Nav Styles */
 .magic-nav {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 3000;
+    bottom: 30px;
+    right: 30px;
+    z-index: 11000;
     display: flex;
-    align-items: center;
-    flex-direction: row-reverse; /* Circle on right, ribbon to left */
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), flex-direction 0.3s ease;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 15px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .magic-nav.hidden {
@@ -1363,153 +1364,127 @@ html.dark .btn-cancel {
 }
 
 .magic-nav.idle {
-    opacity: 0.3;
-    transform: scale(0.9) translateX(5px);
-    pointer-events: none;
-}
-
-html.dark .magic-nav.idle {
-    opacity: 0.5;
+    opacity: 0.4;
+    transform: scale(0.9) translateX(10px);
 }
 
 .magic-nav.idle:hover {
     opacity: 1;
     transform: scale(1) translateX(0);
+}
+
+.nav-scrim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 10500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.nav-scrim.visible {
+    opacity: 1;
     pointer-events: auto;
 }
 
 .magic-nav-circle {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #1e88e5, #1565c0);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 2;
-    overflow: hidden;
-}
-
-html.dark .magic-nav-circle {
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .magic-nav-circle img {
-    width: 35px;
+    width: 40px;
     height: auto;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
-.magic-nav-circle:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+.magic-nav.expanded .magic-nav-circle {
+    transform: rotate(135deg);
+    background: #ef4444; /* Change to red when open */
 }
 
-.magic-nav.expanded .magic-nav-circle img {
-    transform: rotate(90deg) scale(0.8);
+.magic-nav-items {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 12px;
+    pointer-events: none;
 }
 
-.magic-nav-ribbon {
-    background: rgba(30, 41, 59, 0.95);
-    backdrop-filter: blur(10px);
+.nav-item {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 10px 20px;
-    border-radius: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(20px);
-    transition: all 0.3s ease;
-    margin-right: 15px;
-}
-
-html.dark .magic-nav-ribbon {
-    background: rgba(15, 23, 42, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.magic-nav.expanded .magic-nav-ribbon {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0);
-}
-
-.magic-nav-ribbon a {
+    gap: 12px;
     text-decoration: none;
-    color: white;
-    font-weight: 600;
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-delay: calc(var(--i) * 0.05s);
+}
+
+.magic-nav.expanded .nav-item {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.nav-label {
+    background: white;
+    color: #1e293b;
+    padding: 6px 14px;
+    border-radius: 10px;
     font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     white-space: nowrap;
-    transition: opacity 0.2s;
 }
 
-.magic-nav-ribbon a:hover {
-    opacity: 0.7;
+html.dark .nav-label {
+    background: #1e293b;
+    color: white;
 }
 
-/* Morph Entrance Animation */
-@keyframes morphIn {
-    0% {
-        width: 100vw;
-        left: 0;
-        top: 0;
-        height: 100px;
-        border-radius: 0;
-        opacity: 0;
-    }
-    50% {
-        width: 100vw;
-        left: 0;
-        top: 0;
-        height: 60px;
-        border-radius: 0;
-        opacity: 1;
-    }
-    100% {
-        width: 50px;
-        left: 15px;
-        top: 15px;
-        height: 50px;
-        border-radius: 50%;
-    }
+.nav-icon {
+    width: 45px;
+    height: 45px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* Pulsing effect to invite clicking */
-.magic-nav.visible:not(.expanded) .magic-nav-circle {
-    animation: pulse-ring 3s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+html.dark .nav-icon {
+    background: #334155;
 }
 
-@keyframes pulse-ring {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+/* Center Contact Header */
+.contact-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
 }
 
-/* Mobile specific Magic Nav overrides */
 @media (max-width: 480px) {
     .magic-nav {
-        flex-direction: column-reverse; /* Circle at bottom, ribbon above it */
-        align-items: flex-end;
-    }
-
-    .magic-nav-ribbon {
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 12px;
-        padding: 15px;
-        border-radius: 20px;
-        margin-right: 0;
-        margin-bottom: 15px; /* Space between ribbon and circle */
-        transform: translateY(20px); /* Pop up from the bottom */
-    }
-
-    .magic-nav.expanded .magic-nav-ribbon {
-        transform: translateY(0);
+        right: 20px;
+        bottom: 20px;
     }
 }
 

@@ -50,21 +50,39 @@
         </div>
         </div>
 
-        <!-- Magic Nav (Floating Circle / Ribbon) -->
+        <!-- Magic Nav (FAB Style) -->
+        <div id="navScrim" class="nav-scrim hidden"></div>
         <div id="magicNav" class="magic-nav hidden">
-        <div class="magic-nav-circle">
-        <img src="/Media/images/logo.png" alt="Logo"/>
+            <div class="magic-nav-items">
+                <a href="#" class="nav-item" style="--i:1" onclick="event.preventDefault(); loadHome()">
+                    <span class="nav-label">Home</span>
+                    <span class="nav-icon">🏠</span>
+                </a>
+                <a href="#" class="nav-item" style="--i:2" onclick="event.preventDefault(); loadPractice()">
+                    <span class="nav-label">Practice</span>
+                    <span class="nav-icon">📝</span>
+                </a>
+                <a href="#" class="nav-item" style="--i:3" onclick="event.preventDefault(); loadAbout()">
+                    <span class="nav-label">About</span>
+                    <span class="nav-icon">ℹ️</span>
+                </a>
+                <a href="#" class="nav-item" style="--i:4" onclick="event.preventDefault(); loadRequest()">
+                    <span class="nav-label">Contact</span>
+                    <span class="nav-icon">📞</span>
+                </a>
+                <a href="#" class="nav-item" style="--i:5" onclick="event.preventDefault(); shareSite()">
+                    <span class="nav-label">Share</span>
+                    <span class="nav-icon">🔗</span>
+                </a>
+                <a href="#" id="ribbonBackToTop" class="nav-item" style="--i:6">
+                    <span class="nav-label">Top</span>
+                    <span class="nav-icon">↑</span>
+                </a>
+            </div>
+            <div class="magic-nav-circle">
+                <img src="/Media/images/logo.png" alt="Logo"/>
+            </div>
         </div>
-        <div class="magic-nav-ribbon">
-        <a href="#" onclick="event.preventDefault(); loadHome()">Home</a>
-        <a href="#" onclick="event.preventDefault(); loadPractice()">Practice</a>
-        <a href="#" onclick="event.preventDefault(); loadAbout()">About</a>
-        <a href="#" onclick="event.preventDefault(); loadRequest()">Contact</a>
-        <a href="#" onclick="event.preventDefault(); shareSite()">Share</a>
-        <a href="#" id="ribbonBackToTop">↑ Top</a>
-        </div>
-        </div>
-
     <!-- SPA container -->
     <div id="app"></div>
 

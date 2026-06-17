@@ -868,6 +868,7 @@ function activateScrollReveal() {
 function initMagicNav() {
     const header = document.querySelector(".header");
     const magicNav = document.getElementById("magicNav");
+    const navScrim = document.getElementById("navScrim");
     const circle = document.querySelector(".magic-nav-circle");
     const topBtn = document.getElementById("ribbonBackToTop");
 
@@ -893,20 +894,31 @@ function initMagicNav() {
     function updateNavVisibility() {
         const currentScroll = window.scrollY;
         const scrollingUp = currentScroll < lastScroll;
-
-        // Smart Scroll: Show only if (header is gone) AND (scrolling up OR at very bottom)
         const atBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10;
         
         if (!headerVisible && (scrollingUp || atBottom)) {
             magicNav.classList.remove("hidden");
             magicNav.classList.add("visible");
         } else {
-            // Hide if scrolling down OR header is back
             magicNav.classList.add("hidden");
             magicNav.classList.remove("visible");
-            magicNav.classList.remove("expanded");
+            closeNav();
         }
         lastScroll = currentScroll;
+    }
+
+    function closeNav() {
+        magicNav.classList.remove("expanded");
+        if (navScrim) navScrim.classList.remove("visible");
+    }
+
+    function toggleNav() {
+        const isExpanded = magicNav.classList.toggle("expanded");
+        if (navScrim) {
+            if (isExpanded) navScrim.classList.add("visible");
+            else navScrim.classList.remove("visible");
+        }
+        resetIdleTimer();
     }
 
     function resetIdleTimer() {
@@ -922,30 +934,28 @@ function initMagicNav() {
     window.addEventListener("scroll", () => {
         updateNavVisibility();
         resetIdleTimer();
-        
-        // Auto-close ribbon on significant scroll
-        if (Math.abs(window.scrollY - lastScroll) > 100) {
-            magicNav.classList.remove("expanded");
-        }
     }, { passive: true });
 
     circle.addEventListener("click", (e) => {
         e.stopPropagation();
-        magicNav.classList.toggle("expanded");
-        resetIdleTimer();
+        toggleNav();
     });
+
+    if (navScrim) {
+        navScrim.addEventListener("click", closeNav);
+    }
 
     if (topBtn) {
         topBtn.addEventListener("click", (e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
-            magicNav.classList.remove("expanded");
+            closeNav();
         });
     }
 
     document.addEventListener("click", (e) => {
         if (!magicNav.contains(e.target)) {
-            magicNav.classList.remove("expanded");
+            closeNav();
         }
     });
 
