@@ -1842,3 +1842,59 @@ html.dark .btn-secondary {
     background-color: #334155;
     color: #cbd5e1;
 }
+
+/* ─── File Card Action Buttons ─── */
+.file-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.file-actions a, 
+.file-actions button {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Primary Button (Download / View) */
+.file-actions a[download],
+.file-actions .open-zip-btn {
+    background-color: #2563eb;
+    color: white !important;
+}
+
+.file-actions a[download]:hover,
+.file-actions .open-zip-btn:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Secondary Buttons (Open / Share) */
+.file-actions a:not([download]) {
+    background-color: #e2e8f0;
+    color: #1e293b !important;
+}
+
+.file-actions a:not([download]):hover {
+    background-color: #cbd5e1;
+}
+
+html.dark .file-actions a:not([download]) {
+    background-color: #334155;
+    color: #f1f5f9 !important;
+}
+
+html.dark .file-actions a:not([download]):hover {
+    background-color: #475569;
+}
