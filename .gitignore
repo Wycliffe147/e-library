@@ -4,3 +4,5 @@ files-index.json
 pending-questions.json
 *.bak
 .env
+.vercel
+.env*
