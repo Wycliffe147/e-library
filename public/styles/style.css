@@ -1898,3 +1898,26 @@ html.dark .file-actions a:not([download]) {
 html.dark .file-actions a:not([download]):hover {
     background-color: #475569;
 }
+
+/* ─── Specific Button Colors ─── */
+
+/* Open Button - Green */
+.file-actions a:not([download]):not(:last-child) {
+    background-color: #10b981 !important; /* Emerald green */
+    color: white !important;
+}
+
+.file-actions a:not([download]):not(:last-child):hover {
+    background-color: #059669;
+}
+
+/* Share Button (which is the last child) - Grey */
+.file-actions a:last-child {
+    background-color: #e2e8f0 !important;
+    color: #1e293b !important;
+}
+
+html.dark .file-actions a:last-child {
+    background-color: #334155 !important;
+    color: #f1f5f9 !important;
+}
