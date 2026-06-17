@@ -507,6 +507,7 @@ function renderFileCard(file, filePath, isDownloads, size) {
             <div class="file-actions">
                 ${isZip ? `<button class="open-zip-btn" data-file="${file}" data-path="${filePath}">View Contents</button>` : ""}
                 <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
+                <a href="#" onclick="event.preventDefault(); shareFile('${file.replace(/'/g, "\\'")}', '${filePath.replace(/'/g, "\\'")}')">Share</a>
             </div>
         `;
     } else {
@@ -521,6 +522,7 @@ function renderFileCard(file, filePath, isDownloads, size) {
                     `<a href="${openUrl}" target="_blank">Open</a>`
                 }
                 <a href="/api/download?file=${encodeURIComponent(filePath)}&mode=download" download="${file}">Download</a>
+                <a href="#" onclick="event.preventDefault(); shareFile('${file.replace(/'/g, "\\'")}', '${filePath.replace(/'/g, "\\'")}')">Share</a>
             </div>
         `;
     }
@@ -969,6 +971,47 @@ async function updateLastUpdated() {
     } catch (err) {
         console.error("Error fetching last update:", err);
         el.textContent = "Recently";
+    }
+}
+
+async function shareSite() {
+    const shareData = {
+        title: "Wycliffe's e-library",
+        text: "Check out Wycliffe's e-library for academic resources, books, and exam papers!",
+        url: window.location.origin
+    };
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+        } else {
+            await navigator.clipboard.writeText(window.location.origin);
+            alert("Link copied to clipboard!");
+        }
+    } catch (err) {
+        console.error("Error sharing:", err);
+    }
+}
+
+async function shareFile(name, path) {
+    const url = `${window.location.origin}/api/download?file=${encodeURIComponent(path)}&mode=download`;
+    const shareData = {
+        title: name,
+        text: `Check out this resource from Wycliffe's e-library: ${name}`,
+        url: url
+    };
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+        } else {
+            await navigator.clipboard.writeText(url);
+            alert("Link copied to clipboard!");
+        }
+    } catch (err) {
+        if (err.name !== 'AbortError') {
+            console.error("Error sharing file:", err);
+        }
     }
 }
 
