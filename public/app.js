@@ -975,6 +975,13 @@ async function updateLastUpdated() {
 // ─── Initial load ─────────────────────────────────────────────────────────────
 
 window.addEventListener("DOMContentLoaded", () => {
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('Service Worker registered', reg))
+            .catch(err => console.log('Service Worker registration failed', err));
+    }
+
     updateLastUpdated();
     history.replaceState({ view: "home" }, "");
 
