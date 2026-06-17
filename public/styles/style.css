@@ -1869,13 +1869,13 @@ html.dark .btn-secondary {
 /* Primary Button (Download / View) */
 .file-actions a[download],
 .file-actions .open-zip-btn {
-    background-color: #2563eb;
+    background-color: #007BFF;
     color: white !important;
 }
 
 .file-actions a[download]:hover,
 .file-actions .open-zip-btn:hover {
-    background-color: #1d4ed8;
+    background-color: #0056b3;
     transform: translateY(-1px);
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
