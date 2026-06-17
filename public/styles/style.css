@@ -1903,12 +1903,12 @@ html.dark .file-actions a:not([download]):hover {
 
 /* Open Button - Green */
 .file-actions a:not([download]):not(:last-child) {
-    background-color: #10b981 !important; /* Emerald green */
+    background-color: #4CAF50 !important; /* Original Material Green */
     color: white !important;
 }
 
 .file-actions a:not([download]):not(:last-child):hover {
-    background-color: #059669;
+    background-color: #3e8e41;
 }
 
 /* Share Button (which is the last child) - Grey */
