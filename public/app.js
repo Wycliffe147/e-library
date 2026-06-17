@@ -1028,40 +1028,39 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     // PWA Install Logic
-    const installBtn = document.getElementById('installBtn');
-    const installBtnMagic = document.getElementById('installBtnMagic');
+    const installModal = document.getElementById('installModal');
+    const modalInstallNow = document.getElementById('modalInstallNow');
+    const modalMaybeLater = document.getElementById('modalMaybeLater');
 
     window.addEventListener('beforeinstallprompt', (e) => {
-        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        // Prevent Chrome from automatically showing the prompt
         e.preventDefault();
-        // Stash the event so it can be triggered later.
+        // Stash the event
         deferredPrompt = e;
-        // Update UI notify the user they can install the PWA
-        if (installBtn) installBtn.classList.remove('hidden');
-        if (installBtnMagic) installBtnMagic.classList.remove('hidden');
+        // Show our custom modal
+        if (installModal) installModal.classList.remove('hidden');
     });
 
-    const handleInstallClick = async () => {
-        if (!deferredPrompt) return;
-        // Show the prompt
-        deferredPrompt.prompt();
-        // Wait for the user to respond to the prompt
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`User response to the install prompt: ${outcome}`);
-        // We've used the prompt, and can't use it again, throw it away
-        deferredPrompt = null;
-        // Hide our install buttons
-        if (installBtn) installBtn.classList.add('hidden');
-        if (installBtnMagic) installBtnMagic.classList.add('hidden');
-    };
+    if (modalInstallNow) {
+        modalInstallNow.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
+            deferredPrompt = null;
+            if (installModal) installModal.classList.add('hidden');
+        });
+    }
 
-    if (installBtn) installBtn.addEventListener('click', handleInstallClick);
-    if (installBtnMagic) installBtnMagic.addEventListener('click', handleInstallClick);
+    if (modalMaybeLater) {
+        modalMaybeLater.addEventListener('click', () => {
+            if (installModal) installModal.classList.add('hidden');
+        });
+    }
 
     window.addEventListener('appinstalled', (evt) => {
         console.log('e-library was installed');
-        if (installBtn) installBtn.classList.add('hidden');
-        if (installBtnMagic) installBtnMagic.classList.add('hidden');
+        if (installModal) installModal.classList.add('hidden');
     });
 
     updateLastUpdated();
