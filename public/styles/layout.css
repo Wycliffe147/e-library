@@ -100,13 +100,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s, transform 0.2s;
+    transition: background 0.2s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
 }
 
 #darkModeToggle:hover {
     background: rgba(255,255,255,0.4);
-    transform: scale(1.1) rotate(15deg);
+}
+
+/* Rotate the icon based on the active theme state instead of just hover */
+html.dark #darkModeToggle {
+    transform: rotate(360deg);
 }
 
 /* ─── Footer Styles ─── */
