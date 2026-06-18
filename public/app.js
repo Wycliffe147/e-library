@@ -85,8 +85,7 @@ window.addEventListener("popstate", e => {
         navigateTo(() => loadAbout(false), "About - e-library");
     } else if (state.view === "request") {
         navigateTo(() => loadRequest(false), "Contact - e-library");
-        } else if (state.view === "folder") {
-
+    } else if (state.view === "practice") {
         navigateTo(() => loadPractice(false), "Practice - e-library");
     } else if (state.view === "folder") {
         const folderTitle = state.subFolder ? `${state.category} > ${state.subFolder}` : state.category;
