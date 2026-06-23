@@ -1105,11 +1105,6 @@
     "size": 942426
   },
   {
-    "name": "chemistry 2.pdf",
-    "path": "Books/Chemistry/chemistry 2.pdf",
-    "size": 1300834
-  },
-  {
     "name": "chemistry essay_1.pdf",
     "path": "Books/Chemistry/chemistry essay_1.pdf",
     "size": 342785
@@ -5618,6 +5613,11 @@
     "name": "2025 SHED CHEMISTRY MOCK  P 1.pdf",
     "path": "Exams/Chemistry/2025 SHED CHEMISTRY MOCK  P 1.pdf",
     "size": 296556
+  },
+  {
+    "name": "2025 St Mary's chemistry 2.pdf",
+    "path": "Exams/Chemistry/2025 St Mary's chemistry 2.pdf",
+    "size": 1300834
   },
   {
     "name": "2025_CHEMISTRY_I.pdf",
