@@ -980,26 +980,6 @@
     "size": 2286230
   },
   {
-    "name": "CHEMISTRY P1.docx",
-    "path": "Books/Chemistry/CHEMISTRY P1.docx",
-    "size": 114161
-  },
-  {
-    "name": "CHEMISTRY P2.docx",
-    "path": "Books/Chemistry/CHEMISTRY P2.docx",
-    "size": 83009
-  },
-  {
-    "name": "CHEMISTRY PI.docx",
-    "path": "Books/Chemistry/CHEMISTRY PI.docx",
-    "size": 2945174
-  },
-  {
-    "name": "CHEMISTRY PII.docx",
-    "path": "Books/Chemistry/CHEMISTRY PII.docx",
-    "size": 56244
-  },
-  {
     "name": "CHEMISTRY TARGET 4.pdf",
     "path": "Books/Chemistry/CHEMISTRY TARGET 4.pdf",
     "size": 23926371
@@ -1008,11 +988,6 @@
     "name": "CHEMISTRY pamphlet BOOK 4.pdf",
     "path": "Books/Chemistry/CHEMISTRY pamphlet BOOK 4.pdf",
     "size": 940683
-  },
-  {
-    "name": "CHEMISTRY.docx",
-    "path": "Books/Chemistry/CHEMISTRY.docx",
-    "size": 193960
   },
   {
     "name": "CHEMISTRY_3_(target).pdf",
@@ -1048,11 +1023,6 @@
     "name": "Chemistry Complete Senior Secondary_080857_1.pdf",
     "path": "Books/Chemistry/Chemistry Complete Senior Secondary_080857_1.pdf",
     "size": 15974001
-  },
-  {
-    "name": "Chemistry_II.pdf",
-    "path": "Books/Chemistry/Chemistry_II.pdf",
-    "size": 253697
   },
   {
     "name": "Chemistry_Questions__(1).pdf",
@@ -5810,6 +5780,16 @@
     "size": 2945174
   },
   {
+    "name": "CHEMISTRY PII.docx",
+    "path": "Exams/Chemistry/CHEMISTRY PII.docx",
+    "size": 56244
+  },
+  {
+    "name": "CHEMISTRY.docx",
+    "path": "Exams/Chemistry/CHEMISTRY.docx",
+    "size": 193960
+  },
+  {
     "name": "CHEMISTRY_1.pdf",
     "path": "Exams/Chemistry/CHEMISTRY_1.pdf",
     "size": 283920
@@ -5898,6 +5878,11 @@
     "name": "Chemistry_I-1_1.pdf",
     "path": "Exams/Chemistry/Chemistry_I-1_1.pdf",
     "size": 517575
+  },
+  {
+    "name": "Chemistry_II.pdf",
+    "path": "Exams/Chemistry/Chemistry_II.pdf",
+    "size": 253697
   },
   {
     "name": "Chemistry_I_2026_MOCK_msce.pdf",
