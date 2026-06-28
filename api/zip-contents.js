@@ -7,40 +7,16 @@ export default async function handler(req, res) {
         return res.status(400).send("File parameter required");
     }
 
-    const user = "Wycliffe147";
-    const repo = "e-library";
-
     const cleanPath = file.split("/")
         .map(part => encodeURIComponent(part))
         .join("/");
 
-    // Use GitHub API to get the download URL (works for private repos and LFS)
-    const apiUrl = `https://api.github.com/repos/${user}/${repo}/contents/public/Media/${cleanPath}`;
-    
-    const fetchOptions = {
-        headers: {
-            "Accept": "application/vnd.github.v3+json"
-        }
-    };
-
-    if (process.env.GITHUB_TOKEN) {
-        fetchOptions.headers["Authorization"] = `token ${process.env.GITHUB_TOKEN}`;
-    }
+    // Public repo now, so we can hit GitHub's LFS media CDN directly —
+    // no GitHub API lookup, no token needed.
+    const sourceUrl = `https://media.githubusercontent.com/media/Wycliffe147/e-library-media/main/${cleanPath}`;
 
     try {
-        const apiResponse = await fetch(apiUrl, fetchOptions);
-        if (!apiResponse.ok) {
-            return res.status(apiResponse.status).send(`Failed to fetch ZIP metadata from GitHub: ${apiResponse.statusText}`);
-        }
-
-        const metadata = await apiResponse.json();
-        const downloadUrl = metadata.download_url;
-
-        if (!downloadUrl) {
-            return res.status(404).send("Download URL not found for this ZIP.");
-        }
-
-        const response = await fetch(downloadUrl);
+        const response = await fetch(sourceUrl);
         if (!response.ok) {
             return res.status(response.status).send(`Failed to fetch ZIP from GitHub: ${response.statusText}`);
         }
@@ -53,6 +29,9 @@ export default async function handler(req, res) {
             size: entry.header.size
         }));
 
+        // Cache the listing at Vercel's edge so repeat "View Contents" clicks
+        // on the same zip don't re-pull and re-extract the whole archive.
+        res.setHeader("Cache-Control", "public, max-age=86400, s-maxage=86400");
         res.status(200).json(entries);
     } catch (error) {
         console.error("ZIP processing error:", error);
