@@ -18,6 +18,9 @@ const MEDIA_BRANCH = 'main';
 const MEDIA_REPOS = [
     'e-library-media',
     'e-library-media-2',
+    'e-library-media-3',
+    'e-library-media-4',
+    'e-library-media-5',
 ];
 // ──────────────────────────────────────────────────────────────────────────────
 
