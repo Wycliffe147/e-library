@@ -31,11 +31,27 @@
 }
 
 /* ─── Base Body Styles ─── */
+/* The background image lives on a dedicated fixed pseudo-element rather
+   than directly on body. Painting body's own background on every scroll
+   frame (with background-attachment: fixed + background-size: cover) is
+   what caused the white/black flash at the bottom of the screen during
+   fast scrolling on mobile. A separate fixed layer is composited
+   independently of body's scrolling content, so it no longer needs to
+   repaint on scroll. */
 body {
-    background-image: url("https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/bg.jpg");    
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-position: center;
+    z-index: -2;
+    pointer-events: none;
 }
 
 /* ─── Page Transition Classes ────────────────────────────────────── */

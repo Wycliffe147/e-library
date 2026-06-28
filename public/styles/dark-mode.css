@@ -30,7 +30,7 @@ html.dark {
 }
 
 /* Dark mode: body overlay so background image dims */
-html.dark body::before {
+html.dark body::after {
     content: "";
     position: fixed;
     inset: 0;
