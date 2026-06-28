@@ -5,12 +5,12 @@ const ASSETS_TO_CACHE = [
   '/app.js',
   '/styles/style.css',
   '/manifest.json',
-  '/Media/images/logo.png',
-  '/Media/images/about.png',
-  '/Media/images/Excel_Phy.png',
-  '/Media/images/MANEB_Maths.png',
-  '/Media/images/zips.png',
-  '/Media/images/Q&A.png'
+  'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/logo.png',
+  'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/about.png',
+  'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/Excel_Phy.png',
+  'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/MANEB_Maths.png',
+  'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/zips.png',
+  'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/Q&A.png'
 ];
 
 // Install Event
@@ -20,7 +20,18 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('SW: Pre-caching assets');
-        return cache.addAll(ASSETS_TO_CACHE);
+        // addAll is all-or-nothing: if any single URL fails, NONE of the
+        // assets get cached. The cross-origin GitHub image URLs above are
+        // an extra point of failure compared to same-origin assets, so we
+        // cache them individually and don't let one bad image break
+        // caching for the rest of the app shell.
+        return Promise.allSettled(
+          ASSETS_TO_CACHE.map(url =>
+            cache.add(url).catch(err => {
+              console.warn('SW: Failed to pre-cache', url, err);
+            })
+          )
+        );
       })
   );
 });

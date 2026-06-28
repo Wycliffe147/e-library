@@ -32,7 +32,7 @@
 
 /* ─── Base Body Styles ─── */
 body {
-    background-image: url("../Media/images/bg.jpg");    
+    background-image: url("https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/bg.jpg");    
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
