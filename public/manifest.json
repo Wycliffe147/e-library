@@ -1,6 +1,6 @@
 {
   "name": "Wycliffe's e-library",
-  "short_name": "e-library",
+  "short_name": "Wylibrary",
   "description": "Accessible academic resources for students.",
   "start_url": "/",
   "display": "standalone",
