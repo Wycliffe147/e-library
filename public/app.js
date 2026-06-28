@@ -974,8 +974,12 @@ async function updateLastUpdated() {
         
         if (data && data.date) {
             const date = new Date(data.date);
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            el.textContent = date.toLocaleDateString('en-US', options);
+            const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
+            const day = date.toLocaleDateString('en-US', { day: 'numeric' });
+            const month = date.toLocaleDateString('en-US', { month: 'long' });
+            const year = date.toLocaleDateString('en-US', { year: 'numeric' });
+            const time = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+            el.textContent = `${weekday}, ${day} ${month} ${year}, ${time}`;
         } else {
             throw new Error("Invalid response");
         }
