@@ -17,7 +17,6 @@ const MEDIA_BRANCH = 'main';
 // to this list, then redeploy.
 const MEDIA_REPOS = [
     'e-library-media',
-    // 'e-library-media-2',   ← uncomment when you create it
 ];
 // ──────────────────────────────────────────────────────────────────────────────
 
