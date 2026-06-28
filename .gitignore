@@ -1,6 +1,5 @@
 node_modules/
 .DS_Store
-files-index.json
 pending-questions.json
 *.bak
 .env

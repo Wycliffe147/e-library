@@ -1,9 +1,18 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { config } from 'dotenv';
+
+config(); // load .env so GITHUB_TOKEN is available locally
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Use a token if present — raises rate limit from 60 to 5,000 req/hr.
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
+const authHeaders = GITHUB_TOKEN
+    ? { Authorization: `Bearer ${GITHUB_TOKEN}` }
+    : {};
 
 const outputFile = path.join(__dirname, 'files-index.json');
 
@@ -29,7 +38,7 @@ const MEDIA_REPOS = [
 const CONCURRENCY = 20;
 
 async function fetchJson(url) {
-    const res = await fetch(url);
+    const res = await fetch(url, { headers: authHeaders });
     if (!res.ok) {
         throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
     }
@@ -47,7 +56,7 @@ async function fetchJson(url) {
 async function getRealSize(blobSize, rawUrl) {
     if (blobSize > 0 && blobSize < 500) {
         try {
-            const res = await fetch(rawUrl);
+            const res = await fetch(rawUrl, { headers: authHeaders });
             if (res.ok) {
                 const text = await res.text();
                 if (text.includes('https://git-lfs.github.com/spec/')) {
