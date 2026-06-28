@@ -974,12 +974,30 @@ async function updateLastUpdated() {
         
         if (data && data.date) {
             const date = new Date(data.date);
-            const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
-            const day = date.toLocaleDateString('en-US', { day: 'numeric' });
-            const month = date.toLocaleDateString('en-US', { month: 'long' });
-            const year = date.toLocaleDateString('en-US', { year: 'numeric' });
+            const now = new Date();
+
+            const isSameDay = (a, b) =>
+                a.getFullYear() === b.getFullYear() &&
+                a.getMonth() === b.getMonth() &&
+                a.getDate() === b.getDate();
+
+            const yesterday = new Date(now);
+            yesterday.setDate(now.getDate() - 1);
+
+            let datePart;
+            if (isSameDay(date, now)) {
+                datePart = "Today";
+            } else if (isSameDay(date, yesterday)) {
+                datePart = "Yesterday";
+            } else {
+                const day = date.toLocaleDateString('en-US', { day: 'numeric' });
+                const month = date.toLocaleDateString('en-US', { month: 'short' });
+                const year = date.toLocaleDateString('en-US', { year: 'numeric' });
+                datePart = `${day} ${month} ${year}`;
+            }
+
             const time = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-            el.textContent = `${weekday}, ${day} ${month} ${year}, ${time}`;
+            el.textContent = `${datePart}, ${time}`;
         } else {
             throw new Error("Invalid response");
         }
