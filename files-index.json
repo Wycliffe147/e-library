@@ -13332,9 +13332,381 @@
     "repo": "e-library-media-2"
   },
   {
-    "name": "#3HEART DISEASE – Specifically heart failure.#1.pdf",
-    "path": "Books/Additional Mathematics/#3HEART DISEASE – Specifically heart failure.#1.pdf",
-    "size": 131,
+    "name": "2022 AGR FORM 4 NOTES (1).pdf",
+    "path": "Books/Agriculture/2022 AGR FORM 4 NOTES (1).pdf",
+    "size": 2145859,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "A COMPLETE VERSION OF BIBLE KNOWLEDGE NOTES FOR JUNIOR SECONDARY.pdf",
+    "path": "Books/Bible knowledge/A COMPLETE VERSION OF BIBLE KNOWLEDGE NOTES FOR JUNIOR SECONDARY.pdf",
+    "size": 1077319,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "--bio_locomotion.pdf",
+    "path": "Books/Biology/--bio_locomotion.pdf",
+    "size": 363875,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "Business studies syllabus Forms 1-2.doc",
+    "path": "Books/Business Studies/Business studies syllabus Forms 1-2.doc",
+    "size": 221184,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "CHEMISTRY FORM 3 NEW SYLLABUS_1.pdf",
+    "path": "Books/Chemistry/CHEMISTRY FORM 3 NEW SYLLABUS_1.pdf",
+    "size": 2358441,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 CEED CHICHEWA I.pdf",
+    "path": "Books/Chichewa/2026 CEED CHICHEWA I.pdf",
+    "size": 671369,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "ComputerBas_2.pdf",
+    "path": "Books/Computer studies/Comp Basics/ComputerBas_2.pdf",
+    "size": 295753,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "Comp Excel_3.pdf",
+    "path": "Books/Computer studies/Comp Excel_3.pdf",
+    "size": 11719121,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "083-Macbeth - William Shakespeare.pdf",
+    "path": "Books/English/083-Macbeth - William Shakespeare.pdf",
+    "size": 381607,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 CEED FRENCH III.pdf",
+    "path": "Books/French/2026 CEED FRENCH III.pdf",
+    "size": 702852,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "Complete Physical Geography with Map Work Elements student Book 3.pdf",
+    "path": "Books/Geography/Complete Physical Geography with Map Work Elements student Book 3.pdf",
+    "size": 8441237,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 CEED HISTORY II.pdf",
+    "path": "Books/History/2026 CEED HISTORY II.pdf",
+    "size": 254247,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "HE._SONA_2026_FEBRUARY_13.pdf",
+    "path": "Books/Home Economics/HE._SONA_2026_FEBRUARY_13.pdf",
+    "size": 9564938,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "SHED Social and life skills paper2 edited.docx",
+    "path": "Books/Life Skills/SHED Social and life skills paper2 edited.docx",
+    "size": 48969,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "Advance_Dictionary_of_Mathematics_Formulas_1.pdf",
+    "path": "Books/Mathematics/Advance_Dictionary_of_Mathematics_Formulas_1.pdf",
+    "size": 3524669,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2025 MASTER TIMETABLE FOR STAR PVT SECONDARY SCHOOL finalYYYYYYz.docx",
+    "path": "Books/Other/2025 MASTER TIMETABLE FOR STAR PVT SECONDARY SCHOOL finalYYYYYYz.docx",
+    "size": 15945,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "-PHYSICS_book_4(1) (1) (1)_1.pdf",
+    "path": "Books/Physics/-PHYSICS_book_4(1) (1) (1)_1.pdf",
+    "size": 2929063,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "FORM 3 SOCIAL.pdf",
+    "path": "Books/Social Studies/FORM 3 SOCIAL.pdf",
+    "size": 1807936,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2022 MSCE ADDITIONAL MATHEMATICS.pdf",
+    "path": "Exams/Additional Mathematics/2022 MSCE ADDITIONAL MATHEMATICS.pdf",
+    "size": 841833,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2025 MSCE - ADDITIONAL MATHEMATICS CHIEF EXAMINER'S REPORT_1.pdf",
+    "path": "Exams/Additional Mathematics/Marking Keys/2025 MSCE - ADDITIONAL MATHEMATICS CHIEF EXAMINER'S REPORT_1.pdf",
+    "size": 748253,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "1 AGRI PRACTICAL 2 CONFIDENTIAL INSTRUCTION.docx",
+    "path": "Exams/Agriculture/1 AGRI PRACTICAL 2 CONFIDENTIAL INSTRUCTION.docx",
+    "size": 18358,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "1 AGRI PRACTICAL 2 MARKING KEY.docx",
+    "path": "Exams/Agriculture/Marking Keys/1 AGRI PRACTICAL 2 MARKING KEY.docx",
+    "size": 27539,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2025 SEED BK MOCK PII.doc",
+    "path": "Exams/Bible Knowledge/2025 SEED BK MOCK PII.doc",
+    "size": 79360,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 BK MSCE PAPER 2 MARKING KEY.docx",
+    "path": "Exams/Bible Knowledge/Marking Keys/2026 BK MSCE PAPER 2 MARKING KEY.docx",
+    "size": 17069,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "1773338750570_BIOLOGY - 2026 BSS JCE CLUSTER MOCK.pdf",
+    "path": "Exams/Biology/1773338750570_BIOLOGY - 2026 BSS JCE CLUSTER MOCK.pdf",
+    "size": 1379993,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2022 MZUZU_DIOCESE_-2022_BIOLOGY_PII_MARKING_KEY-1.pdf",
+    "path": "Exams/Biology/Marking Keys/2022 MZUZU_DIOCESE_-2022_BIOLOGY_PII_MARKING_KEY-1.pdf",
+    "size": 93263,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2022 MSCE BUSINESS STUDIES-1.pdf",
+    "path": "Exams/Business Studies/2022 MSCE BUSINESS STUDIES-1.pdf",
+    "size": 615226,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "SHED BUSINESS STUDIES PAPER  II marking key.docx",
+    "path": "Exams/Business Studies/Marking Keys/SHED BUSINESS STUDIES PAPER  II marking key.docx",
+    "size": 43291,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2019_CHEMISTRY_MOCK_PI-1_1.pdf",
+    "path": "Exams/Chemistry/2019_CHEMISTRY_MOCK_PI-1_1.pdf",
+    "size": 246412,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2024 CEED CHEMISTRY MARKING KEY II.docx",
+    "path": "Exams/Chemistry/Marking Keys/2024 CEED CHEMISTRY MARKING KEY II.docx",
+    "size": 196182,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2022 JCE CHICHEWA I MANEB_1.pdf",
+    "path": "Exams/Chichewa/2022 JCE CHICHEWA I MANEB_1.pdf",
+    "size": 1906273,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026       SHED MOCK CHICHEWA PAPER  III marking Key.pdf",
+    "path": "Exams/Chichewa/Marking Keys/2026       SHED MOCK CHICHEWA PAPER  III marking Key.pdf",
+    "size": 276856,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "SHED CLOTHING AND TEXTILES P1.docx",
+    "path": "Exams/Clothing & Textiles/SHED CLOTHING AND TEXTILES P1.docx",
+    "size": 448653,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2007 MANEB COMPUTER PAPER I-1.pdf",
+    "path": "Exams/Computer studies/2007 MANEB COMPUTER PAPER I-1.pdf",
+    "size": 3993650,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 CEED COMPUTER STUDIES I PROVISIONAL MARKING KEY.pdf",
+    "path": "Exams/Computer studies/Marking Keys/2026 CEED COMPUTER STUDIES I PROVISIONAL MARKING KEY.pdf",
+    "size": 588737,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2020_ENGLISH_2_(1).pdf",
+    "path": "Exams/English/2020_ENGLISH_2_(1).pdf",
+    "size": 142754,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "1 Paper I ENG NED MOCK 2026 PROVISIONAL MARKING KEY.docx",
+    "path": "Exams/English/Marking Keys/1 Paper I ENG NED MOCK 2026 PROVISIONAL MARKING KEY.docx",
+    "size": 22362,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 LOYOLA MSCE MOCK FRENCH PI (AutoRecovered).docx",
+    "path": "Exams/French/2026 LOYOLA MSCE MOCK FRENCH PI (AutoRecovered).docx",
+    "size": 527637,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 CEED FRENCH II PROVISIONAL MARKING KEY.pdf",
+    "path": "Exams/French/Marking Keys/2026 CEED FRENCH II PROVISIONAL MARKING KEY.pdf",
+    "size": 135602,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2023 JCE Geography_1.pdf",
+    "path": "Exams/Geography/2023 JCE Geography_1.pdf",
+    "size": 1579331,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 CEED GEOGRAPHY I PROVISIONAL MARKING KEY.pdf",
+    "path": "Exams/Geography/Marking Keys/2026 CEED GEOGRAPHY I PROVISIONAL MARKING KEY.pdf",
+    "size": 593318,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2022 JCE HISTORY MANEB_1.pdf",
+    "path": "Exams/History/2022 JCE HISTORY MANEB_1.pdf",
+    "size": 3093910,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 CEED HISTORY I PROVISIONAL MARKING KEY.pdf",
+    "path": "Exams/History/Marking Keys/2026 CEED HISTORY I PROVISIONAL MARKING KEY.pdf",
+    "size": 33788,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 CEED HOME ECONOMICS II.docx",
+    "path": "Exams/Home Economics/2026 CEED HOME ECONOMICS II.docx",
+    "size": 196818,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "HOME ECONOMICS SCORE SHEET.docx",
+    "path": "Exams/Home Economics/Marking Keys/HOME ECONOMICS SCORE SHEET.docx",
+    "size": 16506,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2023 JCE SOCIAL & LIFE SKILLS_1.pdf",
+    "path": "Exams/Life Skills/2023 JCE SOCIAL & LIFE SKILLS_1.pdf",
+    "size": 2618943,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "JCE SOCIAL & LIFE PROVISIONAL MARKING KEY.docx",
+    "path": "Exams/Life Skills/Marking Keys/JCE SOCIAL & LIFE PROVISIONAL MARKING KEY.docx",
+    "size": 17235,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2003_up_to_2012_maths_maneb_papers_1.pdf",
+    "path": "Exams/Mathematics/2003_up_to_2012_maths_maneb_papers_1.pdf",
+    "size": 1983919,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2023 MSCE MATHEMATICS CHIEF EXAMINERS  REPORT -  15 November (1).pdf",
+    "path": "Exams/Mathematics/Marking Keys/2023 MSCE MATHEMATICS CHIEF EXAMINERS  REPORT -  15 November (1).pdf",
+    "size": 983852,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2019-2020 MTENDERE MSCE PHYSICS MOCK.pdf",
+    "path": "Exams/Physics/2019-2020 MTENDERE MSCE PHYSICS MOCK.pdf",
+    "size": 180079,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2024 CEED PHYSICS MARKING KEY I.docx",
+    "path": "Exams/Physics/Marking Keys/2024 CEED PHYSICS MARKING KEY I.docx",
+    "size": 689815,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2024_SHED_MOCK_Social_&_Life_Skills_-_Paper_I.pdf",
+    "path": "Exams/Social Studies/2024_SHED_MOCK_Social_&_Life_Skills_-_Paper_I.pdf",
+    "size": 240908,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 CEED SOCIAL AND LIFE SKILLS II PROVISIONAL MARKING KEY.pdf",
+    "path": "Exams/Social Studies/Marking Keys/2026 CEED SOCIAL AND LIFE SKILLS II PROVISIONAL MARKING KEY.pdf",
+    "size": 443356,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "TIMETABLE - 2026 MSCE EXAM.pdf",
+    "path": "Exams/TIMETABLE - 2026 MSCE EXAM.pdf",
+    "size": 88063,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 SHED TECHNICAL DRAWING PAPER II.docx",
+    "path": "Exams/Technical Drawing/2026 SHED TECHNICAL DRAWING PAPER II.docx",
+    "size": 178694,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 SHED-TD PAPER  I - MARKING KEY.docx",
+    "path": "Exams/Technical Drawing/Marking Keys/2026 SHED-TD PAPER  I - MARKING KEY.docx",
+    "size": 1711884,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "woodwork paper 2 marking key2016 DONE.docx",
+    "path": "Exams/Woodwork/Marking Keys/woodwork paper 2 marking key2016 DONE.docx",
+    "size": 35986,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "SHED WOODWORK P2 CONFIDENTIAL.docx",
+    "path": "Exams/Woodwork/SHED WOODWORK P2 CONFIDENTIAL.docx",
+    "size": 35424,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2020 practicals Q&A target Agriculture.pdf",
+    "path": "Q&A/Agriculture/2020 practicals Q&A target Agriculture.pdf",
+    "size": 1264080,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2022_BIO_Q&A_Evolution_SIR_GODFREY_1.pdf",
+    "path": "Q&A/Biology/2022_BIO_Q&A_Evolution_SIR_GODFREY_1.pdf",
+    "size": 277033,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "Comprehension_Questions_and_Answers_1.pdf",
+    "path": "Q&A/English/Comprehension_Questions_and_Answers_1.pdf",
+    "size": 3663,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "4MATHS PRACTICE_1.pdf",
+    "path": "Q&A/Mathematics/4MATHS PRACTICE_1.pdf",
+    "size": 4169834,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "physics_questions_and_model_answers.pdf",
+    "path": "Q&A/Physics/physics_questions_and_model_answers.pdf",
+    "size": 2030999,
     "repo": "e-library-media-3"
   },
   {
