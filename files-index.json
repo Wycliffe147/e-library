@@ -2016,12 +2016,6 @@
     "repo": "e-library-media"
   },
   {
-    "name": "Chimteka EXPRESSIVE ARTS.pdf",
-    "path": "Books/Expressive Arts/Chimteka EXPRESSIVE ARTS.pdf",
-    "size": 330862,
-    "repo": "e-library-media"
-  },
-  {
     "name": "Complete_Human_Geography;_By_F.mwase_compressed_85_1.pdf",
     "path": "Books/Geography/Complete_Human_Geography;_By_F.mwase_compressed_85_1.pdf",
     "size": 22281228,
@@ -4736,7 +4730,7 @@
   {
     "name": "CWED BK PAPER 1.docx",
     "path": "Exams/Bible Knowledge/CWED BK PAPER 1.docx",
-    "size": 62820,
+    "size": 130,
     "repo": "e-library-media"
   },
   {
@@ -15720,12 +15714,6 @@
     "repo": "e-library-media-2"
   },
   {
-    "name": "2026 CEED FRENCH II.pdf",
-    "path": "Books/French/2026 CEED FRENCH II.pdf",
-    "size": 353930,
-    "repo": "e-library-media-2"
-  },
-  {
     "name": "1._NOTES_PHYSICAL_GEOGRAPHY_MSCE.pdf",
     "path": "Books/Geography/1._NOTES_PHYSICAL_GEOGRAPHY_MSCE.pdf",
     "size": 5683063,
@@ -17196,6 +17184,12 @@
     "repo": "e-library-media-2"
   },
   {
+    "name": "2026 CEED FRENCH II.pdf",
+    "path": "Exams/French/2026 CEED FRENCH II.pdf",
+    "size": 353930,
+    "repo": "e-library-media-2"
+  },
+  {
     "name": "2026 LOYOLA MSCE MOCK FRENCH PI (AutoRecovered) (1).docx",
     "path": "Exams/French/2026 LOYOLA MSCE MOCK FRENCH PI (AutoRecovered) (1).docx",
     "size": 527637,
@@ -17766,12 +17760,6 @@
     "repo": "e-library-media-3"
   },
   {
-    "name": "2026 CEED FRENCH III.pdf",
-    "path": "Books/French/2026 CEED FRENCH III.pdf",
-    "size": 702852,
-    "repo": "e-library-media-3"
-  },
-  {
     "name": "Complete Physical Geography with Map Work Elements student Book 3.pdf",
     "path": "Books/Geography/Complete Physical Geography with Map Work Elements student Book 3.pdf",
     "size": 8441237,
@@ -17907,6 +17895,12 @@
     "name": "1 Paper I ENG NED MOCK 2026 PROVISIONAL MARKING KEY.docx",
     "path": "Exams/English/Marking Keys/1 Paper I ENG NED MOCK 2026 PROVISIONAL MARKING KEY.docx",
     "size": 22362,
+    "repo": "e-library-media-3"
+  },
+  {
+    "name": "2026 CEED FRENCH III.pdf",
+    "path": "Exams/French/2026 CEED FRENCH III.pdf",
+    "size": 702852,
     "repo": "e-library-media-3"
   },
   {
