@@ -14,6 +14,13 @@ function updateManifestAndThemeColor(isDark) {
     if (themeMeta) {
         themeMeta.setAttribute('content', isDark ? '#0d1b3e' : '#2563eb');
     }
+    const faviconLink = document.getElementById('favicon-link');
+    if (faviconLink) {
+        faviconLink.setAttribute('href', isDark 
+            ? 'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/logo-dark.png' 
+            : 'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/logo.png'
+        );
+    }
 }
 
 function initDarkMode() {
