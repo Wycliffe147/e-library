@@ -5,16 +5,29 @@ let currentPath = "";
 
 // ─── Dark Mode ───────────────────────────────────────────────────────────────
 
+function updateManifestAndThemeColor(isDark) {
+    const manifestLink = document.querySelector('link[rel="manifest"]');
+    if (manifestLink) {
+        manifestLink.setAttribute('href', isDark ? '/manifest-dark.json' : '/manifest.json');
+    }
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) {
+        themeMeta.setAttribute('content', isDark ? '#0d1b3e' : '#2563eb');
+    }
+}
+
 function initDarkMode() {
     const saved = localStorage.getItem("darkMode");
+    const isDark = (saved === "true");
 
     // Only add dark class if explicitly saved as "true"
-    if (saved === "true") {
+    if (isDark) {
         document.documentElement.classList.add("dark");
     }
 
     const btn = document.getElementById("darkModeToggle");
     if (btn) updateToggleIcon(btn);
+    updateManifestAndThemeColor(isDark);
 }
 
 function updateToggleIcon(btn) {
@@ -28,6 +41,7 @@ function toggleDarkMode() {
     localStorage.setItem("darkMode", isDark);
     const btn = document.getElementById("darkModeToggle");
     if (btn) updateToggleIcon(btn);
+    updateManifestAndThemeColor(isDark);
 }
 
 function formatSize(bytes) {

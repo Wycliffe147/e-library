@@ -13476,6 +13476,12 @@
     "repo": "e-library-media"
   },
   {
+    "name": "logo-dark.png",
+    "path": "images/logo-dark.png",
+    "size": 15117,
+    "repo": "e-library-media"
+  },
+  {
     "name": "logo.png",
     "path": "images/logo.png",
     "size": 14107,
