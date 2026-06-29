@@ -13478,13 +13478,19 @@
   {
     "name": "logo.png",
     "path": "images/logo.png",
-    "size": 15117,
+    "size": 14107,
     "repo": "e-library-media"
   },
   {
     "name": "zips.png",
     "path": "images/zips.png",
     "size": 7249,
+    "repo": "e-library-media"
+  },
+  {
+    "name": "logo.png",
+    "path": "logo.png",
+    "size": 15117,
     "repo": "e-library-media"
   },
   {
