@@ -1,4 +1,9 @@
 /* Centralized theme overrides for dark mode (html.dark). */
+/* ─── Logo: light/dark swap ─── */
+.logo-dark { display: none; }
+html.dark .logo-light { display: none; }
+html.dark .logo-dark { display: inline; }
+
 /* ─── Dark Mode Overrides ─── */
 html.dark {
     color-scheme: dark;

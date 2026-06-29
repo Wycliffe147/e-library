@@ -1,4 +1,4 @@
-const CACHE_NAME = 'e-library-v2';
+const CACHE_NAME = 'e-library-v3';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -6,6 +6,7 @@ const ASSETS_TO_CACHE = [
   '/styles/style.css',
   '/manifest.json',
   'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/logo.png',
+  'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/logo-dark.png',
   'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/about.png',
   'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/Excel_Phy.png',
   'https://raw.githubusercontent.com/Wycliffe147/e-library-media/main/images/MANEB_Maths.png',
