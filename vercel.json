@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "destination": "https://wylibrary.pages.dev/$1",
+      "destination": "https://wylibrary.org/$1",
       "permanent": true
     }
   ]
